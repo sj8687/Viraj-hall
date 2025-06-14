@@ -20,7 +20,7 @@ adminbooking.get("/admin/bookings", middleware, async (req, res) => {
     orderBy: { date: "desc" },
   });
 
-  const grouped = bookings.reduce((acc, booking) => {
+  const grouped = bookings.reduce((acc: Record<string, typeof bookings>, booking) => {
     const date = new Date(booking.date);
     const monthYear = `${date.toLocaleString("default", {
       month: "long",
