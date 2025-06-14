@@ -35,7 +35,7 @@ export default function Page() {
 
   async function sendOTP() {
     if (!email) {
-      toast.warn("Please enter your email first");
+      toast.warn("Please enter your email firstt");
       return;
     }
 
