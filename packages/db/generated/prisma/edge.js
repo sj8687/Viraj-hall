@@ -175,7 +175,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\fc\\virajj multi\\turbo\\packages\\db\\generated\\prisma",
+      "value": "C:\\viraj-hall\\packages\\db\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -189,7 +189,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\fc\\virajj multi\\turbo\\packages\\db\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\viraj-hall\\packages\\db\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
