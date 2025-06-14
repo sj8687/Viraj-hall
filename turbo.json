@@ -5,7 +5,8 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "env":["AUTH_SECRET", "Auth_GOOGLE_ID","Auth_GOOGLE_SECRET","DATABASE_URL","NEXT_PUBLIC_Backend_URL","NEXT_PUBLIC_RAZORPAY_KEY_ID","ADMIN_EMAIL","ADMIN_PASSWORD_HASH"]
     },
     "lint": {
       "dependsOn": ["^lint"]
