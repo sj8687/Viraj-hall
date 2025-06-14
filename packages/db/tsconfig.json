@@ -8,7 +8,8 @@
     "declarationDir": "./dist",
     "emitDeclarationOnly": false,
     "rootDir": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "composite": true
   }
 
 }

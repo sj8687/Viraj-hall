@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "prebuild": "pnpm --filter @repo/db build",
     "build": "tsc",
     "dev": "pnpm run build && nodemon ./dist/index.js",
     "start": "pnpm run build && node ./dist/index.js"
