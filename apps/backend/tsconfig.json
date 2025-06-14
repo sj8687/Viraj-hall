@@ -10,9 +10,6 @@
       "strict": true,
       "skipLibCheck": true,
       "baseUrl": ".",
-    "paths": {
-      "@repo/db": ["../../packages/db/src"]  // adjust based on your structure
-    }
                                  /* Skip type checking all .d.ts files. */
     },
     "include": [
@@ -21,8 +18,10 @@
       "next-env.d.ts",
       "next.config.js",
       ".next/types/**/*.ts"
-  , "../../packages/lib/utils.ts"  ],
+  , "../../packages/lib/utils.ts" ,
+"src" ],
     "exclude": [
-      "node_modules"
+      "node_modules",
+      "dist"
     ]
   }
