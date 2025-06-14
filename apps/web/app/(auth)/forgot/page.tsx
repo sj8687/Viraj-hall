@@ -39,7 +39,7 @@ export default function Page() {
       return;
     }
 
-    const otpSendLoading = toast.loading("Sending OTP to your email....");
+    const otpSendLoading = toast.loading("Sending OTP to your email...");
 
     try {
         console.log(email);
