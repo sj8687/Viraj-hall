@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc",
     "dev": "pnpm run build && nodemon ./dist/index.js",
     "start": "pnpm run build && node ./dist/index.js"
   },
