@@ -6,8 +6,6 @@ import cache from "../utils/casche";
 export const adminbooking = express.Router();
 
 
-// 🧠 Create cache instance with 5 minutes TTL (Time To Live)
-
 
 adminbooking.get("/admin/bookings", middleware, async (req, res) => {
   const cachedData = cache.get("adminBookings");
