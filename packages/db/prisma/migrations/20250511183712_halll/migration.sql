@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "googleId" TEXT,
+ADD COLUMN     "image" TEXT,
+ADD COLUMN     "password" TEXT,
+ALTER COLUMN "name" DROP NOT NULL;

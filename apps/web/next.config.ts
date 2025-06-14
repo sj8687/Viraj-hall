@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   typescript: {
@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  images: {
+    domains: ['lh3.googleusercontent.com'], // Allow images from Google
   },
 };
 
