@@ -28,8 +28,7 @@
     "jsonwebtoken": "^9.0.2",
     "node-cache": "^5.1.2",
     "nodemailer": "^6.9.0",
-    "razorpay": "^2.9.6",
-    "typescript": "^5.8.3"
+    "razorpay": "^2.9.6"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +37,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.18",
     "@types/node": "^22.15.3",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3"
   }
 }

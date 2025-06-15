@@ -4,7 +4,11 @@
   "main": "./dist/client.js",
   "types": "./dist/client.d.ts",
    "exports": {
-    ".": "./dist/client.js"
+    ".": {
+      "import": "./dist/client.js",
+      "require": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    }
   },
   "scripts": {
     "db:generate": "prisma generate",
