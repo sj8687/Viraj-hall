@@ -1,7 +1,7 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { decode } from "@auth/core/jwt";
 import { parse } from "cookie";
-import { prisma } from "@repo/db"; // Adjust path if needed
+import { prisma } from "@repo/db"; 
 
 // Extend Request type to add custom properties
 declare module "express" {

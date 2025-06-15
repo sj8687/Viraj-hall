@@ -2,42 +2,42 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+   
   "scripts": {
-    "prebuild": "pnpm --filter @repo/db build",
-    "build": "tsc",
-    "dev": "pnpm run build && nodemon ./dist/index.js",
-    "start": "pnpm run build && node ./dist/index.js"
-  },
-  "dependencies": {
-    "@auth/core": "^0.39.1",
-    "@auth/express": "^0.10.1",
-    "@repo/db": "workspace:*",
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@repo/zod": "workspace:*",
-    "@types/cookie": "^1.0.0",
-    "@types/dotenv": "^8.2.3",
-    "@types/express": "^5.0.1",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/nodemailer": "^6.4.17",
-    "bcryptjs": "^3.0.2",
-    "cookie": "^1.0.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "node-cache": "^5.1.2",
-    "nodemailer": "^6.9.0",
-    "razorpay": "^2.9.6"
+    "build": "tsc -b",
+    "dev": "pnpm run build && nodemon ./dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/cors": "^2.8.18",
-    "@types/node": "^22.15.3",
-    "nodemon": "^3.1.10",
+    "@types/cors": "2.8.18",
+    "@types/node": "22.15.3",
+    "nodemon": "3.1.10",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@auth/core": "0.39.1",
+    "@auth/express": "0.10.1",
+    "@repo/db": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/zod": "workspace:*",
+    "@types/cookie": "1.0.0",
+    "@types/dotenv": "8.2.3",
+    "@types/express": "5.0.1",
+    "@types/jsonwebtoken": "9.0.9",
+    "@types/nodemailer": "6.4.17",
+    "bcryptjs": "3.0.2",
+    "cookie": "1.0.2",
+    "cors": "2.8.5",
+    "dotenv": "16.5.0",
+    "express": "5.1.0",
+    "jsonwebtoken": "9.0.2",
+    "node-cache": "5.1.2",
+    "nodemailer": "6.9.0",
+    "razorpay": "2.9.6"
   }
+
 }

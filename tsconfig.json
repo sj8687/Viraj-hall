@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@repo/zod": ["packages/zod/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

@@ -64,7 +64,7 @@ export function Hero() {
 
   return (
     <section className="relative bg-gradient-to-br from-orange-600 via-orange-400 to-amber-700 overflow-hidden w-full h-[775px]">
-      <div className="max-w-[1152px] mx-auto mt-[130px] md:mt-[160px]">
+      <div className="max-w-[1152px] mx-auto mt-[120px] md:mt-[160px]">
         <div className="flex justify-center  mb-4">
   <div className="bg-orange-300 border text-black mobo text--600 font-semibold rounded-full sm:px-5 px-3 py-2 shadow-[0_0_10px_rgba(200,400,600,80)] text-sm">
    💕 Celebrating 1000+ Events!

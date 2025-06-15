@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Router } from "express";
 import bcrypt from "bcryptjs";
 import { prisma } from "@repo/db";
 import { loginSchema } from "@repo/zod";
 
-export const login = express.Router();
+export const login = Router();
 
 // POST /login/validate
 login.post("/validate", async (req, res) => {

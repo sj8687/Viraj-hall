@@ -35,7 +35,7 @@ booking.get('/check',userMiddleware, async (req, res) => {
 
     res.json({ available: !existing });
   } catch (err) {
-    res.status(400).json({ error: 'Invalid query parameterss' });
+    res.status(400).json({ error: 'Invalid query parameters' });
   }
 });
 

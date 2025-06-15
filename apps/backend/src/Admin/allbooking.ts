@@ -1,10 +1,10 @@
 // routes/admin.js
-import express from "express";
+import express, { Router } from "express";
 import { prisma } from "@repo/db";
 import { middleware } from "../middleware/token";
 import cache from "../utils/casche";
-export const adminbooking = express.Router();
 
+export const adminbooking = Router();
 
 
 adminbooking.get("/admin/bookings", middleware, async (req, res) => {
@@ -20,7 +20,7 @@ adminbooking.get("/admin/bookings", middleware, async (req, res) => {
     orderBy: { date: "desc" },
   });
 
-  const grouped = bookings.reduce((acc: Record<string, typeof bookings>, booking) => {
+  const grouped = bookings.reduce((acc, booking) => {
     const date = new Date(booking.date);
     const monthYear = `${date.toLocaleString("default", {
       month: "long",
@@ -50,7 +50,6 @@ adminbooking.delete("/admin/delete/:id", middleware, async (req, res) => {
       where: { id: id },
     });
 
-    // ❌ Invalidate cache since booking data changed
     cache.del("adminBookings");
 
     res.json({ message: "Booking deleted successfully" });
