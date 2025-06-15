@@ -9,6 +9,7 @@
     "emitDeclarationOnly": false,
     "rootDir": "./src",
     "outDir": "./dist",
+     "baseUrl": ".",
   }
 
 }

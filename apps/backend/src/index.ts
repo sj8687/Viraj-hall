@@ -1,6 +1,7 @@
 import express from "express"
+import dotenv from "dotenv";
 import cors from "cors"
-import * as dotenv from "dotenv";
+
 import { OTP } from "./routes/sendotp";
 import { booking } from "./routes/check";
 import { payment } from "./routes/payment";
