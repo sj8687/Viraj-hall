@@ -20,7 +20,8 @@ adminbooking.get("/admin/bookings", middleware, async (req, res) => {
     orderBy: { date: "desc" },
   });
 
-  const grouped = bookings.reduce((acc, booking) => {
+  const grouped = bookings.reduce(
+  (acc: Record<string, typeof bookings>, booking: typeof bookings[number]) => {
     const date = new Date(booking.date);
     const monthYear = `${date.toLocaleString("default", {
       month: "long",
@@ -33,7 +34,8 @@ adminbooking.get("/admin/bookings", middleware, async (req, res) => {
     acc[monthYear].push(booking);
     
     return acc;
-  }, {} as Record<string, typeof bookings>);
+  }, {}
+);
 
   cache.set("adminBookings", grouped); // ✅ set new cache
 
