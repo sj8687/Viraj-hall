@@ -109,9 +109,8 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true ,
-     "paths": {
-      "@repo/db": ["../../packages/db/dist"]
-    }                                /* Skip type checking all .d.ts files. */
+ "paths": {
+ "@repo/db": ["../../packages/db/dist/client"]    }                          /* Skip type checking all .d.ts files. */
   },
   "include": ["src"]
 }
