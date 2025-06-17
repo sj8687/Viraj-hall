@@ -193,8 +193,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../prisma/.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.7.0",
@@ -207,13 +206,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "fromEnvVar": null,
+        "value": "postgresql://neondb_owner:npg_bhsPZJzWAv36@ep-solitary-cell-a4uefppt-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  name      String?\n  email     String   @unique\n  password  String?\n  image     String?\n  googleId  String?\n  role      Role     @default(USER)\n\n  bookings Booking[]\n}\n\nmodel otpStore {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  otp       String\n  createdAt DateTime @default(now())\n  expiresAt DateTime\n}\n\nmodel Booking {\n  id           String        @id @default(uuid())\n  customer     String\n  date         DateTime\n  timeSlot     String\n  contact      String\n  hall         String        @default(\"Viraj Multipurpose Hall\")\n  plan         BookingPlan   @default(BASIC)\n  status       BookingStatus @default(PENDING)\n  email        String?\n  functionType String?\n  createdAt    DateTime      @default(now())\n\n  paymentId String?\n  userId    Int\n  user      User    @relation(fields: [userId], references: [id])\n\n  guests         Int?\n  additionalInfo String? // ✅ NEW FIELD\n}\n\nenum BookingStatus {\n  PENDING\n  CONFIRMED\n  CANCELLED\n}\n\nenum BookingPlan {\n  BASIC\n  PREMIUM\n}\n\nenum Role {\n  USER\n  ADMIN\n}\n",
-  "inlineSchemaHash": "b697f01de519e54bea3888f97eb740f88d932c6b08078e1447c942b853a2fad8",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = \"postgresql://neondb_owner:npg_bhsPZJzWAv36@ep-solitary-cell-a4uefppt-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require\"\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  name      String?\n  email     String   @unique\n  password  String?\n  image     String?\n  googleId  String?\n  role      Role     @default(USER)\n\n  bookings Booking[]\n}\n\nmodel otpStore {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  otp       String\n  createdAt DateTime @default(now())\n  expiresAt DateTime\n}\n\nmodel Booking {\n  id           String        @id @default(uuid())\n  customer     String\n  date         DateTime\n  timeSlot     String\n  contact      String\n  hall         String        @default(\"Viraj Multipurpose Hall\")\n  plan         BookingPlan   @default(BASIC)\n  status       BookingStatus @default(PENDING)\n  email        String?\n  functionType String?\n  createdAt    DateTime      @default(now())\n\n  paymentId String?\n  userId    Int\n  user      User    @relation(fields: [userId], references: [id])\n\n  guests         Int?\n  additionalInfo String?\n}\n\nenum BookingStatus {\n  PENDING\n  CONFIRMED\n  CANCELLED\n}\n\nenum BookingPlan {\n  BASIC\n  PREMIUM\n}\n\nenum Role {\n  USER\n  ADMIN\n}\n",
+  "inlineSchemaHash": "82bfefb2b9fc1b3d3fcb37dbecd6c446311717d9f3737f882df0fd3ce63bd91e",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -224,9 +223,7 @@ config.engineWasm = undefined
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
+  parsed: {}
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {

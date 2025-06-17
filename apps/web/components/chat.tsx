@@ -4,8 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaRobot, FaUserCircle, FaPaperPlane } from "react-icons/fa";
 import { IoIosChatboxes } from "react-icons/io";
 
-// FAQ data with keywords for flexible matching
+
 const faqs = [
+	{
+		question: "Want to book your hall?",
+		answer: "we have a basic and premium package select one of them .",
+		keywords: ["book", "booking", "bookkk"],
+	},
 	{
 		question: "Who is the owner?",
 		answer: "The owner of Viraj Multipurpose Hall is Narayn Patil.",
@@ -88,7 +93,6 @@ const faqs = [
 	},
 ];
 
-// Flexible answer finder: matches keywords first, then question text
 function findAnswer(userQuestion: string) {
 	const lowerQ = userQuestion.toLowerCase();
 	// Try keyword match
@@ -97,7 +101,6 @@ function findAnswer(userQuestion: string) {
 			return faq.answer;
 		}
 	}
-	// Fallback: match question text
 	const faq = faqs.find((faq) =>
 		faq.question.toLowerCase().includes(lowerQ)
 	);
@@ -127,7 +130,6 @@ const Chat: React.FC = () => {
 
 	return (
 		<>
-			{/* Floating Chat Icon */}
 			{!open && (
 				<button
 					onClick={() => setOpen(true)}
@@ -138,17 +140,13 @@ const Chat: React.FC = () => {
 				</button>
 			)}
 
-			{/* Chat Modal */}
 			{open && (
 				<div className="fixed inset-0 z-50 flex items-end justify-end sm:items-end sm:justify-end">
-					{/* Overlay */}
 					<div
 						className="absolute inset-0 bg-black bg-opacity-30"
 						onClick={() => setOpen(false)}
 					/>
-					{/* Chat Box */}
 					<div className="relative w-full h-full sm:w-[400px] sm:h-[600px] sm:mr-6 sm:mb-6 bg-orange-50 border border-orange-200 rounded-none sm:rounded-lg shadow-lg flex flex-col">
-						{/* Header */}
 						<div className="bg-orange-700 text-white px-6 py-4 sm:rounded-t-lg font-bold text-lg flex items-center gap-2">
 							<FaRobot className="w-8 h-8 bg-orange-600 rounded-full p-1" />
 							FAQ Chatbot
@@ -160,7 +158,6 @@ const Chat: React.FC = () => {
 								×
 							</button>
 						</div>
-						{/* Messages */}
 						<div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 bg-orange-100">
 							{messages.map((msg, idx) => (
 								<div
@@ -191,7 +188,6 @@ const Chat: React.FC = () => {
 							))}
 							<div ref={messagesEndRef} />
 						</div>
-						{/* Input */}
 						<div className="flex items-center px-4 py-3 bg-orange-50 sm:rounded-b-lg border-t border-orange-200">
 							<input
 								value={input}
@@ -208,7 +204,6 @@ const Chat: React.FC = () => {
 								<FaPaperPlane />
 							</button>
 						</div>
-						{/* Footer */}
 						<div className="text-center text-xs text-orange-700 py-2 border-t border-orange-200 bg-orange-50">
 							Powered by Viraj Multipurpose Hall
 						</div>

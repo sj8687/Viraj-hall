@@ -95,7 +95,7 @@ export default function Page() {
   }
 };
   return (
-    <div className="flex justify-center items-center h-full w-full mt-16 ">
+    <div className="flex justify-center items-center h-full w-full mt-24 ">
       <Card className="w-[90%] md:w-[50%] lg:w-[28%]">
         <CardHeader>
           <CardTitle className="text-2xl text-center">

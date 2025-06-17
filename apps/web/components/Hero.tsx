@@ -77,10 +77,10 @@ export function Hero() {
           </h1>
         </div>
 
-        <div className="text-center mx-auto p-4 mt-1 w-[84%] sm:w-[45%] md:w-[57%]">
+        <div className="text-center mx-auto p-4 mt-1 w-[86%] sm:w-[55%] md:w-[50%]">
           <p className="md:text-[18px] leading-relaxed text-center descr text-wrap overflow-hidden text-[19px] text-black">
             Viraj is where love stories come to life. Celebrate your wedding and
-            marriage,anniversary in beautiful &  elegant,viraj design to make your special
+            marriage,anniversary in beautiful &  elegant way ,viraj design to make your special
             day truly unforgettable.
           </p>
         </div>

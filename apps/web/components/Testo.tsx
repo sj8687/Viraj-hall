@@ -54,15 +54,15 @@ export default function Testimonials() {
 
   return (
     <section className="bg-white py-16 text-center">
-      <h2 className="text-orange-400 tracking-widest uppercase font-medium text-[20px] mb-2">Testimonials</h2>
-      <h3 className="text-4xl font-serif font-bold mt-4 mb-8">What Customers Say?</h3>
+      <h2 className="text-orange-700 tracking-widest uppercase font-medium text-[20px] mb-2">Testimonials</h2>
+      <h3 className="sm:text-4xl text-[32px] px-4 font-serif font-bold mt-4 mb-8">What Customers Say?</h3>
 
       <div
         className={`transition-opacity duration-500 ease-in-out ${
           fade ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <p className="max-w-3xl font-medium mx-auto text-gray-600 text-lg px-4 mb-6">
+        <p className="max-w-3xl font-medium mx-auto text-gray-600 text-[16px] sm:text-lg px-4 mb-6">
           {testimonial?.text}
         </p>
 
@@ -70,7 +70,7 @@ export default function Testimonials() {
           {[...Array(testimonial?.rating)].map((_, i) => (
             <span key={i} className="text-yellow-400 text-xl">★</span>
           ))}
-          <span className="text-xl font-medium ml-2">{testimonial?.name}</span>
+          <span className="sm:text-xl text-[17px] font-medium ml-2">{testimonial?.name}</span>
         </div>
       </div>
 

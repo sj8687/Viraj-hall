@@ -49,7 +49,7 @@ export default function Intro() {
                     scrollTrigger:{
                         trigger:".h1",
                         scroller:"body",
-                        start:"top 70%",
+                        start:"top 80%",
                         // markers:true
                     }
                 })
@@ -62,7 +62,7 @@ export default function Intro() {
                   scrollTrigger:{
                       trigger:".h2",
                       scroller:"body",
-                      start:"top 70%",
+                      start:"top 80%",
                       // markers:true
                   }
               })
@@ -75,7 +75,7 @@ export default function Intro() {
                 scrollTrigger:{
                     trigger:".h3",
                     scroller:"body",
-                    start:"top 70%",
+                    start:"top 80%",
                     // markers:true
                 }
             })
@@ -87,7 +87,7 @@ export default function Intro() {
               scrollTrigger:{
                   trigger:".img",
                   scroller:"body",
-                  start:"top 70%",
+                  start:"top 80%",
                   // markers:true
               }
           })
@@ -97,14 +97,14 @@ export default function Intro() {
 
 
   return (
-    <section className="px-6 py-16 bg-white md:mt-20">
+    <section className="px-6 overflow-hidden py-16 bg-white md:mt-20">
       <div className="max-w-[1152px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className='headddd'>
           <h2 className="text-5xl h1 md:text-start text-center  font-medium">
             Discover <span className="text-orange-500 font-medium">Viraj </span>
           </h2>
-          <p className="mt-7 md:text-start h1 text-center  text-[17px] font-medium text-gray-700">
+          <p className="mt-7 md:text-start h1  text-center  text-[17px] font-medium text-gray-700">
             At Viraj, we are dedicated to creating unforgettable Marrage & Wedding experiences.
             Established in 2020, our mission is to provide personalized service and exquisite
             decor, ensuring every detail is perfect for your special day.
@@ -114,7 +114,7 @@ export default function Intro() {
           <div className="grid grid-cols-2  gap-6 mt-10">
             <div className='text-center h2'>
               <h3 className="text-orange-600 text-[22px] md:text-[30px]  font-bold">500 weddings hosted</h3>
-              <p className="text-gray-600 font-medium text-[15px] mt-2">
+              <p className="text-gray-600  font-medium text-[15px] mt-2">
                 Since our inception, we have hosted over 500 weddings, each uniquely tailored to the couple’s desires.
               </p>
             </div>

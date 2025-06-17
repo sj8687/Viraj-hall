@@ -61,7 +61,7 @@ const Contact = () => {
             {/* Contact Form */}
             <form
               onSubmit={handleSubmit}
-              className="bg-gray-00 p-6 rounded-lg border shadow-[0_0_10px_rgba(200,400,800,80)]"
+              className="bg-gray-00 p-6 rounded-lg border shadow-[0_0_10px_rgba(200,100,100,20)]"
             >
               <input
                 type="text"
@@ -118,13 +118,12 @@ const Contact = () => {
              
             </form>
 
-            {/* Map */}
             <div className="w-full">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.0909793093797!2d74.0068627!3d18.067342500000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc259c774edce29%3A0xcbb9ebc30425056f!2sViraj%20Multipurpose%20Hall!5e0!3m2!1sen!2sin!4v1746471900796!5m2!1sen!2sin"
                 width="100%"
                 height="400"
-                className="rounded-lg w-full h-[300px] md:h-[580px] border shadow-[0_0_10px_rgba(200,400,800,80)]"
+                className="rounded-lg w-full h-[300px] md:h-[580px] border shadow-[0_0_10px_rgba(200,100,100,20)]"
                 allowFullScreen
                 loading="lazy"
               ></iframe>
@@ -133,7 +132,7 @@ const Contact = () => {
 
  <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
             {/* Catering Contact */}
-            <div className="bg-white border  p-6 rounded-xl shadow-[0_0_10px_rgba(200,400,800,80)]">
+            <div className="bg-white border  p-6 rounded-xl shadow-[0_0_10px_rgba(200,100,100,20)]">
               <h3 className="text-lg font-semibold text-orange-600 mb-2">🍽 Catering Inquiries</h3>
               <p className="text-gray-700 ">Want a different menu? Talk to our catering expert.</p>
               <p className="mt-2 text-sm text-gray-700 font-medium">👨‍🍳 Mr. Rakesh Mehra</p>
@@ -144,8 +143,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Decor Contact */}
-            <div className="bg-white border  p-6 rounded-xl  shadow-[0_0_10px_rgba(200,400,800,80)]">
+            <div className="bg-white border  p-6 rounded-xl  shadow-[0_0_10px_rgba(200,100,100,20)]">
               <h3 className="text-lg font-semibold text-orange-600 mb-2">🎨 Decor Customization</h3>
               <p className="text-gray-700 ">Looking for a unique decor theme? Contact our design team.</p>
               <p className="mt-2 text-sm text-gray-700 font-medium">🎨 Ms. Anjali Verma</p>
@@ -157,7 +155,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Address */}
           <div className="mt-14 text-center">
             <h2 className="text-2xl font-bold text-orange-500 mb-2">📍 Our Hall Address</h2>
             <p className="text-gray-700 text-[16px] font-medium leading-relaxed">

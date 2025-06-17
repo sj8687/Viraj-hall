@@ -4,8 +4,8 @@ import { FaBuilding, FaGem, FaCheck, FaRupeeSign } from 'react-icons/fa';
 const PricingSection = () => {
   return (
     <section className="max-w-[1150px] sm:mt-[50px] mx-auto px-4 py-10">
-      <h1 className="text-3xl sm:text-4xl font-bold text-center">Wedding & Marriage Packages</h1>
-      <p className="text-center text-[20px] text-gray-800 mt-3">
+      <h1 className="text-3xl sm:text-4xl font-bold text-center">Wedding <span className='text-orange-500'>& </span> Marriage Packages</h1>
+      <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto text-center mt-3">
         Explore our tailored wedding packages designed to fit your needs.
       </p>
 

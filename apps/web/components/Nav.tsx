@@ -35,7 +35,7 @@ export function Navbar() {
       });
 
       t1.current.from("#mobile-menu-text", {
-        x: "10px",
+        x: "10",
         duration: 0.1,
         opacity: 0,
         stagger: 0.1,
@@ -81,7 +81,7 @@ export function Navbar() {
     <section className="">
 
       <div
-        className={`flex   justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${scrolled ? "bg- shadow-lg" : "bg-transparent  backdrop-blur-[10px]"
+        className={`flex   justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${scrolled ? "bg- shadow-lg" : "md:bg-transparent shadow-lg md:shadow-none   backdrop-blur-[10px]"
           }`}
       >
         <div className="logo">
@@ -97,7 +97,7 @@ export function Navbar() {
           </Link>
         </div>
 
-        <div className="text-start px-2  hidden md:flex flex-1 justify-center gap-8 text-[17px] font-medium">
+        <div className="text-start px-2 hidden md:flex flex-1 justify-center gap-8 text-[17px] font-medium">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -112,7 +112,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="space-x-2 sm:space-x-3 flex justify-center menus items-center">
+        <div className="space-x-2 sm:space-x-3 flex justify-center  items-center">
           {authData && !(authData.user as any)?.isAdmin && (
             <Link href="/booking/Show">
               <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-blue-500 text-white rounded-lg">

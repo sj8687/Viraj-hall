@@ -55,7 +55,7 @@ model Booking {
   user          User           @relation(fields: [userId], references: [id])
 
   guests        Int?
-  additionalInfo String?       // ✅ NEW FIELD
+  additionalInfo String? 
 }
 
 
@@ -74,3 +74,4 @@ enum Role {
   USER
   ADMIN
 }
+

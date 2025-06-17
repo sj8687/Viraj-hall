@@ -60,14 +60,12 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* Floating Gallery */}
       <main className="mt-10">
         <InfiniteFloatingImages images={images} speed="normal" direction="right" />
       </main>
 
       
 
-      {/* CTA */}
       <div className="mt-20">
         <p className="text-lg text-gray-700 font-medium mb-4">Want to see the hall in person?</p>
       <Link href={"/booking/dashboard"}

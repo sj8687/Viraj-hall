@@ -10,14 +10,12 @@ login.post("/validate", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validate input
     const valid = loginSchema.safeParse({ email, password });
     if (!valid.success) {
       res.status(400).json({ message: valid.error.errors[0]?.message });
       return;
     }
 
-    // Regular user
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       res.status(404).json({ message: "User not found" });

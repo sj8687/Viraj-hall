@@ -21,7 +21,6 @@ const Services = () => {
         <>
             <div className=" text-gray-800 mt-[40px] bg-slate-00">
                 <div className="max-w-7xl mx-auto px-6 py-16">
-                    {/* Header */}
                     <div className="text-center mb-16">
                         <h1 className="text-4xl font-bold text-black mb-2">Ou<span className='text-orange-500'>r Serv</span><span className='text-black'>ices</span> </h1>
                         <p className="text-lg text-gray-800">
@@ -46,7 +45,6 @@ const Services = () => {
                                     <Image src="/cat1.jpg" alt="Catering" className="object-cover" fill />
                                 </div>                            </div>
 
-                            {/* Decor */}
                             <div className="flex flex-col-reverse md:flex-row mt-7 gap-8 items-start">
                                 <div className="relative w-full md:w-1/2 h-64 rounded-xl overflow-hidden shadow-md">
                                     <Image src="/decor1.jpg" alt="Decor" className="object-cover" fill />
@@ -59,7 +57,6 @@ const Services = () => {
                                 </div>
                             </div>
 
-                            {/* VIP Manager */}
                             <div className="flex flex-col md:flex-row gap-8  mt-7 items-start">
                                 <div className="md:w-1/2">
                                     <h2 className="text-2xl font-semibold text-orange-600 mb-2">🕴 Personal Event Manager</h2>
@@ -72,7 +69,6 @@ const Services = () => {
                                     <Image src="/man.png" alt="Manager" className="object-cover" fill />
                                 </div>                            </div>
 
-                            {/* Marriage Planning */}
                             <div className="flex flex-col-reverse md:flex-row  mt-7 gap-8 items-start">
                                 <div className="relative w-full md:w-1/2 h-64 rounded-xl overflow-hidden shadow-md">
                                     <Image src="/marr.jpg" alt="Marriage Planning" className="object-cover" fill />
@@ -87,7 +83,6 @@ const Services = () => {
                         </div>
                     </div>
 
-                    {/* Decor Gallery */}
                     <div className="mt-20">
 
                         <h2 className="text-3xl font-bold text-center   text-orange-600 mb-8">✨ Our Signature Decor Themes</h2>
@@ -106,37 +101,37 @@ const Services = () => {
 
 
 
-                        <section className="w-full px-4 sm:px-8 md:px-16 md:mt-[100px] py-10">
+                        <section className="w-full px-2 sm:px-8 md:px-16 md:mt-[100px] py-10">
 
                             <h2 className="text-4xl font-bold mb-2 sm:text-start text-center">FAQs</h2>
-                            <p className="text-gray-600 text-[18px] mb-10">
+                            <p className="text-gray-600 text-center sm:text-start text-[18px] mb-10">
                                 Find answers to common questions about our features and services.
                             </p>
                             <Accordion type="single" collapsible className="w-full space-y-2">
                                 <AccordionItem value="item-1" className="border-b border-black pb-3">
-                                    <AccordionTrigger className="text-lg font-bold justify-between hover:no-underline">
-                                        What is included in the Basic Package?
+                                    <AccordionTrigger className="sm:text-lg text-[16px] font-bold justify-between hover:no-underline">
+                                        What is included in the Basic Package ?
                                     </AccordionTrigger>
                                     <AccordionContent className="text-gray-700 text-[15px] font-medium mt-2">
-                                        The Basic Package includes access to all core features like 400 setting arragement, basic catering, and 6 hrs rental.
+                                        - The Basic Package includes access to all core features like 400 setting arragement, basic catering, and 6 hrs rental.
                                     </AccordionContent>
                                 </AccordionItem>
 
                                 <AccordionItem value="item-2" className="border-b border-black pb-3">
-                                    <AccordionTrigger className="text-lg font-bold justify-between hover:no-underline">
-                                        Are there any discounts available?
+                                    <AccordionTrigger className="sm:text-lg text-[16px] font-bold justify-between hover:no-underline">
+                                        Are there any discounts available ?
                                     </AccordionTrigger>
                                     <AccordionContent className="text-gray-700 text-[15px] font-medium  mt-2">
-                                        Yes, we offer seasonal discounts and special pricing. Subscribe to our newsletter to stay updated!
+                                        - Yes, we offer seasonal discounts and special pricing. Subscribe to our newsletter to stay updated!
                                     </AccordionContent>
                                 </AccordionItem>
 
                                 <AccordionItem value="item-3" className="border-b border-black pb-3">
-                                    <AccordionTrigger className="text-lg font-bold justify-between hover:no-underline">
-                                        Can we do a Customization In decor and catering
+                                    <AccordionTrigger className="sm:text-lg text-[16px] font-bold justify-between hover:no-underline">
+                                        Can we do a Customization In decor and catering ?
                                     </AccordionTrigger>
                                     <AccordionContent className="text-gray-700 text-[15px] font-medium  mt-2">
-                                        Absolutely. You can contact with our professionals from contact form
+                                        - Absolutely. You can contact with our professionals from contact form
                                     </AccordionContent>
                                 </AccordionItem>
                             </Accordion>
@@ -146,7 +141,7 @@ const Services = () => {
 
 
                     <div className="text-center mt-8">
-                        <p className="text-lg font-medium text-gray-700 mb-7">
+                        <p className="smtext-lg sm:text-[16px] font-medium text-gray-700 mb-7">
                             If you're looking for a negotiable price or customizations, feel free to contact us for a personalized quote!
                         </p>
                         <Link href={"/nav/contact"}
