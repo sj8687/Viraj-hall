@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
    
-  "scripts": {
-  "dev": "pnpm run build && ./dist/index.js",
+ "scripts": {
   "build": "tsc",
-  "start": "node ./dist/index.js"    
-
-  },
+  "start": "node ./dist/index.js",
+  "dev": "pnpm run build && nodemon ./dist/index.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

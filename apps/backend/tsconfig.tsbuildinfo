@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/admin/allbooking.ts","./src/middleware/clientmiddle.ts","./src/middleware/token.ts","./src/routes/check.ts","./src/routes/contact.ts","./src/routes/login.ts","./src/routes/payment.ts","./src/routes/sendotp.ts","./src/routes/show.ts","./src/utils/casche.ts","./src/utils/otpconfig.ts","./src/utils/razerpay.ts"],"version":"5.8.3"}
+{"fileNames":[],"fileInfos":[],"root":[],"options":{"composite":true,"esModuleInterop":true,"module":1,"outDir":"./dist","rootDir":"./src","skipLibCheck":true,"strict":true,"target":3},"version":"5.8.3"}

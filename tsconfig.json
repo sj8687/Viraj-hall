@@ -7,8 +7,9 @@
     }
   },
   "exclude": ["node_modules"],
+  "files": [],
   "references": [
-    { "path": "packages/db" },
-    { "path": "apps/backend" }
+    { "path": "apps/backend" },
+    { "path": "packages/db" }
   ]
 }
