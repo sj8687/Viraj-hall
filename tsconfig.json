@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".", // so monorepo can resolve from root
     "paths": {
-      "@repo/db": ["packages/db/src/client.ts"] // ✅ adjust path as per your db package
+      "@repo/db": ["packages/db/src/index.ts"] // ✅ adjust path as per your db package
     }
   },
   "exclude": ["node_modules"],
