@@ -25,8 +25,9 @@ export default async function RootLayout({
       <body>
         <SessionProvider>
          <Navbar />
-           {children}
-          <ToastProvider aria-label="Notification" />
+        {children}
+               <ToastProvider aria-label="Notification" />
+  
         <Footer />
         </SessionProvider>
         </body>
