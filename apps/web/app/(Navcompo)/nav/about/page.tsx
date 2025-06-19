@@ -10,7 +10,7 @@ export default function AboutSection() {
 
   return (
     <section
-      className="bg-gray-00 py-16 mt-[50px] px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="bg-gray-00 py-16  mt-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
       // ref={sectionRef}
     >
       <div className="max-w-4xl mx-auto text-center mb-12 animate">

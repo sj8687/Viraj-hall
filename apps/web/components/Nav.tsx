@@ -10,10 +10,10 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 
 export function Navbar() {
-  const { data: authData } = useSession(); 
+  const { data: authData } = useSession();
   const pathname = usePathname();
   const t1 = useRef<gsap.core.Timeline | null>(null);
-  const [scrolled, setScrolled] = useState(false); // for scroll effect
+  const [scrolled, setScrolled] = useState(false); // for scroll/shadow effect
 
   function handleClick() {
     document.body.classList.add("overflow-hidden");
@@ -42,6 +42,7 @@ export function Navbar() {
       });
     }
 
+    // GSAP animations
     gsap.from(".logo", {
       y: -100,
       duration: 1,
@@ -53,19 +54,35 @@ export function Navbar() {
       duration: 1,
       opacity: 0,
     });
+
     gsap.from(".menus", {
       y: -100,
       duration: 1,
       opacity: 0,
     });
 
-    // Scroll listener
-    const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    // Shadow always visible on these routes
+    const alwaysShadowRoutes = [
+      "/nav/gallery",
+      "/nav/contact",
+      "/nav/services",
+      "/nav/about",
+      "/booking/dashboard",
+       "/booking/payment",
+        "/booking/admin",
+         "/booking/Show",
+    ];
+
+    if (alwaysShadowRoutes.includes(pathname)) {
+      setScrolled(true);
+    } else {
+      const onScroll = () => {
+        setScrolled(window.scrollY > 10);
+      };
+      window.addEventListener("scroll", onScroll);
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+  }, [pathname]);
 
   const isActive = (route: string) => pathname === route;
 
@@ -78,22 +95,23 @@ export function Navbar() {
   ];
 
   return (
-    <section className="">
-
+    <section>
       <div
-        className={`flex   justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${scrolled ? "bg- shadow-lg" : "md:bg-transparent shadow-lg md:shadow-none   backdrop-blur-[10px]"
-          }`}
+        className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
+          scrolled
+            ? "backdrop-blur-[10px] shadow-lg"
+            : "md:bg-transparent shadow-lg md:shadow-none backdrop-blur-[10px]"
+        }`}
       >
         <div className="logo">
           <Link href={"/"}>
             <Image
               src="/logoo.png"
               alt="Viraj Hall"
-              width={125} // max width (responsive handled by Tailwind)
-              height={50} // use approx height or tune it
+              width={125}
+              height={50}
               className="object-cover w-[110px] sm:w-[125px] h-auto rounded-xl"
             />
-
           </Link>
         </div>
 
@@ -101,10 +119,11 @@ export function Navbar() {
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
-              className={`hover:shadow-lg px-4 py-1 hover:bg-gray-100 hover:rounded-lg menus ${isActive(href)
+              className={`hover:shadow-lg px-4 py-1 hover:bg-gray-100 hover:rounded-lg menus ${
+                isActive(href)
                   ? "underline decoration-2 underline-offset-8"
                   : ""
-                }`}
+              }`}
               href={href}
             >
               {label}
@@ -112,7 +131,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="space-x-2 sm:space-x-3 flex justify-center  items-center">
+        <div className="space-x-2  sm:space-x-3 flex justify-center items-center">
           {authData && !(authData.user as any)?.isAdmin && (
             <Link href="/booking/Show">
               <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-blue-500 text-white rounded-lg">
@@ -122,7 +141,7 @@ export function Navbar() {
           )}
           {authData && (authData.user as any)?.isAdmin && (
             <Link href="/booking/admin">
-              <button className="bg-black signbarsdiv  text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
+              <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
                 Admin Panel
               </button>
             </Link>
@@ -158,12 +177,16 @@ export function Navbar() {
         </p>
 
         {navLinks.map(({ href, label }) => (
-          <Link suppressHydrationWarning
+          <Link
+            suppressHydrationWarning
             key={href}
             id="mobile-menu-text"
             href={href}
-            className={`tracking-widest rounded-lg transition-shadow duration-100 hover:text-white hover:bg-orange-400 px-12 p-2 barsmenus ${pathname === href ? 'underline decoration-2 underline-offset-8 hover:text-white' : ''
-              }`}
+            className={`tracking-widest rounded-lg transition-shadow duration-100 hover:text-white hover:bg-orange-400 px-12 p-2 barsmenus ${
+              pathname === href
+                ? "underline decoration-2 underline-offset-8 hover:text-white"
+                : ""
+            }`}
           >
             {label}
           </Link>
