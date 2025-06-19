@@ -111,8 +111,8 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true ,
  "paths": {
- "@repo/db": ["../../packages/db/src/intex.ts"],
- "@repo/db/*": ["../../packages/db/src/*"]    }                          /* Skip type checking all .d.ts files. */
+"@repo/db": ["../../packages/db/src/client.ts"],
+      "@repo/db/*": ["../../packages/db/src/*"]   }                          /* Skip type checking all .d.ts files. */
   },
   "include": ["src"]
 }
