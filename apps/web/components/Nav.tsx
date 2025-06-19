@@ -182,6 +182,7 @@ export function Navbar() {
             key={href}
             id="mobile-menu-text"
             href={href}
+             onClick={() => hidediv()}
             className={`tracking-widest rounded-lg transition-shadow duration-100 hover:text-white hover:bg-orange-400 px-12 p-2 barsmenus ${
               pathname === href
                 ? "underline decoration-2 underline-offset-8 hover:text-white"
