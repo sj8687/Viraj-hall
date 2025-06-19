@@ -10,9 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./src",
-    "paths": {
-      "@repo/db": ["../../packages/db/src"]
-    }
+    
   },
   "include": ["src"],
  
