@@ -68,9 +68,9 @@ export function Navbar() {
       "/nav/services",
       "/nav/about",
       "/booking/dashboard",
-       "/booking/payment",
-        "/booking/admin",
-         "/booking/Show",
+      "/booking/payment",
+      "/booking/admin",
+       "/booking/Show",
     ];
 
     if (alwaysShadowRoutes.includes(pathname)) {

@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".", // so monorepo can resolve from root
     "paths": {
-      "@repo/zod": ["packages/zod/src/index.ts"]
+      "@repo/db": ["packages/db/src/client.ts"] // ✅ adjust path as per your db package
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "references": [
+    { "path": "packages/db" },
+    { "path": "apps/backend" },
+    { "path": "apps/frontend" }
+  ]
 }
