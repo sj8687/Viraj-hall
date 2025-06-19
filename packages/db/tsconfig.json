@@ -7,7 +7,7 @@
     "module": "nodenext",
     "rootDir": "./src",
     "outDir": "./dist",
-    "composite": true,
+    // "composite": true,
     "declaration": true,
     "declarationDir": "./dist",
     "emitDeclarationOnly": false,
