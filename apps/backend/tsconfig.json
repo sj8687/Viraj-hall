@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "rootDir": "src",
     "outDir": "dist",
-    "composite": true,
+    // "composite": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
@@ -16,7 +16,5 @@
     }
   },
   "include": ["src"],
-  "references": [
-    { "path": "../../packages/db" }
-  ]
+ 
 }
