@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@repo/db";
 import { loginSchema } from "@repo/zod";
 
-export const login: Router = Router();
+export const login = Router();
 
 // POST /login/validate
 login.post("/validate", async (req, res) => {

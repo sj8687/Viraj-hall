@@ -4,9 +4,9 @@ dotenv.config()
 import { prisma } from "@repo/db"
 import { checkAvailabilitySchema, createBookingSchema } from "@repo/zod";
 import { userMiddleware } from "../middleware/clientmiddle";
-import cache from "../utils/casche";
+import NodeCache from "node-cache";
 
-// export const cache = new NodeCache();
+export const cache = new NodeCache();
 
 
 declare global {
@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export const booking: Router.Router = Router();
+export const booking = Router();
 
 
 booking.get('/check',userMiddleware, async (req, res) => {

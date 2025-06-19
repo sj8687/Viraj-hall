@@ -1,4 +1,4 @@
-import { Router } from "express";
+import Router from "express";
 import { generateOTP, transporter } from "../utils/otpConfig";
 import { prisma } from "@repo/db";
 import * as dotenv from "dotenv";
@@ -6,7 +6,7 @@ import { forgotPasswordSchema } from "@repo/zod";
 import bcrypt from "bcryptjs";
 dotenv.config();
 
-export const OTP: Router = Router();
+export const OTP = Router();
 
 OTP.post("/send-otp", async (req, res) => {
   const { email } = req.body;

@@ -1,20 +1,21 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ES2020",
     "module": "commonjs",
-    "moduleResolution": "node",
-    "rootDir": "src",
-    "outDir": "dist",
-    // "composite": true,
-    "esModuleInterop": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
     "paths": {
-      "@repo/db": ["../../packages/db/src/client.ts"],
-      "@repo/db/*": ["../../packages/db/src/*"]
+      "@repo/db": ["../../packages/db/src"]
     }
   },
   "include": ["src"],
- 
+  "references": [
+    { "path": "../../packages/db" }
+  ]
 }
