@@ -1,10 +1,10 @@
-import Router from "express";
+import express, { Router as RouterType } from "express";
 import * as dotenv from "dotenv";
 dotenv.config()
 import { prisma } from "@repo/db"
 import { userMiddleware } from "../middleware/clientmiddle";
 
-export const show = Router();
+export const show: RouterType = express.Router();
 
 show.get('/show',userMiddleware, async (req, res) => {
   const user = req.email;

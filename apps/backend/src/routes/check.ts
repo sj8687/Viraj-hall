@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export const booking = Router();
+export const booking: Router.Router = Router();
 
 
 booking.get('/check',userMiddleware, async (req, res) => {
