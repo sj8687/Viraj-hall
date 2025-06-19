@@ -4,12 +4,12 @@
     "paths": {
       "@repo/db": ["packages/db/src/client.ts"],
       "@repo/db/*": ["packages/db/src/*"]
-    },
+    }
   },
   "exclude": ["node_modules"],
   "files": [],
   "references": [
     { "path": "apps/backend" },
     { "path": "packages/db" }
-  ],
+  ]
 }

@@ -4,7 +4,7 @@ import { prisma } from "@repo/db";
 import { middleware } from "../middleware/token";
 import cache from "../utils/casche";
 
-export const adminbooking: Router = Router();
+export const adminbooking = Router();
 
 
 adminbooking.get("/admin/bookings", middleware, async (req, res) => {

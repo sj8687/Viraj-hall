@@ -5,7 +5,7 @@ import crypto from "crypto"
 import { transporter } from '../utils/otpConfig';
 import { userMiddleware } from '../middleware/clientmiddle';
 
-export const payment: Router = Router();
+export const payment = Router();
 
 
 payment.post('/create',userMiddleware, async (req, res) => {
