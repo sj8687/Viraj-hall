@@ -1,7 +1,7 @@
 import express, { Request, Response, Router } from 'express';
 import nodemailer from 'nodemailer';
 
-export const contact = Router();
+export const contact: Router = Router();
 
 type ContactFormBody = {
   name: string;
