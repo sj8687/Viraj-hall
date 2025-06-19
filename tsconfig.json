@@ -9,6 +9,5 @@
   "references": [
     { "path": "packages/db" },
     { "path": "apps/backend" },
-    { "path": "apps/frontend" }
   ]
 }
