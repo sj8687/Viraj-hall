@@ -95,9 +95,9 @@ export function Navbar() {
   ];
 
   return (
-    <section>
+    <section className="">
       <div
-        className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
+        className={`flex justify-between overflow-hidden sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
           scrolled
             ? "backdrop-blur-[10px] shadow-lg"
             : "md:bg-transparent shadow-lg md:shadow-none backdrop-blur-[10px]"

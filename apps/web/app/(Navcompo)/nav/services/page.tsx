@@ -19,7 +19,7 @@ const decorImages = [
 const Services = () => {
     return (
         <>
-            <div className=" text-gray-800  mt-16 bg-slate-00">
+            <div className=" text-gray-800 overflow-hidden mt-16 bg-slate-00">
                 <div className="max-w-7xl mx-auto px-6 py-16">
                     <div className="text-center mb-16">
                         <h1 className="text-4xl font-bold text-black mb-2">Ou<span className='text-orange-500'>r Serv</span><span className='text-black'>ices</span> </h1>

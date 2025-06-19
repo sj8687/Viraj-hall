@@ -18,7 +18,7 @@ export default function AboutSection() {
           About <span className="text-orange-500">Viraj Multipurpose <span className="text-black">Hall</span> </span>
         </h2>
    <div className="">
-                <div className="absolute w-[95%] h-[60%] top-40 left-14 bg-orange-200 opacity-50 rounded-full blur-[100px] z-[-1]"></div>
+                <div className="absolute w-[80%] h-[60%] top-40 left-14 bg-orange-200 opacity-50 rounded-full blur-[100px] z-[-1]"></div>
         <p className="text-base sm:text-lg text-gray-600">
           Since 2004, Viraj Hall has hosted over 500 beautiful weddings. Known for elegance, service, and love — we’re honored to make your day magical.
         </p>

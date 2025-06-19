@@ -38,7 +38,7 @@ const images = [
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen mt-16 px-4 py-12 text-center text-gray-800">
+    <div className="min-h-screen mt-16 px-4 py-12 text-center overflow-hidden text-gray-800">
       <h1 className="text-4xl font-bold mb-2">
         Viraj <span className="text-orange-500">Multipurpose</span> Hall Gallery
       </h1>

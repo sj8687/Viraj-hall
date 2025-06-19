@@ -46,7 +46,7 @@ const Contact = () => {
   };
 
   return (
-    <main className="bg-gray- flex items-center justify-center sm:px-4 mt-24">
+    <main className="overflow-hidden flex items-center justify-center sm:px-4 mt-24">
       <section className="p-4 w-full sm:max-w-[1152px] mx-auto text-center  ">
         <h1 className="text-4xl text-black font-bold mb-1">
           Conta<span className="text-orange-500">ct Us</span>
