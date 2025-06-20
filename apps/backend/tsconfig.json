@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@repo/db": ["../../packages/db/src/index.ts"],
+      "@repo/db": ["../../packages/db/src/client.ts"],
       "@repo/db/*": ["../../packages/db/src/*"]
     }
   },
