@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@repo/db": ["packages/db/src"]  // Adjust if pointing to dist
+      "@repo/db": ["packages/db/src/client.ts"]
     }
   },
   "references": [

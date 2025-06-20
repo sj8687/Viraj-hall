@@ -1,4 +1,4 @@
-import Router from "express";
+import express, { Router as ExpressRouter } from "express";
 import * as dotenv from "dotenv";
 dotenv.config()
 import { prisma } from "@repo/db"
@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export const booking = Router();
+export const booking: ExpressRouter = express.Router();
 
 
 booking.get('/check',userMiddleware, async (req, res) => {

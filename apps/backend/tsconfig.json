@@ -5,14 +5,14 @@
     "module": "commonjs",
     "rootDir": "./src",
     "outDir": "./dist",
+    "composite": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@repo/db": ["../../packages/db/src"] // or "dist" if prebuilt
-    }
+    "moduleResolution": "node"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    { "path": "../../packages/db" }
+  ]
 }
