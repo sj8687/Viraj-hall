@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@repo/db": ["packages/db/src/client.ts"],  // Adjust this to your actual file
-      "@repo/db/*": ["packages/db/src/*"]
+      "@repo/db": ["packages/db/dist"],  // Adjust this to your actual file
+      "@repo/db/*": ["packages/db/dist/*"]
     }
   },
   "files": [],
