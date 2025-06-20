@@ -1,16 +1,13 @@
 {
-  "extends":"@repo/typescript-config/base.json",
   "compilerOptions": {
     "target": "ES2016",
     "module": "commonjs",
-    "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src"]
+  "include": ["src"]
 }
