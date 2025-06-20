@@ -1,22 +1,17 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "ES2016",
     "module": "commonjs",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "composite": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@repo/db": ["../../packages/db/src/client.ts"],
-      "@repo/db/*": ["../../packages/db/src/*"]
+      "@repo/db": ["../../packages/db/dist"]
     }
   },
-  "include": ["src"],
-  "references": [
-    { "path": "../../packages/db" }
-  ]
+  "include": ["src","types"]
 }
