@@ -2,17 +2,15 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "ES2016",
-    "module": "commonjs",
+   "module": "nodenext",
+"moduleResolution": "nodenext",
     "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@repo/db": ["../../packages/db/dist"]
-    }
+    "baseUrl": "."
+    // ❌ remove "paths" from here — keep them only in root
   },
   "include": ["src"]
 }

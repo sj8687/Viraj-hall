@@ -1,8 +1,9 @@
 {
-     "extends": "@repo/typescript-config/base.json",
+  "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "target": "ES2016",
-    "module": "nodenext",
+   "module": "nodenext",
+"moduleResolution": "nodenext",
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true,
