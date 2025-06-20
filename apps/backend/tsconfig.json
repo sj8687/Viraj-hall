@@ -11,9 +11,6 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "baseUrl": ".",
-    "paths": {
-      "@repo/db": ["../../packages/db/dist"]
-    }
   },
   "include": ["src"],
  
