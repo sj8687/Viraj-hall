@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "rootDir": ".",
-    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@repo/db": ["packages/db/src/client.ts"]
-    },
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true
+      "@repo/db": ["packages/db/src/client.ts"],
+      "@repo/db/*": ["packages/db/src/*"]
+    }
   },
-  "include": ["apps/backend/src", "packages/db/src"]
+  "exclude": ["node_modules"],
+  "references": [
+    { "path": "packages/db" },
+    { "path": "apps/backend" }
+  ]
 }
