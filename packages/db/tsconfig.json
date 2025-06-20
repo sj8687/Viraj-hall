@@ -1,12 +1,12 @@
 {
-  "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "target": "ES2016",
-   "module": "nodenext",
-"moduleResolution": "nodenext",
+    "target": "ES2020",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true,
+    "declarationDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true
