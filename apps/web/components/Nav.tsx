@@ -10,10 +10,11 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 
 export function Navbar() {
-  const { data: authData } = useSession();
+  const { data: authData, status } = useSession();
   const pathname = usePathname();
+
   const t1 = useRef<gsap.core.Timeline | null>(null);
-  const [scrolled, setScrolled] = useState(false); // for scroll/shadow effect
+  const [scrolled, setScrolled] = useState(false); // for scroll effect
 
   function handleClick() {
     document.body.classList.add("overflow-hidden");
@@ -35,14 +36,13 @@ export function Navbar() {
       });
 
       t1.current.from("#mobile-menu-text", {
-        x: "10",
+        x: "10px",
         duration: 0.1,
         opacity: 0,
         stagger: 0.1,
       });
     }
 
-    // GSAP animations
     gsap.from(".logo", {
       y: -100,
       duration: 1,
@@ -54,35 +54,19 @@ export function Navbar() {
       duration: 1,
       opacity: 0,
     });
-
     gsap.from(".menus", {
       y: -100,
       duration: 1,
       opacity: 0,
     });
 
-    // Shadow always visible on these routes
-    const alwaysShadowRoutes = [
-      "/nav/gallery",
-      "/nav/contact",
-      "/nav/services",
-      "/nav/about",
-      "/booking/dashboard",
-      "/booking/payment",
-      "/booking/admin",
-       "/booking/Show",
-    ];
-
-    if (alwaysShadowRoutes.includes(pathname)) {
-      setScrolled(true);
-    } else {
-      const onScroll = () => {
-        setScrolled(window.scrollY > 10);
-      };
-      window.addEventListener("scroll", onScroll);
-      return () => window.removeEventListener("scroll", onScroll);
-    }
-  }, [pathname]);
+    // Scroll listener
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (route: string) => pathname === route;
 
@@ -94,13 +78,28 @@ export function Navbar() {
     { href: "/nav/about", label: "About Us" },
   ];
 
+  // Add this array
+  const alwaysShadowRoutes = [
+    "/nav/gallery",
+    "/nav/contact",
+    "/nav/services",
+    "/nav/about",
+    "/booking/dashboard",
+    "/booking/payment",
+    "/booking/admin",
+    "/booking/Show",
+  ];
+
+  // Check if current route should always have shadow
+  const alwaysShadow = alwaysShadowRoutes.includes(pathname);
+
   return (
     <section className="">
       <div
-        className={`flex justify-between overflow-hidden sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
-          scrolled
-            ? "backdrop-blur-[10px] shadow-lg"
-            : "md:bg-transparent shadow-lg md:shadow-none backdrop-blur-[10px]"
+        className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
+          alwaysShadow || scrolled
+            ? "bg- shadow-lg"
+            : "bg-transparent  backdrop-blur-[10px]"
         }`}
       >
         <div className="logo">
@@ -108,22 +107,21 @@ export function Navbar() {
             <Image
               src="/logoo.png"
               alt="Viraj Hall"
-              width={125}
-              height={50}
+              width={125} // max width (responsive handled by Tailwind)
+              height={50} // use approx height or tune it
               className="object-cover w-[110px] sm:w-[125px] h-auto rounded-xl"
             />
           </Link>
         </div>
 
-        <div className="text-start px-2 hidden md:flex flex-1 justify-center gap-8 text-[17px] font-medium">
+        <div className="text-start px-2   hidden md:flex flex-1 justify-center gap-8 text-[17px] font-medium">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
-              className={`hover:shadow-lg px-4 py-1 hover:bg-gray-100 hover:rounded-lg menus ${
-                isActive(href)
+              className={`hover:shadow-lg px-4 py-1 hover:bg-gray-100 hover:rounded-lg menus ${isActive(href)
                   ? "underline decoration-2 underline-offset-8"
                   : ""
-              }`}
+                }`}
               href={href}
             >
               {label}
@@ -131,31 +129,35 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="space-x-2  sm:space-x-3 flex justify-center items-center">
-          {authData && !(authData.user as any)?.isAdmin && (
-            <Link href="/booking/Show">
-              <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-blue-500 text-white rounded-lg">
-                Bookings
-              </button>
-            </Link>
+        <div className="space-x-2 sm:space-x-3 flex justify-center menus items-center">
+          {/* Only render after session is loaded */}
+          {status === "loading" ? null : (
+            <>
+              {authData && !(authData.user as any)?.isAdmin && (
+                <Link href="/booking/Show">
+                  <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-blue-500 text-white rounded-lg">
+                    Bookings
+                  </button>
+                </Link>
+              )}
+              {authData && (authData.user as any)?.isAdmin && (
+                <Link href="/booking/admin">
+                  <button className="bg-black signbarsdiv  text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
+                    Admin Panel
+                  </button>
+                </Link>
+              )}
+              {authData ? (
+                <Profile authData={authData.user} />
+              ) : (
+                <Link href={"/login"}>
+                  <button className="bg-black signbarsdiv p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
+                    Log in
+                  </button>
+                </Link>
+              )}
+            </>
           )}
-          {authData && (authData.user as any)?.isAdmin && (
-            <Link href="/booking/admin">
-              <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
-                Admin Panel
-              </button>
-            </Link>
-          )}
-          {authData ? (
-            <Profile authData={authData.user} />
-          ) : (
-            <Link href={"/login"}>
-              <button className="bg-black signbarsdiv p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
-                Log in
-              </button>
-            </Link>
-          )}
-
           <div
             onClick={handleClick}
             className="w-[30px] text-[26px] font-bold flex items-center justify-center md:hidden cursor-pointer menus"
@@ -177,17 +179,13 @@ export function Navbar() {
         </p>
 
         {navLinks.map(({ href, label }) => (
-          <Link
-            suppressHydrationWarning
+          <Link suppressHydrationWarning
             key={href}
             id="mobile-menu-text"
             href={href}
              onClick={() => hidediv()}
-            className={`tracking-widest rounded-lg transition-shadow duration-100 hover:text-white hover:bg-orange-400 px-12 p-2 barsmenus ${
-              pathname === href
-                ? "underline decoration-2 underline-offset-8 hover:text-white"
-                : ""
-            }`}
+            className={`tracking-widest rounded-lg transition-shadow duration-100 hover:text-white hover:bg-orange-400 px-12 p-2 barsmenus ${pathname === href ? 'underline decoration-2 underline-offset-8 hover:text-white' : ''
+              }`}
           >
             {label}
           </Link>

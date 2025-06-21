@@ -2,13 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-   
- "scripts": {
-  "build": "tsc",
-  "start": "node ./dist/index.js",
-  "dev": "pnpm run build && nodemon ./dist/index.js",
-   "prepare": "pnpm --filter @repo/db... build"
-},
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "dev": "pnpm run build && nodemon ./dist/index.js",
+    "prepare": "pnpm --filter @repo/db... build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -27,12 +26,14 @@
     "@repo/typescript-config": "workspace:*",
     "@repo/zod": "workspace:*",
     "@types/cookie": "1.0.0",
+    "@types/cookie-parser": "^1.4.9",
     "@types/dotenv": "8.2.3",
     "@types/express": "5.0.1",
     "@types/jsonwebtoken": "9.0.9",
     "@types/nodemailer": "6.4.17",
     "bcryptjs": "3.0.2",
     "cookie": "1.0.2",
+    "cookie-parser": "^1.4.7",
     "cors": "2.8.5",
     "dotenv": "16.5.0",
     "express": "5.1.0",
@@ -41,5 +42,4 @@
     "nodemailer": "6.9.0",
     "razorpay": "2.9.6"
   }
-
 }

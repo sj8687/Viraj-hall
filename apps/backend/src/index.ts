@@ -1,6 +1,7 @@
 import express from "express"
 import dotenv from "dotenv";
 import cors from "cors"
+import cookieParser from "cookie-parser";
 
 import { OTP } from "./routes/sendotp";
 import { booking } from "./routes/check";
@@ -14,6 +15,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json())
+app.use(cookieParser());
 app.use(cors({
     origin:`${process.env.FRONTEND_URL}`,
     credentials: true,

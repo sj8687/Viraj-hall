@@ -1,9 +1,7 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { decode } from "@auth/core/jwt";
-import { parse } from "cookie";
 import { prisma } from "@repo/db"; 
 
-// Extend Request type to add custom properties
 declare module "express" {
   interface Request {
     email?: string;
@@ -17,15 +15,16 @@ export const userMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const cookieHeader = req.headers.cookie;
+  const token =req.cookies['authjs.session-token'];
+    
 
-    if (!cookieHeader) {
+
+    console.log("Checking cookies:", token);
+    
+    if (!token) {
        res.status(401).json({ message: "No cookies found" });
        return
     }
-
-    const cookies = parse(cookieHeader);
-    const token = cookies["authjs.session-token"];
 
     if (!token) {
        res.status(401).json({ message: "No auth token found" });
@@ -55,8 +54,6 @@ export const userMiddleware = async (
     console.log(users.id);
     
     
-
-    // ✅ Attach useful info to request
     req.email = decoded.email;
     req.userid = users.id;
 

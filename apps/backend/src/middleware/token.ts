@@ -8,16 +8,15 @@ export const middleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const cookieHeader = req.headers.cookie;
+    const token =req.cookies['authjs.session-token'];
     // console.log(cookieHeader);
     
-    if (!cookieHeader) {
+    if (!token) {
       res.status(401).json({ message: "No cookies found" });
       return;
     }
 
-    const cookies = parse(cookieHeader);
-    const token = cookies["authjs.session-token"];
+    
     console.log(token);
     
 
@@ -43,7 +42,7 @@ export const middleware = async (
     // Optional: attach session to request
     (req as any).session = decoded;
 
-    next(); // continue to next middleware or route handler
+    next(); 
   } catch (err) {
     console.error("Session decode error:", err);
     res.status(401).json({ message: "Invalid session token" });
