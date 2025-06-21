@@ -13,7 +13,7 @@ login.post("/validate", async (req, res) => {
 
     const valid = loginSchema.safeParse({ email, password });
     if (!valid.success) {
-      res.status(400).json({ message: valid.error.errors[0]?.message });
+      res.status(400).json({ message: "user is not vaild"});
       return;
     }
 

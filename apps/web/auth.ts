@@ -1,4 +1,3 @@
-
 import { loginSchema } from "@repo/zod";
 import bcrypt from "bcryptjs";
 import NextAuth, { AuthError, type NextAuthConfig } from "next-auth";
@@ -74,6 +73,19 @@ const config: NextAuthConfig = {
 
   pages: {
     signIn: "/login",
+  },
+
+  cookies: {
+    sessionToken: {
+      name: `authjs.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "none", // <--- allow cross-site
+        path: "/",
+        secure: true,     // <--- required for SameSite: "none"
+        // domain: ".yourdomain.com", // optional, set if using subdomains
+      },
+    },
   },
 
   callbacks: {
