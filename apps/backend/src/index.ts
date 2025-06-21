@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
-    origin: "https://viraj-multipurpose-hall.vercel.app",
+    origin:`${process.env.FRONTEND_URL}`,
     credentials: true,
 }))
 

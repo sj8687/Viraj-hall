@@ -76,17 +76,18 @@ const config: NextAuthConfig = {
   },
 
   cookies: {
-    sessionToken: {
-      name: `authjs.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "none", // <--- allow cross-site
-        path: "/",
-        secure: true,     // <--- required for SameSite: "none"
-        // domain: ".yourdomain.com", // optional, set if using subdomains
-      },
+  sessionToken: {
+    name: process.env.NODE_ENV === "production"
+      ? "__Secure-authjs.session-token"
+      : "authjs.session-token",
+    options: {
+      httpOnly: true,
+      sameSite: "none",   // allow cross-site (Vercel to Render)
+      path: "/",
+      secure: true,       // must be true for sameSite: "none"
     },
   },
+},
 
   callbacks: {
     async signIn({ user, account }) {

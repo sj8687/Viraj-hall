@@ -16,7 +16,10 @@ export const userMiddleware = async (
 ): Promise<void> => {
   try {
   // const token =req.cookies['authjs.session-token'];
-  const token =req.headers.cookie;
+ const token =
+    req.cookies["__Secure-authjs.session-token"] ||  // Production
+    req.cookies["authjs.session-token"];             // Development
+
     
 
 
