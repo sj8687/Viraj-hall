@@ -2,6 +2,7 @@ import express, { Router } from "express";
 import bcrypt from "bcryptjs";
 import { prisma } from "@repo/db";
 import { loginSchema } from "@repo/zod";
+import { registerSchema } from "@repo/zod";
 
 export const login = Router();
 
@@ -77,3 +78,43 @@ login.post("/google", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+
+// backend/routes/login.ts (or signup.ts)
+
+
+
+login.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // ✅ Validate input
+  const valid = registerSchema.safeParse({ name, email, password });
+  if (!valid.success) {
+     res.status(400).json({ success: false, message: "Invalid input" });
+     return
+  }
+
+  try {
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+    if (existingUser) {
+       res.status(409).json({ success: false, message: "User already exists" });
+       return
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
+
+     res.status(201).json({ success: true, message: "Signup successful" });
+  } catch (err) {
+    console.error(err);
+     res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+

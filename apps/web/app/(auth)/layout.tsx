@@ -3,6 +3,7 @@ import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import LogoPage from "@/components/Signupnav";
 import { ToastProvider } from "@/components/Toastcontainer";
+import { SessionProvider } from "next-auth/react";
 
 
 export const metadata: Metadata = {
@@ -18,10 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+           <SessionProvider>
         <LogoPage />
          <ToastProvider aria-label="Notification" /> 
         {children}
-     
+     </SessionProvider>
         </body>
     </html>
   );
