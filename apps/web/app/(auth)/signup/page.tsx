@@ -27,7 +27,7 @@ export default async function Page() {
         
             "use server"
 
-            toast.loading("Creating your account...");
+            
         
             const name = formData.get("name") as string | undefined
             const email = formData.get("email") as string | undefined
@@ -47,9 +47,9 @@ export default async function Page() {
                     password:hashPassword
                 }
             });
+
            
-            toast.dismiss();
-            toast.success("Account created successfully");
+        
             redirect("/login")
         
     }

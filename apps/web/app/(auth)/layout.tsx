@@ -19,8 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LogoPage />
+         <ToastProvider aria-label="Notification" /> 
         {children}
-      <ToastProvider aria-label="Notification" /> 
+     
         </body>
     </html>
   );
