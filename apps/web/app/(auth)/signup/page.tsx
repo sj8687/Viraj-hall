@@ -15,7 +15,6 @@ import bcrypt from "bcryptjs"
 import { redirect } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 import { auth, signIn } from "@/auth"
-import { toast } from "react-toastify"
 
 
 export default async function Page() {
