@@ -15,7 +15,8 @@ export const userMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-  const token =req.cookies['authjs.session-token'];
+  // const token =req.cookies['authjs.session-token'];
+  const token =req.headers.cookie;
     
 
 
@@ -26,36 +27,33 @@ export const userMiddleware = async (
        return
     }
 
-    if (!token) {
-       res.status(401).json({ message: "No auth token found" });
-       return
-    }
+   
 
-    const decoded = await decode({
-      token,
-      secret: process.env.AUTH_SECRET!,
-      salt: process.env.AUTH_SECRETT!, 
-    });
+    // const decoded = await decode({
+    //   token,
+    //   secret: process.env.AUTH_SECRET!,
+    //   salt: process.env.AUTH_SECRETT!, 
+    // });
 
-    if (!decoded || !decoded.email) {
-       res.status(403).json({ message: "Unauthorized: Invalid session" });
-       return
-    }
+    // if (!decoded || !decoded.email) {
+    //    res.status(403).json({ message: "Unauthorized: Invalid session" });
+    //    return
+    // }
 
-    const users = await prisma.user.findUnique({
-      where: { email: decoded.email },
-    });
+    // const users = await prisma.user.findUnique({
+    //   where: { email: decoded.email },
+    // });
 
-    if (!users) {
-       res.status(403).json({ message: "User not found in database" });
-       return
-    }
-    console.log(decoded.email);
-    console.log(users.id);
+    // if (!users) {
+    //    res.status(403).json({ message: "User not found in database" });
+    //    return
+    // }
+    // console.log(decoded.email);
+    // console.log(users.id);
     
     
-    req.email = decoded.email;
-    req.userid = users.id;
+    // req.email = decoded.email;
+    // req.userid = users.id;
 
     
     next();
