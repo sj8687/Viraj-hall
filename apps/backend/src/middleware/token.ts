@@ -1,6 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { decode } from "@auth/core/jwt"; // Same as next-auth/jwt
-import { parse } from "cookie";
 
 export const middleware = async (
   req: Request,

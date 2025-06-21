@@ -20,7 +20,7 @@ declare global {
 export const booking = Router();
 
 
-booking.get('/check',userMiddleware, async (req, res) => {
+booking.get('/check', async (req, res) => {
   try {
     const { date, time } = checkAvailabilitySchema.parse(req.query);
 
