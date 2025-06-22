@@ -76,11 +76,28 @@ export default function PaymentPage() {
   const bookingId = searchParams.get('bookingId');
   const router = useRouter();
    const { data: authData, status } = useSession();
-  
+    const [token, setToken] = useState<string>();
+ 
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("/api/token"); // ✔️ axios call
+        console.log("Token from API:", response.data.token);
+        setToken(response.data.token);
+      } catch (err) {
+        console.error("Error fetching token:", err);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+
     useEffect(() => {
       if (status === "loading") return;
   
-      if (!authData || !authData.user?.isAdmin) {
+      if (!authData) {
         router.replace("/");
       }
     }, [authData, status, router]);
@@ -100,21 +117,20 @@ export default function PaymentPage() {
   }, []);
 
   // ✅ Fetch Razorpay Order & open Razorpay UI
-  useEffect(() => {
-    if (!bookingId) {
-      toast.error('No booking ID provided');
-      return;
-    }
+  
 
     const fetchOrder = async () => {
+      if(!token) return
       try {
         const { data } = await axios.post<RazorpayOrderResponse>(
           `${process.env.NEXT_PUBLIC_Backend_URL}/payment/create`,
           { bookingId  } ,
           
-          {withCredentials:true
-
-          }
+           {
+       headers: {
+            Authorization: `Bearer ${token}`,
+        },
+  }
         );
 
         const options: RazorpayOptions & { modal?: any } = {
@@ -135,12 +151,12 @@ export default function PaymentPage() {
             
           });
 
-              toast.success('🎉 Payment verified successfully!');
+              toast.success('Payment verified successfully!');
               // window.location.href = `/success?bookingId=${bookingId}`;
               router.push("/")
             } catch (error: any) {
               console.error(error);
-              toast.error('❌ Payment verification failed!');
+              toast.error(' Payment verification failed!');
               router.push("./")
             }
           },
@@ -157,9 +173,9 @@ export default function PaymentPage() {
           },
           modal: {
             ondismiss: function () {
-              toast.info("❌ Payment was cancelled by user");
+              toast.info(" Payment was cancelled by user");
               setLoading(false)
-              router.push("/"); // or redirect to a 'payment failed' page
+              // router.push("/"); // or redirect to a 'payment failed' page
             },
           },
         };
@@ -177,8 +193,12 @@ export default function PaymentPage() {
       }
     };
 
+    useEffect(() => {
+    if (bookingId && token) {
+      
     fetchOrder();
-  }, [bookingId]);
+    }
+  }, [bookingId,token]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">

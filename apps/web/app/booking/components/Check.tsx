@@ -63,8 +63,25 @@ export default function CheckAvailability() {
   const [submitting, setSubmitting] = useState(false);
   const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null);
   const router = useRouter();
-   const { data: authData, status } = useSession();
-  
+  const { data: authData, status } = useSession();
+   const [token, setToken] = useState<string>();
+ 
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("/api/token"); // ✔️ axios call
+        console.log("Token from API:", response.data.token);
+        setToken(response.data.token);
+      } catch (err) {
+        console.error("Error fetching token:", err);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+
     useEffect(() => {
       if (status === "loading") return; 
   
@@ -84,7 +101,6 @@ export default function CheckAvailability() {
         `${process.env.NEXT_PUBLIC_Backend_URL}/booking/check`,
         {
           params: { date, time },
-          withCredentials: true
         }
       );
       setAvailable(res.data.available);
@@ -116,6 +132,7 @@ export default function CheckAvailability() {
 
   const handleSubmit = useCallback(async () => {
     if (!validateForm()) return;
+    if (!token) return;
 
     try {
       setSubmitting(true);
@@ -129,9 +146,13 @@ export default function CheckAvailability() {
           timeSlot: time,
           plan,
           functionType: form.functionType,
-          additionalInfo: form.additionalInfo // ✅ added
+          additionalInfo: form.additionalInfo
         },
-        { withCredentials: true }
+        {
+       headers: {
+            Authorization: `Bearer ${token}`,
+        },
+      }
       );
 
       toast.success('Redirecting to payment...');
@@ -147,7 +168,7 @@ export default function CheckAvailability() {
     } finally {
       setSubmitting(false);
     }
-  }, [form, date, verifiedPhone, time, plan]);
+  }, [form, date, verifiedPhone, time, plan,token]);
 
   return (
     

@@ -7,8 +7,7 @@ export const middleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-const token = req
-    // console.log(cookieHeader);
+const token = req.headers.authorization?.split(" ")[1];
     
     if (!token) {
       res.status(401).json({ message: "No cookies found" });
@@ -24,22 +23,22 @@ const token = req
       return;
     }
 
-    // const decoded = await decode({
-    //   token:token,
-    //   salt: process.env.AUTH_SECRETT!,
-    //   secret: process.env.AUTH_SECRET!
-    // });
+    const decoded = await decode({
+      token:token,
+      salt: process.env.AUTH_SECRETT!,
+      secret: process.env.AUTH_SECRET!
+    });
 
-    // console.log(decoded);
+    console.log(decoded);
     
 
-    // if (!decoded || decoded.email !== "shreyashjadhav59807@gmail.com") {
-    //   res.status(403).json({ message: "Unauthorized" });
-    //   return;
-    // }
+    if (!decoded || decoded.email !== "shreyashjadhav59807@gmail.com") {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
 
-    // // Optional: attach session to request
-    // (req as any).session = decoded;
+    // Optional: attach session to request
+    (req as any).session = decoded;
 
     next(); 
   } catch (err) {

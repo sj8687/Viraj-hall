@@ -33,17 +33,7 @@ export default function MyBookings() {
   const router = useRouter();
   const { data: authData, status } = useSession();
    const [token, setToken] = useState<string>();
-  
-  //   useEffect(() => {
-  //   // Server Action call (browser मधून)
-  //   getTokenFromServer().then((res) => {
-  //     console.log("bhai" ,res);
-      
-  //     setToken(res);
-  //   });
-  // }, []);
-
-  
+ 
 
   useEffect(() => {
     const fetchToken = async () => {

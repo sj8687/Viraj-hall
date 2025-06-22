@@ -39,6 +39,23 @@ export default function AdminDashboard() {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
   const router = useRouter();
  const { data: authData, status } = useSession();
+  const [token, setToken] = useState<string>();
+ 
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("/api/token"); // ✔️ axios call
+        console.log("Token from API:", response.data.token);
+        setToken(response.data.token);
+      } catch (err) {
+        console.error("Error fetching token:", err);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
 
   useEffect(() => {
     if (status === "loading") return;
@@ -49,11 +66,15 @@ export default function AdminDashboard() {
   }, [authData, status, router]);
 
   const fetchBookings = () => {
+    if (!token) return
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/bookings`, {
-        withCredentials: true,
-      })
+      .get(`${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/bookings`,        {
+       headers: {
+            Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => setBookingsByMonth(res.data))
       .catch(() => toast.error("Failed to fetch bookings"))
       .finally(() => setLoading(false));
@@ -61,13 +82,15 @@ export default function AdminDashboard() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this booking?")) return;
-
+    
     try {
       await axios.delete(
         `${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/delete/${id}`,
-        {
-          withCredentials: true,
-        }
+       {
+       headers: {
+            Authorization: `Bearer ${token}`,
+        },
+      }
       );
       toast.success("Booking deleted");
       fetchBookings();
@@ -77,8 +100,10 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchBookings();
-  }, []);
+     if (token) {
+        fetchBookings();
+    }
+  }, [token]);
 
   const toggleRow = (id: string) => {
     setExpandedRows((prev) => {

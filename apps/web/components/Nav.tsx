@@ -99,7 +99,7 @@ export function Navbar() {
         className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
           alwaysShadow || scrolled
             ? "bg- shadow-lg"
-            : "bg-transparent  backdrop-blur-[10px]"
+            : "bg-transparent shadow-lg sm:shadow-none  backdrop-blur-[10px]"
         }`}
       >
         <div className="logo">
