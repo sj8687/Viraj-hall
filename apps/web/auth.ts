@@ -75,18 +75,7 @@ const config: NextAuthConfig = {
     signIn: "/login",
   },
 
-  cookies: {
-    sessionToken: {
-      name: `authjs.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "none", // <--- allow cross-site
-        path: "/",
-        secure: true,     // <--- required for SameSite: "none"
-        // domain: ".yourdomain.com", // optional, set if using subdomains
-      },
-    },
-  },
+
 
   callbacks: {
     async signIn({ user, account }) {

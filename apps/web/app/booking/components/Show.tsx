@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Spinner } from "./Spinner";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+// import { getTokenFromServer } from "@/app/actions/gettoken/gettoken";
 
 interface Booking {
   id: string;
@@ -30,8 +31,35 @@ export default function MyBookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-   const { data: authData, status } = useSession();
+  const { data: authData, status } = useSession();
+   const [token, setToken] = useState<string>();
   
+  //   useEffect(() => {
+  //   // Server Action call (browser मधून)
+  //   getTokenFromServer().then((res) => {
+  //     console.log("bhai" ,res);
+      
+  //     setToken(res);
+  //   });
+  // }, []);
+
+  
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("/api/token"); // ✔️ axios call
+        console.log("Token from API:", response.data.token);
+        setToken(response.data.token);
+      } catch (err) {
+        console.error("Error fetching token:", err);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+
     useEffect(() => {
       if (status === "loading") return; 
       
@@ -40,14 +68,20 @@ export default function MyBookings() {
       }
     }, [authData, status, router]);
 
-  const fetchBookings = useCallback(async () => {
+
+const fetchBookings = useCallback(async () => {
+    if (!token) return;
     setLoading(true);
     try {
+      console.log(token);
+      
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
         {
-          withCredentials: true,
-        }
+       headers: {
+            Authorization: `Bearer ${token}`,
+        },
+  }
       );
       setBookings(data);
     } catch {
@@ -55,11 +89,14 @@ export default function MyBookings() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    fetchBookings();
-  }, [fetchBookings]);
+    if (token) {
+        fetchBookings();
+    }
+  
+  }, [fetchBookings,token]);
 
   return (
     <div className="min-h-screen max-w-[1250px] mx-auto px-4 py-8 mt-[80px] flex flex-col">

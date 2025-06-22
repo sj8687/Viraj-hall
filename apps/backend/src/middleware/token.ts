@@ -7,7 +7,7 @@ export const middleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const token =req.cookies['authjs.session-token'];
+const token = req
     // console.log(cookieHeader);
     
     if (!token) {
