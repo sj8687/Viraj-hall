@@ -4,6 +4,7 @@ import { razorpay } from '../utils/razerpay';
 import crypto from "crypto"
 import { transporter } from '../utils/otpConfig';
 import { userMiddleware } from '../middleware/clientmiddle';
+import cache from "../utils/casche";
 
 export const payment = Router();
 
@@ -35,7 +36,8 @@ payment.post('/create',userMiddleware, async (req, res) => {
     };
 
     const order = await razorpay.orders.create(options);
-
+     cache.del(`bookings-${booking.email}`);
+       cache.del("adminBookings");
     res.json({ orderId: order.id, amount, currency: order.currency });
   } catch (err) {
     console.error(err);
@@ -95,7 +97,8 @@ payment.post("/verify",userMiddleware, async (req, res) => {
       // await transporter.sendMail(mailOptions);
 
 
-
+       cache.del(`bookings-${updatebooking.email}`);
+       cache.del("adminBookings");
       res.json({ success: true });
     } catch (err) {
       console.error("Failed to update booking:", err);
