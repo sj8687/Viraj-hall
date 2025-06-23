@@ -9,8 +9,12 @@ healthRoute.get("/check", async (req, res) => {
     const result = await prisma.user.findFirst({ select: { id: true } });
     if(result){
         res.status(200).json({ status: "DB awake " });
+        console.log("db awake");
+        
     }else{
         res.status(404).json({ status: "DB sleep " });
+        console.log("db sleep");
+
     }
   } catch (err) {
     console.error(err);
