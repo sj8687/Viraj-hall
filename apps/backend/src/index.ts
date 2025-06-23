@@ -14,6 +14,7 @@ dotenv.config();
 
 
 const app = express();
+const port = process.env.PORT || 8080;
 app.use(express.json())
 app.use(cookieParser());
 
@@ -31,4 +32,6 @@ app.use("/contact",contact)
 app.use("/login",login)
 
 
-app.listen(8080)
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

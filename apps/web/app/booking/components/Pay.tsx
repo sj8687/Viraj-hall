@@ -104,7 +104,7 @@ export default function PaymentPage() {
 
 
 
-  // ✅ Load Razorpay script
+  // Load Razorpay script
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
@@ -116,11 +116,12 @@ export default function PaymentPage() {
     };
   }, []);
 
-  // ✅ Fetch Razorpay Order & open Razorpay UI
+
+  // Fetch Razorpay Order & open Razorpay UI
   
 
     const fetchOrder = async () => {
-      if(!token) return
+     
       try {
         const { data } = await axios.post<RazorpayOrderResponse>(
           `${process.env.NEXT_PUBLIC_Backend_URL}/payment/create`,
@@ -147,9 +148,11 @@ export default function PaymentPage() {
                 payment_Id: response.razorpay_payment_id,
                 signature: response.razorpay_signature,
                 bookingId: bookingId,
-              },  {withCredentials:true
-            
-          });
+              },  {
+       headers: {
+            Authorization: `Bearer ${token}`,
+        },
+  });
 
               toast.success('Payment verified successfully!');
               // window.location.href = `/success?bookingId=${bookingId}`;
@@ -157,7 +160,7 @@ export default function PaymentPage() {
             } catch (error: any) {
               console.error(error);
               toast.error(' Payment verification failed!');
-              router.push("./")
+              router.push("/")
             }
           },
           prefill: {
@@ -175,7 +178,7 @@ export default function PaymentPage() {
             ondismiss: function () {
               toast.info(" Payment was cancelled by user");
               setLoading(false)
-              // router.push("/"); // or redirect to a 'payment failed' page
+              router.push("/"); // or redirect to a 'payment failed' page
             },
           },
         };

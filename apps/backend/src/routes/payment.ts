@@ -8,7 +8,7 @@ import { userMiddleware } from '../middleware/clientmiddle';
 export const payment = Router();
 
 
-payment.post('/create', async (req, res) => {
+payment.post('/create',userMiddleware, async (req, res) => {
   const { bookingId } = req.body;
 
   if (!bookingId) {

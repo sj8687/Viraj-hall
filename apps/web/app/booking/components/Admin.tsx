@@ -66,7 +66,7 @@ export default function AdminDashboard() {
   }, [authData, status, router]);
 
   const fetchBookings = () => {
-    if (!token) return
+  
     setLoading(true);
     axios
       .get(`${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/bookings`,        {

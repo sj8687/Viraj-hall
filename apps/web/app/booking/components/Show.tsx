@@ -60,7 +60,7 @@ export default function MyBookings() {
 
 
 const fetchBookings = useCallback(async () => {
-    if (!token) return;
+  
     setLoading(true);
     try {
       console.log(token);
