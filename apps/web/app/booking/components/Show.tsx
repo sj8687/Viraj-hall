@@ -59,34 +59,32 @@ export default function MyBookings() {
     }, [authData, status, router]);
 
 
-const fetchBookings = useCallback(async () => {
-  
+useEffect(() => {
+  if (!token) return;
+
+  const fetchBookings = async () => {
     setLoading(true);
     try {
-      console.log(token);
-      
+      console.log("Fetching with token:", token);
+
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
         {
-       headers: {
+          headers: {
             Authorization: `Bearer ${token}`,
-        },
-  }
+          },
+        }
       );
       setBookings(data);
-    } catch {
+    } catch (err) {
       toast.error("Failed to load bookings");
     } finally {
       setLoading(false);
     }
-  }, [token]);
+  };
 
-  useEffect(() => {
-    if (token) {
-        fetchBookings();
-    }
-  
-  }, [fetchBookings,token]);
+  fetchBookings(); // ✅ only when token is ready
+}, [token]);
 
   return (
     <div className="min-h-screen max-w-[1250px] mx-auto px-4 py-8 mt-[80px] flex flex-col">

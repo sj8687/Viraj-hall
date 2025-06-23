@@ -1,28 +1,17 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Spinner } from './Spinner';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Spinner } from "./Spinner";
+import { useSession } from "next-auth/react";
+import "react-toastify/dist/ReactToastify.css";
 
 interface RazorpayPaymentResponse {
   razorpay_order_id: string;
   razorpay_payment_id: string;
   razorpay_signature: string;
-}
-
-interface RazorpayOrderResponse {
-  orderId: string;
-  amount: number;
-  currency: string;
-  plan: string;
-  id: string; // booking ID
-  customer: string;
-  email: string;
-  contact: string;
 }
 
 interface RazorpayOrderResponse {
@@ -55,11 +44,10 @@ interface RazorpayOptions {
   theme: {
     color: string;
   };
+  modal?: {
+    ondismiss: () => void;
+  };
 }
-
-// interface payment {
-//   email: string | null;
-// }
 
 declare global {
   interface Window {
@@ -69,155 +57,126 @@ declare global {
   }
 }
 
-
 export default function PaymentPage() {
   const [loading, setLoading] = useState(true);
-  const searchParams = useSearchParams();
-  const bookingId = searchParams.get('bookingId');
   const router = useRouter();
-   const { data: authData, status } = useSession();
-    const [token, setToken] = useState<string>();
- 
+  const searchParams = useSearchParams();
+  const bookingId = searchParams.get("bookingId");
+  const { data: authData, status } = useSession();
+  const [token, setToken] = useState<string>();
 
+  // 🔐 Fetch Token
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const response = await axios.get("/api/token"); // ✔️ axios call
-        console.log("Token from API:", response.data.token);
-        setToken(response.data.token);
-      } catch (err) {
-        console.error("Error fetching token:", err);
+        const res = await axios.get("/api/token");
+        setToken(res.data.token);
+      } catch {
+        toast.error("Failed to get auth token");
+        router.push("/");
       }
     };
-
     fetchToken();
   }, []);
 
-
-    useEffect(() => {
-      if (status === "loading") return;
-  
-      if (!authData) {
-        router.replace("/");
-      }
-    }, [authData, status, router]);
-
-
-
-  // Load Razorpay script
+  // ⛔ Redirect unauthenticated users
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    if (status === "loading") return;
+    if (!authData) router.replace("/");
+  }, [authData, status, router]);
+
+  // 🧠 Razorpay Script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    return () => document.body.removeChild(script);
   }, []);
 
+  // 💳 Payment handler
+  const fetchOrder = useCallback(async () => {
+    if (!bookingId || !token) return;
 
-  // Fetch Razorpay Order & open Razorpay UI
-  
+    try {
+      const { data } = await axios.post<RazorpayOrderResponse>(
+        `${process.env.NEXT_PUBLIC_Backend_URL}/payment/create`,
+        { bookingId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-    const fetchOrder = async () => {
-     
-      try {
-        const { data } = await axios.post<RazorpayOrderResponse>(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/payment/create`,
-          { bookingId  } ,
-          
-           {
-       headers: {
-            Authorization: `Bearer ${token}`,
+      const options: RazorpayOptions = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+        amount: data.amount,
+        currency: data.currency,
+        name: "Viraj Multipurpose Hall",
+        description: `Booking Payment (${data.plan})`,
+        order_id: data.orderId,
+        prefill: {
+          name: data.customer,
+          email: data.email,
+          contact: data.contact,
         },
-  }
-        );
-
-        const options: RazorpayOptions & { modal?: any } = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-          amount: data.amount,
-          currency: data.currency,
-          name: 'Viraj Multipurpose Hall',
-          description: `Booking Payment (${data.plan})`,
-          order_id: data.orderId,
-          handler: async function (response: RazorpayPaymentResponse) {
-            try {
-              await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/payment/verify`, {
+        notes: {
+          bookingId: data.id,
+        },
+        theme: {
+          color: "#ec6e24",
+        },
+        handler: async (response: RazorpayPaymentResponse) => {
+          try {
+            await axios.post(
+              `${process.env.NEXT_PUBLIC_Backend_URL}/payment/verify`,
+              {
                 order_id: response.razorpay_order_id,
                 payment_Id: response.razorpay_payment_id,
                 signature: response.razorpay_signature,
-                bookingId: bookingId,
-              },  {
-       headers: {
-            Authorization: `Bearer ${token}`,
+                bookingId,
+              },
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
+            toast.success("Payment successful!");
+            router.push("/");
+          } catch {
+            toast.error("Payment verification failed.");
+            router.push("/");
+          }
         },
-  });
+        modal: {
+          ondismiss: () => {
+            toast.info("Payment cancelled by user.");
+            router.push("/");
+          },
+        },
+      };
 
-              toast.success('Payment verified successfully!');
-              // window.location.href = `/success?bookingId=${bookingId}`;
-              router.push("/")
-            } catch (error: any) {
-              console.error(error);
-              toast.error(' Payment verification failed!');
-              router.push("/")
-            }
-          },
-          prefill: {
-            name: data.customer,
-            email: data.email,
-            contact: data.contact,
-          },
-          notes: {
-            bookingId: data.id,
-          },
-          theme: {
-            color: '#ec6e24',
-          },
-          modal: {
-            ondismiss: function () {
-              toast.info(" Payment was cancelled by user");
-              setLoading(false)
-              router.push("/"); // or redirect to a 'payment failed' page
-            },
-          },
-        };
-
-        const razor = new window.Razorpay(options);
-        razor.open();
-        setLoading(false); 
-      } catch (err: any) {
-        toast.error(err?.response?.data?.error || 'Payment initiation failed');
-         setLoading(false);
-        router.push("/")
-
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    useEffect(() => {
-    if (bookingId && token) {
-      
-    fetchOrder();
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (err: any) {
+      toast.error(err?.response?.data?.error || "Failed to create Razorpay order");
+      router.push("/");
+    } finally {
+      setLoading(false);
     }
-  }, [bookingId,token]);
+  }, [bookingId, token]);
+
+  // 🚀 Trigger payment if bookingId + token exist
+  useEffect(() => {
+    if (bookingId && token) fetchOrder();
+  }, [bookingId, token, fetchOrder]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      {loading ? (
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <Spinner />
-          <span className="text-gray-600 text-sm">Loading payment gateway...</span>
-        </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <Spinner />
-
-          <span className="text-gray-600 text-sm">Redirecting to Dashboard...</span>
-        </div>
-      )}
+      <div className="flex flex-col items-center space-y-4">
+        <Spinner />
+        <span className="text-gray-600 text-sm">
+          {loading ? "Loading payment gateway..." : "Redirecting..."}
+        </span>
+      </div>
     </div>
-
   );
 }

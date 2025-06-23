@@ -4,9 +4,8 @@ dotenv.config()
 import { prisma } from "@repo/db"
 import { checkAvailabilitySchema, createBookingSchema } from "@repo/zod";
 import { userMiddleware } from "../middleware/clientmiddle";
-import NodeCache from "node-cache";
+import cache from "../utils/casche";
 
-export const cache = new NodeCache();
 
 
 declare global {
@@ -104,7 +103,8 @@ booking.post('/book', userMiddleware, async (req, res) => {
       
     });
 
-    // ✅ Cache invalidate after new booking
+    cache.del(`bookings-${email}`);
+   cache.del("adminBookings");
     cache.del("adminBookings");
 
     res.json(booking);
