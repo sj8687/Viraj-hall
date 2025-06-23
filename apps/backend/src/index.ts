@@ -10,6 +10,8 @@ import { show } from "./routes/show";
 import { adminbooking } from "./Admin/allbooking";
 import { contact } from "./routes/contact";
 import { login } from "./routes/login";
+import "./routes/corn";
+
 dotenv.config();
 
 

@@ -84,6 +84,9 @@ importers:
       node-cache:
         specifier: 5.1.2
         version: 5.1.2
+      node-cron:
+        specifier: ^4.1.1
+        version: 4.1.1
       nodemailer:
         specifier: 6.9.0
         version: 6.9.0
@@ -4124,6 +4127,11 @@ packages:
     engines: {node: '>= 8.0.0'}
     dependencies:
       clone: 2.1.2
+    dev: false
+
+  /node-cron@4.1.1:
+    resolution: {integrity: sha512-oJj9CYV7teeCVs+y2Efi5IQ4FGmAYbsXQOehc1AGLlwteec8pC7DjBCUzSyRQ0LYa+CRCgmD+vtlWQcnPpXowA==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /node-releases@2.0.19:

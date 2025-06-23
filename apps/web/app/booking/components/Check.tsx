@@ -132,7 +132,7 @@ export default function CheckAvailability() {
 
   const handleSubmit = useCallback(async () => {
     if (!validateForm()) return;
-    if (!token) return;
+    if (!token) return toast.error('Authorization token missing. Try again.');
 
     try {
       setSubmitting(true);
@@ -164,7 +164,7 @@ export default function CheckAvailability() {
       setForm({ customer: '', contact: '', guests: '', functionType: '', additionalInfo: '' });
       setAvailable(null);
     } catch (err: any) {
-      toast.error(err?.response?.data?.error || 'Booking failed');
+      toast.error('Booking failed');
     } finally {
       setSubmitting(false);
     }
@@ -209,7 +209,7 @@ export default function CheckAvailability() {
                 <div className="sm:col-span-2 flex justify-center">
                   <button
                     onClick={checkAvailability}
-                    disabled={checking}
+                disabled={checking || !date || !time}
                     className={`flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded transition ${checking ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
                     {checking ? <Spinner /> : 'Check Availability'}
