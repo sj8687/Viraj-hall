@@ -105,7 +105,7 @@ export default function SignupPage() {
             <Button
               type="button"
               variant="outline"
-              className="w-full mt-2 flex items-center justify-center gap-2"
+              className="w-[100%] mt-2 flex items-center justify-center gap-2"
               onClick={handleGoogleSignup}
             >
               <FcGoogle className="text-xl" />

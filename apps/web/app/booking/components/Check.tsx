@@ -86,7 +86,7 @@ export default function CheckAvailability() {
       if (status === "loading") return; 
   
       if (!authData || !authData.user) {
-        router.replace("/");
+        router.push("/login");
       }
     }, [authData, status, router]);
 

@@ -5,7 +5,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import axios from "axios";
 
-// 🔐 Admin credentials
+//  Admin credentials
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL!;
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH!;
 
@@ -35,7 +35,7 @@ const config: NextAuthConfig = {
         const email = credentials?.email as string;
         const password = credentials?.password as string;
 
-        // 🔒 Special case for admin login
+        //  Special case for admin login
         if (email === ADMIN_EMAIL) {
           const isAdmin = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
           if (!isAdmin) {
@@ -49,22 +49,22 @@ const config: NextAuthConfig = {
           };
         }
 
-        // 🧪 Validate input
+       
         const validInput = loginSchema.safeParse({ email, password });
         if (!validInput.success) {
           throw new Error(validInput.error.errors[0]?.message ?? "Invalid input");
         }
 
-        // 🟡 Call backend to validate credentials
+        // Call  
         try {
           const response = await axios.post(
             `${process.env.NEXT_PUBLIC_Backend_URL}/login/validate`,
             { email, password },
           );
-          console.log("Backend response:", response.data); // <-- Add this
+          console.log("Backend response:", response.data); 
           return response.data.user;
         } catch (err: any) {
-          console.error("Backend error:", err.response?.data || err.message); // <-- Add this
+          console.error("Backend error:", err.response?.data || err.message);
           throw new Error(err.response?.data?.message || "Login failed");
         }
       },
@@ -98,7 +98,7 @@ const config: NextAuthConfig = {
       return true;
     },
 
-    // ✅ Your admin logic in session callback
+    //  admin logic in session callback
     async session({ session }) {
       if (session?.user?.email) {
         session.user.isAdmin = session.user.email === ADMIN_EMAIL;

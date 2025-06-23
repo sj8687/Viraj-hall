@@ -10,7 +10,8 @@ import { show } from "./routes/show";
 import { adminbooking } from "./Admin/allbooking";
 import { contact } from "./routes/contact";
 import { login } from "./routes/login";
-import "./routes/corn";
+import { healthRoute } from "./routes/corn";
+// import "./routes/corn";
 
 dotenv.config();
 
@@ -32,6 +33,8 @@ app.use("/show",show)
 app.use("/adminbooking",adminbooking)
 app.use("/contact",contact)
 app.use("/login",login)
+app.use("/health", healthRoute);
+
 
 
 app.listen(port, () => {

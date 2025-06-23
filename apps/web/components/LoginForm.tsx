@@ -28,7 +28,7 @@ export function LoginForm() {
                 }
                 else{
                     toast.dismiss(toastId)
-                    toast.error(error.err.toString())
+                    toast.error("fill out the correct details")
                 } 
                 
              }

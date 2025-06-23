@@ -35,7 +35,7 @@ export default async function Page() {
                     }} >
                         <Link href={"/forgot"} className="flex justify-center items-center gap-2">Forgot Password<p><CiLock className="text-red-500 text-2xl hover:text-green-400" /></p></Link>
                         <p className="text-center">OR</p>
-                       <Button type="submit" variant={"outline"}><FcGoogle/>Login With Google</Button>
+                       <Button className="px-[90px]" type="submit" variant={"outline"}><FcGoogle/>Login With Google</Button>
                     </form>
                     <Link className="text-sm flex gap-2 mt-2 hover:text-green-600" href={"/signup"}><p className="text-black dark:text-white">Don't have an account?</p>Signup</Link>
                 </CardFooter>
