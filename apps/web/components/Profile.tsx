@@ -38,7 +38,7 @@ export function Profile({ authData }: any) {
             <div className="">
                 {
                     profile && 
-                    <div className=" absolute w-[332px] shadow-[0_0_10px_rgba(1000,100,100,200)] overflow-hidden md:w-[400px] bg-white dark:bg-yellow-300 top-[70px] rounded-lg right-[0px] pb-[60px]">
+                    <div className=" absolute w-[332px] shadow-[0_0_10px_rgba(1000,100,100,200)] overflow-hidden  md:w-[400px] bg-white dark:bg-yellow-300 top-[70px] rounded-lg right-[0px] pb-[60px]">
 
                         <div className="bg-gradient-to-r from-violet-300 to-orange-600  h-[100px]"></div>
 
@@ -69,8 +69,8 @@ export function Profile({ authData }: any) {
                             }
                         </div>
 
-                        <div className="flex max-w-fit gap-2 mx-auto">
-                            <p className="dark:text-black">Email:</p> 
+                        <div className="flex max-w-fit gap-2 px-1 text-center mt-2 mx-auto">
+                            <p className="dark:text-black font-medium">Email:</p> 
                             <p className={`${mainheading.className} w-fit mx-auto mb-5 dark:text-black`}>{authData.email}</p>
                         </div>
 
