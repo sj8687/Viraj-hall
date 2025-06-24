@@ -119,11 +119,12 @@ export default function CheckAvailability() {
   const validateForm = (): boolean => {
     if (!verifiedPhone) return toast.error('Please verify your phone number first'), false;
     if (!form.customer.trim()) return toast.error('Please enter customer name'), false;
-    if (!isValidIndianName(form.customer.trim())) return toast.error('Name should only contain letters (max 30)'), false;
+    if (!isValidIndianName(form.customer.trim())) return toast.error('Name should only contain letters (max 25)'), false;
 
     const guestsCount = parseInt(form.guests);
     if (!guestsCount) return toast.error('Fill the guest field'), false;
-    if (guestsCount > 750) return toast.error('Max allowed guests is 750'), false;
+      if (guestsCount < 30) return toast.error('Minimum allowed guests is 30'), false; // <-- added condition
+    if (guestsCount > 1000) return toast.error('Max allowed guests is 1000'), false;
     if (!form.functionType) return toast.error('Fill the function field'), false;
     if (isPast(date)) return toast.error('You cannot select a past date'), false;
 
@@ -159,7 +160,7 @@ export default function CheckAvailability() {
       
       setTimeout(() => {
         router.push(`/booking/payment?bookingId=${res.data.id}`);
-      }, 1000);
+      }, 500);
 
       setForm({ customer: '', contact: '', guests: '', functionType: '', additionalInfo: '' });
       setAvailable(null);
@@ -230,10 +231,10 @@ export default function CheckAvailability() {
                         type="text"
                         placeholder="Enter full name"
                         value={form.customer}
-                        maxLength={20}
+                        maxLength={25}
                         onChange={(e) => {
                           const inputValue = e.target.value.replace(/[^a-zA-Z\s]/g, "");
-                          if (inputValue.length <= 20) setForm({ ...form, customer: inputValue });
+                          if (inputValue.length <= 25) setForm({ ...form, customer: inputValue });
                         }}
                         className="w-full p-[5px] border rounded"
                       />

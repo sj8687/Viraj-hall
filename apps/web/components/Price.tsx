@@ -17,7 +17,7 @@ const PricingSection = () => {
             <h2 className="text-2xl font-bold text-white">Basic Package</h2>
           </div>
           <p className="text-3xl font-bold mt-4 text-white flex items-center gap-1">
-            <FaRupeeSign /> 7,0000
+            <FaRupeeSign /> 70,000
           </p>
           <p className="mt-2 text-white">
             Ideal for intimate gatherings and budget-conscious couples.
@@ -30,7 +30,7 @@ const PricingSection = () => {
               <FaCheck className="text-white" /> Basic decor setup
             </li>
             <li className="flex items-center gap-2">
-              <FaCheck className="text-white" /> Basic Seating for up to 650 guests
+              <FaCheck className="text-white" /> Basic Seating for up to 1000 guests
             </li>
           </ul>
         <Link href={"/booking/dashboard"}> <button className="mt-6 bg-white text-orange-500 font-semibold px-4 py-2 rounded-md hover:bg-orange-100">
@@ -46,7 +46,7 @@ const PricingSection = () => {
             <h2 className="text-2xl font-bold text-white">Premium Package</h2>
           </div>
           <p className="text-3xl font-bold mt-4 text-white flex items-center gap-1">
-            <FaRupeeSign /> 15,0000
+            <FaRupeeSign /> 1,50,000
           </p>
           <p className="mt-2 text-white">
             Perfect for larger celebrations with all-inclusive services.
@@ -59,13 +59,13 @@ const PricingSection = () => {
               <FaCheck className="text-white" /> Full decor setup
             </li>
             <li className="flex items-center gap-2">
-              <FaCheck className="text-white" /> Catering for up to 650 guests
+              <FaCheck className="text-white" /> Catering for up to 1000 guests
             </li>
             <li className="flex items-center gap-2">
               <FaCheck className="text-white" /> Wedding planning service included
             </li>
              <li className="flex items-center gap-2">
-              <FaCheck className="text-white" />  Maharaja Seating for up to 650 guests
+              <FaCheck className="text-white" />  Maharaja Seating for up to 1000 guests
             </li>
           </ul>
           <Link href={"/booking/dashboard"}><button className="mt-6 bg-white text-orange-500 font-semibold px-4 py-2 rounded-md hover:bg-orange-100">
