@@ -88,6 +88,7 @@ export function Navbar() {
     "/booking/payment",
     "/booking/admin",
     "/booking/Show",
+    "/nav/bug"
   ];
 
   // Check if current route should always have shadow
