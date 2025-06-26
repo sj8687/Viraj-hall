@@ -28,6 +28,11 @@ export type otpStore = $Result.DefaultSelection<Prisma.$otpStorePayload>
  * 
  */
 export type Booking = $Result.DefaultSelection<Prisma.$BookingPayload>
+/**
+ * Model BugReport
+ * 
+ */
+export type BugReport = $Result.DefaultSelection<Prisma.$BugReportPayload>
 
 /**
  * Enums
@@ -225,6 +230,16 @@ export class PrismaClient<
     * ```
     */
   get booking(): Prisma.BookingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bugReport`: Exposes CRUD operations for the **BugReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BugReports
+    * const bugReports = await prisma.bugReport.findMany()
+    * ```
+    */
+  get bugReport(): Prisma.BugReportDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -667,7 +682,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     otpStore: 'otpStore',
-    Booking: 'Booking'
+    Booking: 'Booking',
+    BugReport: 'BugReport'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -686,7 +702,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "otpStore" | "booking"
+      modelProps: "user" | "otpStore" | "booking" | "bugReport"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -912,6 +928,80 @@ export namespace Prisma {
           }
         }
       }
+      BugReport: {
+        payload: Prisma.$BugReportPayload<ExtArgs>
+        fields: Prisma.BugReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BugReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BugReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>
+          }
+          findFirst: {
+            args: Prisma.BugReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BugReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>
+          }
+          findMany: {
+            args: Prisma.BugReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>[]
+          }
+          create: {
+            args: Prisma.BugReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>
+          }
+          createMany: {
+            args: Prisma.BugReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BugReportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>[]
+          }
+          delete: {
+            args: Prisma.BugReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>
+          }
+          update: {
+            args: Prisma.BugReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.BugReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BugReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BugReportUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>[]
+          }
+          upsert: {
+            args: Prisma.BugReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BugReportPayload>
+          }
+          aggregate: {
+            args: Prisma.BugReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBugReport>
+          }
+          groupBy: {
+            args: Prisma.BugReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BugReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BugReportCountArgs<ExtArgs>
+            result: $Utils.Optional<BugReportCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -999,6 +1089,7 @@ export namespace Prisma {
     user?: UserOmit
     otpStore?: otpStoreOmit
     booking?: BookingOmit
+    bugReport?: BugReportOmit
   }
 
   /* Types for Logging */
@@ -1094,10 +1185,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     bookings: number
+    bugReport: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookings?: boolean | UserCountOutputTypeCountBookingsArgs
+    bugReport?: boolean | UserCountOutputTypeCountBugReportArgs
   }
 
   // Custom InputTypes
@@ -1116,6 +1209,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBookingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BookingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBugReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BugReportWhereInput
   }
 
 
@@ -1346,6 +1446,7 @@ export namespace Prisma {
     googleId?: boolean
     role?: boolean
     bookings?: boolean | User$bookingsArgs<ExtArgs>
+    bugReport?: boolean | User$bugReportArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1385,6 +1486,7 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "name" | "email" | "password" | "image" | "googleId" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookings?: boolean | User$bookingsArgs<ExtArgs>
+    bugReport?: boolean | User$bugReportArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1394,6 +1496,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       bookings: Prisma.$BookingPayload<ExtArgs>[]
+      bugReport: Prisma.$BugReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1799,6 +1902,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     bookings<T extends User$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, User$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bugReport<T extends User$bugReportArgs<ExtArgs> = {}>(args?: Subset<T, User$bugReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2245,6 +2349,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * User.bugReport
+   */
+  export type User$bugReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    where?: BugReportWhereInput
+    orderBy?: BugReportOrderByWithRelationInput | BugReportOrderByWithRelationInput[]
+    cursor?: BugReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BugReportScalarFieldEnum | BugReportScalarFieldEnum[]
   }
 
   /**
@@ -4488,6 +4616,1137 @@ export namespace Prisma {
 
 
   /**
+   * Model BugReport
+   */
+
+  export type AggregateBugReport = {
+    _count: BugReportCountAggregateOutputType | null
+    _avg: BugReportAvgAggregateOutputType | null
+    _sum: BugReportSumAggregateOutputType | null
+    _min: BugReportMinAggregateOutputType | null
+    _max: BugReportMaxAggregateOutputType | null
+  }
+
+  export type BugReportAvgAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type BugReportSumAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type BugReportMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    screenshot: string | null
+    userEmail: string | null
+    userName: string | null
+    createdAt: Date | null
+    userId: number | null
+  }
+
+  export type BugReportMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    screenshot: string | null
+    userEmail: string | null
+    userName: string | null
+    createdAt: Date | null
+    userId: number | null
+  }
+
+  export type BugReportCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    screenshot: number
+    userEmail: number
+    userName: number
+    createdAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type BugReportAvgAggregateInputType = {
+    userId?: true
+  }
+
+  export type BugReportSumAggregateInputType = {
+    userId?: true
+  }
+
+  export type BugReportMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    screenshot?: true
+    userEmail?: true
+    userName?: true
+    createdAt?: true
+    userId?: true
+  }
+
+  export type BugReportMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    screenshot?: true
+    userEmail?: true
+    userName?: true
+    createdAt?: true
+    userId?: true
+  }
+
+  export type BugReportCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    screenshot?: true
+    userEmail?: true
+    userName?: true
+    createdAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type BugReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BugReport to aggregate.
+     */
+    where?: BugReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BugReports to fetch.
+     */
+    orderBy?: BugReportOrderByWithRelationInput | BugReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BugReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BugReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BugReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BugReports
+    **/
+    _count?: true | BugReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BugReportAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BugReportSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BugReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BugReportMaxAggregateInputType
+  }
+
+  export type GetBugReportAggregateType<T extends BugReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateBugReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBugReport[P]>
+      : GetScalarType<T[P], AggregateBugReport[P]>
+  }
+
+
+
+
+  export type BugReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BugReportWhereInput
+    orderBy?: BugReportOrderByWithAggregationInput | BugReportOrderByWithAggregationInput[]
+    by: BugReportScalarFieldEnum[] | BugReportScalarFieldEnum
+    having?: BugReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BugReportCountAggregateInputType | true
+    _avg?: BugReportAvgAggregateInputType
+    _sum?: BugReportSumAggregateInputType
+    _min?: BugReportMinAggregateInputType
+    _max?: BugReportMaxAggregateInputType
+  }
+
+  export type BugReportGroupByOutputType = {
+    id: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt: Date
+    userId: number
+    _count: BugReportCountAggregateOutputType | null
+    _avg: BugReportAvgAggregateOutputType | null
+    _sum: BugReportSumAggregateOutputType | null
+    _min: BugReportMinAggregateOutputType | null
+    _max: BugReportMaxAggregateOutputType | null
+  }
+
+  type GetBugReportGroupByPayload<T extends BugReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BugReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BugReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BugReportGroupByOutputType[P]>
+            : GetScalarType<T[P], BugReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BugReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    screenshot?: boolean
+    userEmail?: boolean
+    userName?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bugReport"]>
+
+  export type BugReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    screenshot?: boolean
+    userEmail?: boolean
+    userName?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bugReport"]>
+
+  export type BugReportSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    screenshot?: boolean
+    userEmail?: boolean
+    userName?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bugReport"]>
+
+  export type BugReportSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    screenshot?: boolean
+    userEmail?: boolean
+    userName?: boolean
+    createdAt?: boolean
+    userId?: boolean
+  }
+
+  export type BugReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "screenshot" | "userEmail" | "userName" | "createdAt" | "userId", ExtArgs["result"]["bugReport"]>
+  export type BugReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BugReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BugReportIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BugReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BugReport"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string
+      screenshot: string
+      userEmail: string
+      userName: string
+      createdAt: Date
+      userId: number
+    }, ExtArgs["result"]["bugReport"]>
+    composites: {}
+  }
+
+  type BugReportGetPayload<S extends boolean | null | undefined | BugReportDefaultArgs> = $Result.GetResult<Prisma.$BugReportPayload, S>
+
+  type BugReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BugReportFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BugReportCountAggregateInputType | true
+    }
+
+  export interface BugReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BugReport'], meta: { name: 'BugReport' } }
+    /**
+     * Find zero or one BugReport that matches the filter.
+     * @param {BugReportFindUniqueArgs} args - Arguments to find a BugReport
+     * @example
+     * // Get one BugReport
+     * const bugReport = await prisma.bugReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BugReportFindUniqueArgs>(args: SelectSubset<T, BugReportFindUniqueArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BugReport that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BugReportFindUniqueOrThrowArgs} args - Arguments to find a BugReport
+     * @example
+     * // Get one BugReport
+     * const bugReport = await prisma.bugReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BugReportFindUniqueOrThrowArgs>(args: SelectSubset<T, BugReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BugReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportFindFirstArgs} args - Arguments to find a BugReport
+     * @example
+     * // Get one BugReport
+     * const bugReport = await prisma.bugReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BugReportFindFirstArgs>(args?: SelectSubset<T, BugReportFindFirstArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BugReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportFindFirstOrThrowArgs} args - Arguments to find a BugReport
+     * @example
+     * // Get one BugReport
+     * const bugReport = await prisma.bugReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BugReportFindFirstOrThrowArgs>(args?: SelectSubset<T, BugReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BugReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BugReports
+     * const bugReports = await prisma.bugReport.findMany()
+     * 
+     * // Get first 10 BugReports
+     * const bugReports = await prisma.bugReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bugReportWithIdOnly = await prisma.bugReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BugReportFindManyArgs>(args?: SelectSubset<T, BugReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BugReport.
+     * @param {BugReportCreateArgs} args - Arguments to create a BugReport.
+     * @example
+     * // Create one BugReport
+     * const BugReport = await prisma.bugReport.create({
+     *   data: {
+     *     // ... data to create a BugReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends BugReportCreateArgs>(args: SelectSubset<T, BugReportCreateArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BugReports.
+     * @param {BugReportCreateManyArgs} args - Arguments to create many BugReports.
+     * @example
+     * // Create many BugReports
+     * const bugReport = await prisma.bugReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BugReportCreateManyArgs>(args?: SelectSubset<T, BugReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BugReports and returns the data saved in the database.
+     * @param {BugReportCreateManyAndReturnArgs} args - Arguments to create many BugReports.
+     * @example
+     * // Create many BugReports
+     * const bugReport = await prisma.bugReport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BugReports and only return the `id`
+     * const bugReportWithIdOnly = await prisma.bugReport.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BugReportCreateManyAndReturnArgs>(args?: SelectSubset<T, BugReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BugReport.
+     * @param {BugReportDeleteArgs} args - Arguments to delete one BugReport.
+     * @example
+     * // Delete one BugReport
+     * const BugReport = await prisma.bugReport.delete({
+     *   where: {
+     *     // ... filter to delete one BugReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BugReportDeleteArgs>(args: SelectSubset<T, BugReportDeleteArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BugReport.
+     * @param {BugReportUpdateArgs} args - Arguments to update one BugReport.
+     * @example
+     * // Update one BugReport
+     * const bugReport = await prisma.bugReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BugReportUpdateArgs>(args: SelectSubset<T, BugReportUpdateArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BugReports.
+     * @param {BugReportDeleteManyArgs} args - Arguments to filter BugReports to delete.
+     * @example
+     * // Delete a few BugReports
+     * const { count } = await prisma.bugReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BugReportDeleteManyArgs>(args?: SelectSubset<T, BugReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BugReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BugReports
+     * const bugReport = await prisma.bugReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BugReportUpdateManyArgs>(args: SelectSubset<T, BugReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BugReports and returns the data updated in the database.
+     * @param {BugReportUpdateManyAndReturnArgs} args - Arguments to update many BugReports.
+     * @example
+     * // Update many BugReports
+     * const bugReport = await prisma.bugReport.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BugReports and only return the `id`
+     * const bugReportWithIdOnly = await prisma.bugReport.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BugReportUpdateManyAndReturnArgs>(args: SelectSubset<T, BugReportUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BugReport.
+     * @param {BugReportUpsertArgs} args - Arguments to update or create a BugReport.
+     * @example
+     * // Update or create a BugReport
+     * const bugReport = await prisma.bugReport.upsert({
+     *   create: {
+     *     // ... data to create a BugReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BugReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BugReportUpsertArgs>(args: SelectSubset<T, BugReportUpsertArgs<ExtArgs>>): Prisma__BugReportClient<$Result.GetResult<Prisma.$BugReportPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BugReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportCountArgs} args - Arguments to filter BugReports to count.
+     * @example
+     * // Count the number of BugReports
+     * const count = await prisma.bugReport.count({
+     *   where: {
+     *     // ... the filter for the BugReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends BugReportCountArgs>(
+      args?: Subset<T, BugReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BugReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BugReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BugReportAggregateArgs>(args: Subset<T, BugReportAggregateArgs>): Prisma.PrismaPromise<GetBugReportAggregateType<T>>
+
+    /**
+     * Group by BugReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BugReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BugReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BugReportGroupByArgs['orderBy'] }
+        : { orderBy?: BugReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BugReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBugReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BugReport model
+   */
+  readonly fields: BugReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BugReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BugReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BugReport model
+   */
+  interface BugReportFieldRefs {
+    readonly id: FieldRef<"BugReport", 'String'>
+    readonly title: FieldRef<"BugReport", 'String'>
+    readonly description: FieldRef<"BugReport", 'String'>
+    readonly screenshot: FieldRef<"BugReport", 'String'>
+    readonly userEmail: FieldRef<"BugReport", 'String'>
+    readonly userName: FieldRef<"BugReport", 'String'>
+    readonly createdAt: FieldRef<"BugReport", 'DateTime'>
+    readonly userId: FieldRef<"BugReport", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BugReport findUnique
+   */
+  export type BugReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BugReport to fetch.
+     */
+    where: BugReportWhereUniqueInput
+  }
+
+  /**
+   * BugReport findUniqueOrThrow
+   */
+  export type BugReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BugReport to fetch.
+     */
+    where: BugReportWhereUniqueInput
+  }
+
+  /**
+   * BugReport findFirst
+   */
+  export type BugReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BugReport to fetch.
+     */
+    where?: BugReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BugReports to fetch.
+     */
+    orderBy?: BugReportOrderByWithRelationInput | BugReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BugReports.
+     */
+    cursor?: BugReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BugReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BugReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BugReports.
+     */
+    distinct?: BugReportScalarFieldEnum | BugReportScalarFieldEnum[]
+  }
+
+  /**
+   * BugReport findFirstOrThrow
+   */
+  export type BugReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BugReport to fetch.
+     */
+    where?: BugReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BugReports to fetch.
+     */
+    orderBy?: BugReportOrderByWithRelationInput | BugReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BugReports.
+     */
+    cursor?: BugReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BugReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BugReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BugReports.
+     */
+    distinct?: BugReportScalarFieldEnum | BugReportScalarFieldEnum[]
+  }
+
+  /**
+   * BugReport findMany
+   */
+  export type BugReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BugReports to fetch.
+     */
+    where?: BugReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BugReports to fetch.
+     */
+    orderBy?: BugReportOrderByWithRelationInput | BugReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BugReports.
+     */
+    cursor?: BugReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BugReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BugReports.
+     */
+    skip?: number
+    distinct?: BugReportScalarFieldEnum | BugReportScalarFieldEnum[]
+  }
+
+  /**
+   * BugReport create
+   */
+  export type BugReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BugReport.
+     */
+    data: XOR<BugReportCreateInput, BugReportUncheckedCreateInput>
+  }
+
+  /**
+   * BugReport createMany
+   */
+  export type BugReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BugReports.
+     */
+    data: BugReportCreateManyInput | BugReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BugReport createManyAndReturn
+   */
+  export type BugReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * The data used to create many BugReports.
+     */
+    data: BugReportCreateManyInput | BugReportCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BugReport update
+   */
+  export type BugReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BugReport.
+     */
+    data: XOR<BugReportUpdateInput, BugReportUncheckedUpdateInput>
+    /**
+     * Choose, which BugReport to update.
+     */
+    where: BugReportWhereUniqueInput
+  }
+
+  /**
+   * BugReport updateMany
+   */
+  export type BugReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BugReports.
+     */
+    data: XOR<BugReportUpdateManyMutationInput, BugReportUncheckedUpdateManyInput>
+    /**
+     * Filter which BugReports to update
+     */
+    where?: BugReportWhereInput
+    /**
+     * Limit how many BugReports to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BugReport updateManyAndReturn
+   */
+  export type BugReportUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * The data used to update BugReports.
+     */
+    data: XOR<BugReportUpdateManyMutationInput, BugReportUncheckedUpdateManyInput>
+    /**
+     * Filter which BugReports to update
+     */
+    where?: BugReportWhereInput
+    /**
+     * Limit how many BugReports to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BugReport upsert
+   */
+  export type BugReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BugReport to update in case it exists.
+     */
+    where: BugReportWhereUniqueInput
+    /**
+     * In case the BugReport found by the `where` argument doesn't exist, create a new BugReport with this data.
+     */
+    create: XOR<BugReportCreateInput, BugReportUncheckedCreateInput>
+    /**
+     * In case the BugReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BugReportUpdateInput, BugReportUncheckedUpdateInput>
+  }
+
+  /**
+   * BugReport delete
+   */
+  export type BugReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+    /**
+     * Filter which BugReport to delete.
+     */
+    where: BugReportWhereUniqueInput
+  }
+
+  /**
+   * BugReport deleteMany
+   */
+  export type BugReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BugReports to delete
+     */
+    where?: BugReportWhereInput
+    /**
+     * Limit how many BugReports to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BugReport without action
+   */
+  export type BugReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BugReport
+     */
+    select?: BugReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BugReport
+     */
+    omit?: BugReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BugReportInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4545,6 +5804,20 @@ export namespace Prisma {
   };
 
   export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+  export const BugReportScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    screenshot: 'screenshot',
+    userEmail: 'userEmail',
+    userName: 'userName',
+    createdAt: 'createdAt',
+    userId: 'userId'
+  };
+
+  export type BugReportScalarFieldEnum = (typeof BugReportScalarFieldEnum)[keyof typeof BugReportScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4690,6 +5963,7 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     bookings?: BookingListRelationFilter
+    bugReport?: BugReportListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4702,6 +5976,7 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     role?: SortOrder
     bookings?: BookingOrderByRelationAggregateInput
+    bugReport?: BugReportOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4717,6 +5992,7 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     bookings?: BookingListRelationFilter
+    bugReport?: BugReportListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -4908,6 +6184,78 @@ export namespace Prisma {
     additionalInfo?: StringNullableWithAggregatesFilter<"Booking"> | string | null
   }
 
+  export type BugReportWhereInput = {
+    AND?: BugReportWhereInput | BugReportWhereInput[]
+    OR?: BugReportWhereInput[]
+    NOT?: BugReportWhereInput | BugReportWhereInput[]
+    id?: StringFilter<"BugReport"> | string
+    title?: StringFilter<"BugReport"> | string
+    description?: StringFilter<"BugReport"> | string
+    screenshot?: StringFilter<"BugReport"> | string
+    userEmail?: StringFilter<"BugReport"> | string
+    userName?: StringFilter<"BugReport"> | string
+    createdAt?: DateTimeFilter<"BugReport"> | Date | string
+    userId?: IntFilter<"BugReport"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BugReportOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    screenshot?: SortOrder
+    userEmail?: SortOrder
+    userName?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BugReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BugReportWhereInput | BugReportWhereInput[]
+    OR?: BugReportWhereInput[]
+    NOT?: BugReportWhereInput | BugReportWhereInput[]
+    title?: StringFilter<"BugReport"> | string
+    description?: StringFilter<"BugReport"> | string
+    screenshot?: StringFilter<"BugReport"> | string
+    userEmail?: StringFilter<"BugReport"> | string
+    userName?: StringFilter<"BugReport"> | string
+    createdAt?: DateTimeFilter<"BugReport"> | Date | string
+    userId?: IntFilter<"BugReport"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type BugReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    screenshot?: SortOrder
+    userEmail?: SortOrder
+    userName?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    _count?: BugReportCountOrderByAggregateInput
+    _avg?: BugReportAvgOrderByAggregateInput
+    _max?: BugReportMaxOrderByAggregateInput
+    _min?: BugReportMinOrderByAggregateInput
+    _sum?: BugReportSumOrderByAggregateInput
+  }
+
+  export type BugReportScalarWhereWithAggregatesInput = {
+    AND?: BugReportScalarWhereWithAggregatesInput | BugReportScalarWhereWithAggregatesInput[]
+    OR?: BugReportScalarWhereWithAggregatesInput[]
+    NOT?: BugReportScalarWhereWithAggregatesInput | BugReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BugReport"> | string
+    title?: StringWithAggregatesFilter<"BugReport"> | string
+    description?: StringWithAggregatesFilter<"BugReport"> | string
+    screenshot?: StringWithAggregatesFilter<"BugReport"> | string
+    userEmail?: StringWithAggregatesFilter<"BugReport"> | string
+    userName?: StringWithAggregatesFilter<"BugReport"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BugReport"> | Date | string
+    userId?: IntWithAggregatesFilter<"BugReport"> | number
+  }
+
   export type UserCreateInput = {
     createdAt?: Date | string
     name?: string | null
@@ -4917,6 +6265,7 @@ export namespace Prisma {
     googleId?: string | null
     role?: $Enums.Role
     bookings?: BookingCreateNestedManyWithoutUserInput
+    bugReport?: BugReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4929,6 +6278,7 @@ export namespace Prisma {
     googleId?: string | null
     role?: $Enums.Role
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
+    bugReport?: BugReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4940,6 +6290,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     bookings?: BookingUpdateManyWithoutUserNestedInput
+    bugReport?: BugReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4952,6 +6303,7 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
+    bugReport?: BugReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -5167,6 +6519,82 @@ export namespace Prisma {
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type BugReportCreateInput = {
+    id?: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutBugReportInput
+  }
+
+  export type BugReportUncheckedCreateInput = {
+    id?: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt?: Date | string
+    userId: number
+  }
+
+  export type BugReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBugReportNestedInput
+  }
+
+  export type BugReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BugReportCreateManyInput = {
+    id?: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt?: Date | string
+    userId: number
+  }
+
+  export type BugReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BugReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -5232,12 +6660,22 @@ export namespace Prisma {
     none?: BookingWhereInput
   }
 
+  export type BugReportListRelationFilter = {
+    every?: BugReportWhereInput
+    some?: BugReportWhereInput
+    none?: BugReportWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type BookingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BugReportOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5512,6 +6950,47 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type BugReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    screenshot?: SortOrder
+    userEmail?: SortOrder
+    userName?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type BugReportAvgOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
+  export type BugReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    screenshot?: SortOrder
+    userEmail?: SortOrder
+    userName?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type BugReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    screenshot?: SortOrder
+    userEmail?: SortOrder
+    userName?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type BugReportSumOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
   export type BookingCreateNestedManyWithoutUserInput = {
     create?: XOR<BookingCreateWithoutUserInput, BookingUncheckedCreateWithoutUserInput> | BookingCreateWithoutUserInput[] | BookingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookingCreateOrConnectWithoutUserInput | BookingCreateOrConnectWithoutUserInput[]
@@ -5519,11 +6998,25 @@ export namespace Prisma {
     connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
   }
 
+  export type BugReportCreateNestedManyWithoutUserInput = {
+    create?: XOR<BugReportCreateWithoutUserInput, BugReportUncheckedCreateWithoutUserInput> | BugReportCreateWithoutUserInput[] | BugReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BugReportCreateOrConnectWithoutUserInput | BugReportCreateOrConnectWithoutUserInput[]
+    createMany?: BugReportCreateManyUserInputEnvelope
+    connect?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+  }
+
   export type BookingUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<BookingCreateWithoutUserInput, BookingUncheckedCreateWithoutUserInput> | BookingCreateWithoutUserInput[] | BookingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookingCreateOrConnectWithoutUserInput | BookingCreateOrConnectWithoutUserInput[]
     createMany?: BookingCreateManyUserInputEnvelope
     connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type BugReportUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BugReportCreateWithoutUserInput, BugReportUncheckedCreateWithoutUserInput> | BugReportCreateWithoutUserInput[] | BugReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BugReportCreateOrConnectWithoutUserInput | BugReportCreateOrConnectWithoutUserInput[]
+    createMany?: BugReportCreateManyUserInputEnvelope
+    connect?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -5556,6 +7049,20 @@ export namespace Prisma {
     deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
   }
 
+  export type BugReportUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BugReportCreateWithoutUserInput, BugReportUncheckedCreateWithoutUserInput> | BugReportCreateWithoutUserInput[] | BugReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BugReportCreateOrConnectWithoutUserInput | BugReportCreateOrConnectWithoutUserInput[]
+    upsert?: BugReportUpsertWithWhereUniqueWithoutUserInput | BugReportUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BugReportCreateManyUserInputEnvelope
+    set?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    disconnect?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    delete?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    connect?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    update?: BugReportUpdateWithWhereUniqueWithoutUserInput | BugReportUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BugReportUpdateManyWithWhereWithoutUserInput | BugReportUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BugReportScalarWhereInput | BugReportScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -5576,6 +7083,20 @@ export namespace Prisma {
     update?: BookingUpdateWithWhereUniqueWithoutUserInput | BookingUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: BookingUpdateManyWithWhereWithoutUserInput | BookingUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type BugReportUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BugReportCreateWithoutUserInput, BugReportUncheckedCreateWithoutUserInput> | BugReportCreateWithoutUserInput[] | BugReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BugReportCreateOrConnectWithoutUserInput | BugReportCreateOrConnectWithoutUserInput[]
+    upsert?: BugReportUpsertWithWhereUniqueWithoutUserInput | BugReportUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BugReportCreateManyUserInputEnvelope
+    set?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    disconnect?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    delete?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    connect?: BugReportWhereUniqueInput | BugReportWhereUniqueInput[]
+    update?: BugReportUpdateWithWhereUniqueWithoutUserInput | BugReportUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BugReportUpdateManyWithWhereWithoutUserInput | BugReportUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BugReportScalarWhereInput | BugReportScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutBookingsInput = {
@@ -5606,6 +7127,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutBookingsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBookingsInput, UserUpdateWithoutBookingsInput>, UserUncheckedUpdateWithoutBookingsInput>
+  }
+
+  export type UserCreateNestedOneWithoutBugReportInput = {
+    create?: XOR<UserCreateWithoutBugReportInput, UserUncheckedCreateWithoutBugReportInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBugReportInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBugReportNestedInput = {
+    create?: XOR<UserCreateWithoutBugReportInput, UserUncheckedCreateWithoutBugReportInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBugReportInput
+    upsert?: UserUpsertWithoutBugReportInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBugReportInput, UserUpdateWithoutBugReportInput>, UserUncheckedUpdateWithoutBugReportInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5866,6 +7401,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BugReportCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt?: Date | string
+  }
+
+  export type BugReportUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt?: Date | string
+  }
+
+  export type BugReportCreateOrConnectWithoutUserInput = {
+    where: BugReportWhereUniqueInput
+    create: XOR<BugReportCreateWithoutUserInput, BugReportUncheckedCreateWithoutUserInput>
+  }
+
+  export type BugReportCreateManyUserInputEnvelope = {
+    data: BugReportCreateManyUserInput | BugReportCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BookingUpsertWithWhereUniqueWithoutUserInput = {
     where: BookingWhereUniqueInput
     update: XOR<BookingUpdateWithoutUserInput, BookingUncheckedUpdateWithoutUserInput>
@@ -5903,6 +7468,36 @@ export namespace Prisma {
     additionalInfo?: StringNullableFilter<"Booking"> | string | null
   }
 
+  export type BugReportUpsertWithWhereUniqueWithoutUserInput = {
+    where: BugReportWhereUniqueInput
+    update: XOR<BugReportUpdateWithoutUserInput, BugReportUncheckedUpdateWithoutUserInput>
+    create: XOR<BugReportCreateWithoutUserInput, BugReportUncheckedCreateWithoutUserInput>
+  }
+
+  export type BugReportUpdateWithWhereUniqueWithoutUserInput = {
+    where: BugReportWhereUniqueInput
+    data: XOR<BugReportUpdateWithoutUserInput, BugReportUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BugReportUpdateManyWithWhereWithoutUserInput = {
+    where: BugReportScalarWhereInput
+    data: XOR<BugReportUpdateManyMutationInput, BugReportUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BugReportScalarWhereInput = {
+    AND?: BugReportScalarWhereInput | BugReportScalarWhereInput[]
+    OR?: BugReportScalarWhereInput[]
+    NOT?: BugReportScalarWhereInput | BugReportScalarWhereInput[]
+    id?: StringFilter<"BugReport"> | string
+    title?: StringFilter<"BugReport"> | string
+    description?: StringFilter<"BugReport"> | string
+    screenshot?: StringFilter<"BugReport"> | string
+    userEmail?: StringFilter<"BugReport"> | string
+    userName?: StringFilter<"BugReport"> | string
+    createdAt?: DateTimeFilter<"BugReport"> | Date | string
+    userId?: IntFilter<"BugReport"> | number
+  }
+
   export type UserCreateWithoutBookingsInput = {
     createdAt?: Date | string
     name?: string | null
@@ -5911,6 +7506,7 @@ export namespace Prisma {
     image?: string | null
     googleId?: string | null
     role?: $Enums.Role
+    bugReport?: BugReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookingsInput = {
@@ -5922,6 +7518,7 @@ export namespace Prisma {
     image?: string | null
     googleId?: string | null
     role?: $Enums.Role
+    bugReport?: BugReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookingsInput = {
@@ -5948,6 +7545,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    bugReport?: BugReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookingsInput = {
@@ -5959,6 +7557,69 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    bugReport?: BugReportUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBugReportInput = {
+    createdAt?: Date | string
+    name?: string | null
+    email: string
+    password?: string | null
+    image?: string | null
+    googleId?: string | null
+    role?: $Enums.Role
+    bookings?: BookingCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBugReportInput = {
+    id?: number
+    createdAt?: Date | string
+    name?: string | null
+    email: string
+    password?: string | null
+    image?: string | null
+    googleId?: string | null
+    role?: $Enums.Role
+    bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBugReportInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBugReportInput, UserUncheckedCreateWithoutBugReportInput>
+  }
+
+  export type UserUpsertWithoutBugReportInput = {
+    update: XOR<UserUpdateWithoutBugReportInput, UserUncheckedUpdateWithoutBugReportInput>
+    create: XOR<UserCreateWithoutBugReportInput, UserUncheckedCreateWithoutBugReportInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBugReportInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBugReportInput, UserUncheckedUpdateWithoutBugReportInput>
+  }
+
+  export type UserUpdateWithoutBugReportInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    bookings?: BookingUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBugReportInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BookingCreateManyUserInput = {
@@ -5976,6 +7637,16 @@ export namespace Prisma {
     paymentId?: string | null
     guests?: number | null
     additionalInfo?: string | null
+  }
+
+  export type BugReportCreateManyUserInput = {
+    id?: string
+    title: string
+    description: string
+    screenshot: string
+    userEmail: string
+    userName: string
+    createdAt?: Date | string
   }
 
   export type BookingUpdateWithoutUserInput = {
@@ -6027,6 +7698,36 @@ export namespace Prisma {
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     guests?: NullableIntFieldUpdateOperationsInput | number | null
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BugReportUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BugReportUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BugReportUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    screenshot?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -33,3 +33,10 @@ export const createBookingSchema = z.object({
   functionType: z.string(),
   additionalInfo: z.string().max(200).optional() // ✅ ADD THIS
 });
+
+export const bugReportSchema = z.object({
+  title: z.string().min(5).max(100, "Title must be under 100 characters"),
+  description: z.string().min(10).max(1000, "Description must be under 1000 characters"),
+  userEmail: z.string().email("Invalid email"),
+  userName: z.string().min(1, "Name is required"),
+});

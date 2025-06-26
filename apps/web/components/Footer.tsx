@@ -1,9 +1,12 @@
 
 // components/Footer.tsx
 
+import Link from 'next/link';
 import { FaInstagram, FaTwitter, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { IoCallSharp } from 'react-icons/io5';
+import { FaBug } from "react-icons/fa";
+
 
 const Footer = () => {
   return (
@@ -48,6 +51,13 @@ const Footer = () => {
             <div className="flex items-center space-x-2 mb-4">
               <HiMail size={20} className="text-yellow-500" />
               <span className="text-sm">Viraj@Gmail.com</span>
+            </div>
+             <div className="flex items-center space-x-2 mb-4">
+              <FaBug
+                size={20} className="text-red-500" />
+              <Link href="/nav/bug" className="text-sm">
+                Report a Bug
+              </Link>
             </div>
           </div>
 

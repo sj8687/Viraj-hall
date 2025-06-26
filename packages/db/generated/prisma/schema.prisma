@@ -24,7 +24,8 @@ model User {
   googleId  String?
   role      Role     @default(USER)
 
-  bookings Booking[]
+  bookings  Booking[]
+  bugReport BugReport[]
 }
 
 model otpStore {
@@ -54,6 +55,18 @@ model Booking {
 
   guests         Int?
   additionalInfo String?
+}
+
+model BugReport {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  screenshot  String
+  userEmail   String
+  userName    String
+  createdAt   DateTime @default(now())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 enum BookingStatus {

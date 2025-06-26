@@ -45,7 +45,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const response = await axios.get("/api/token"); // ✔️ axios call
+        const response = await axios.get("/api/token"); 
         console.log("Token from API:", response.data.token);
         setToken(response.data.token);
       } catch (err) {

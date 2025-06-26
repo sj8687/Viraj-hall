@@ -35,7 +35,7 @@ const Contact = () => {
     setLoading(true);
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/contact/contact`, form);
-      
+
       setForm({ name: '', number: '', email: '', message: '' });
       toast.success("message sent successfully")
     } catch (err) {
@@ -72,24 +72,24 @@ const Contact = () => {
                 onChange={handleChange}
                 required
               />
-      <input
-        type="tel"
-        name="number"
-        placeholder="Your number"
-        className="w-full p-2 mb-4 bg-gray-00 text-black border rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-        value={form.number}
-        maxLength={10}
-        onChange={(e) => {
-          const value = e.target.value;
-          if (/^[+0-9]{0,13}$/.test(value)) {
-            setForm((prev) => ({
-              ...prev,
-              number: value,
-            }));
-          }
-        }}
-        required
-      />
+              <input
+                type="tel"
+                name="number"
+                placeholder="Your number"
+                className="w-full p-2 mb-4 bg-gray-00 text-black border rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+                value={form.number}
+                maxLength={10}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^[+0-9]{0,13}$/.test(value)) {
+                    setForm((prev) => ({
+                      ...prev,
+                      number: value,
+                    }));
+                  }
+                }}
+                required
+              />
               <input
                 type="email"
                 name="email"
@@ -115,7 +115,7 @@ const Contact = () => {
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
-             
+
             </form>
 
             <div className="w-full">
@@ -130,7 +130,7 @@ const Contact = () => {
             </div>
           </div>
 
- <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
             {/* Catering Contact */}
             <div className="bg-white border  p-6 rounded-xl shadow-[0_0_10px_rgba(200,100,100,20)]">
               <h3 className="text-lg font-semibold text-orange-600 mb-2">🍽 Catering Inquiries</h3>
@@ -162,7 +162,7 @@ const Contact = () => {
               Old NH4,<br /> Kini, Maharashtra 416112
             </p>
           </div>
-                </div>
+        </div>
       </section>
     </main>
   );
