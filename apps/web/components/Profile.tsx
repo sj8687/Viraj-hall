@@ -69,9 +69,9 @@ export function Profile({ authData }: any) {
                             }
                         </div>
 
-                        <div className="flex max-w-fit gap-2 px-1 text-center mt-2 mx-auto">
+                        <div className="flex max-w-fit gap-2 pr-2 sm:px-1 text-center mt-2  mx-auto">
                             <p className="dark:text-black font-medium">Email:</p> 
-                            <p className={`${mainheading.className} w-fit mx-auto mb-5 dark:text-black`}>{authData.email}</p>
+                            <p className={`${mainheading.className} w-fit  mx-auto mb-5 dark:text-black`}>{authData.email}</p>
                         </div>
 
                         <div className="w-[70%] mx-auto p-2 flex justify-center gap-4 cursor-pointer">

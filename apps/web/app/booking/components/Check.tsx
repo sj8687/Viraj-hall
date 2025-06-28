@@ -62,6 +62,8 @@ export default function CheckAvailability() {
   const [checking, setChecking] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null);
+const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
+
   const router = useRouter();
   const { data: authData, status } = useSession();
    const [token, setToken] = useState<string>();
@@ -137,8 +139,7 @@ export default function CheckAvailability() {
 
     try {
       setSubmitting(true);
-      const res = await axios.post<BookingRequest>(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/booking/book`,
+      const res = await axios.post<BookingRequest>(`${process.env.NEXT_PUBLIC_Backend_URL}/booking/book`,
         {
           customer: form.customer,
           contact: verifiedPhone,
@@ -152,6 +153,7 @@ export default function CheckAvailability() {
         {
        headers: {
             Authorization: `Bearer ${token}`,
+             "X-Firebase-Token": firebaseToken,   
         },
       }
       );
@@ -244,7 +246,10 @@ export default function CheckAvailability() {
 {/* phn compo */}
                     <div>
                       <label className="block mb-1 font-medium">Phone Number</label>
-                      <PhoneOtp onVerified={(phone) => setVerifiedPhone(phone)} />
+<PhoneOtp onVerified={(phone, token) => {
+  setVerifiedPhone(phone);
+  setFirebaseToken(token); // ✅ save token
+}} />
                     </div>
 
                     <div>

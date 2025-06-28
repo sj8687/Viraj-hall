@@ -12,14 +12,13 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { FormEvent, startTransition, useEffect, useState } from "react";
-
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 interface Props {
-  onVerified: (phone: string) => void;
+  onVerified: (phone: string, token: string) => void;
 }
 
 export default function PhoneOtp({ onVerified }: Props) {
@@ -68,8 +67,11 @@ export default function PhoneOtp({ onVerified }: Props) {
       try {
         await confirmationResult.confirm(otp);
         toast.success("OTP verified successfully");
+        const token = await auth.currentUser?.getIdToken();
+         console.log("bkl",token);
+         
         // Parent component ko phone number bhej rahe hain
-        onVerified(phoneNumber);
+        onVerified(phoneNumber,token!);
       } catch (err: any) {
         console.error(err);
         toast.error("OTP verification failed. Please try again.");
@@ -98,6 +100,7 @@ export default function PhoneOtp({ onVerified }: Props) {
       const result = await signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
       setConfirmationResult(result);
       toast.success("OTP sent successfully");
+
     } catch (err: any) {
       console.error(err);
       setResendCountdown(0);
@@ -108,6 +111,7 @@ export default function PhoneOtp({ onVerified }: Props) {
       } else {
         toast.error("Failed to send OTP. Try again.");
       }
+      toast.error("incorrect phn no.")
     } finally {
       setIsPending(false);
     }
