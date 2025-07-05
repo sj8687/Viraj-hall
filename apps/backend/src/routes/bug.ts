@@ -55,7 +55,7 @@ bug.post('/bug-report', cloudinaryUploader.single('screenshot'), async (req: Req
 
 
 // Fetch all bug reports
-bug.get('/bug-report',middleware, async (req, res) => {
+bug.get('/bug-report', async (req, res) => {
   try {
     const bugs = await prisma.bugReport.findMany({
       orderBy: { createdAt: 'desc' },

@@ -55,20 +55,20 @@ booking.post('/book', userMiddleware, async (req, res) => {
   // Verify Firebase phone 
   const firebaseToken = req.headers['x-firebase-token'] as string;
   if (!firebaseToken) {
-     res.status(401).json({ error: "Phone verification token missing" });
-     return
+    res.status(401).json({ error: "Phone verification token missing" });
+    return
   }
 
   try {
-const decoded = await adminAuth.verifyIdToken(firebaseToken);
-console.log("decoded",decoded);
+    const decoded = await adminAuth.verifyIdToken(firebaseToken);
+    console.log("decoded", decoded);
 
     const verifiedPhone = decoded.phone_number;
-    console.log("phn",verifiedPhone);
-    
+    console.log("phn", verifiedPhone);
+
     if (!verifiedPhone) {
-       res.status(403).json({ error: "Invalid phone token" });
-       return
+      res.status(403).json({ error: "Invalid phone token" });
+      return
     }
 
     const {
@@ -92,8 +92,8 @@ console.log("decoded",decoded);
     });
 
     if (existing) {
-       res.status(409).json({ error: "Booking already exists for this date and time slot" });
-       return
+      res.status(409).json({ error: "Booking already exists for this date and time slot" });
+      return
     }
 
     const booking = await prisma.booking.create({
@@ -101,7 +101,7 @@ console.log("decoded",decoded);
         customer,
         date: new Date(date),
         timeSlot,
-        contact: verifiedPhone, 
+        contact: verifiedPhone,
         hall: "Viraj Multipurpose Hall",
         plan,
         guests,

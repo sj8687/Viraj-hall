@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#0A0A23] text-white py-12">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
             <h3 className="text-2xl font-semibold mb-4">Viraj Marriage Hall</h3>
             <p className="text-sm mb-4">Creating unforgettable memories for your special events.</p>
@@ -42,7 +42,7 @@ const Footer = () => {
             </ul>
           </div> */}
 
-          <div className='md:ml-[100px]'>
+          <div className=' sm:ml-[20%]'>
             <h4 className="text-xl font-semibold mb-4 ">Contact Us</h4>
             <div className="flex items-center space-x-2 mb-4">
               <IoCallSharp size={20} className="text-green-500" />

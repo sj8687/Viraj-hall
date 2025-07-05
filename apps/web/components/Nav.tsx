@@ -110,7 +110,7 @@ export function Navbar() {
               alt="Viraj Hall"
               width={125} // max width (responsive handled by Tailwind)
               height={50} // use approx height or tune it
-              className="object-cover w-[110px] sm:w-[125px] h-auto rounded-xl"
+              className="object-cover w-[110px] sm:w-[116px] h-auto rounded-xl"
             />
           </Link>
         </div>
@@ -142,7 +142,7 @@ export function Navbar() {
                 </Link>
               )}
               {authData && (authData.user as any)?.isAdmin && (
-                <Link href="/booking/admin">
+                <Link href="/AdminDash/Admin">
                   <button className="bg-black signbarsdiv  text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
                     Admin Panel
                   </button>

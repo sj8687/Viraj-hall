@@ -12,6 +12,8 @@ import { contact } from "./routes/contact";
 import { login } from "./routes/login";
 import { healthRoute } from "./routes/corn";
 import { bug } from "./routes/bug";
+import { graph } from "./Admin/graph";
+import { allusers } from "./Admin/allusers";
 // import "./routes/corn";
 
 dotenv.config();
@@ -35,7 +37,9 @@ app.use("/adminbooking",adminbooking)
 app.use("/contact",contact)
 app.use("/login",login)
 app.use("/health", healthRoute);
-app.use("/bug",bug)
+app.use("/bug",bug);
+app.use("/allusers",allusers)
+app.use("/graph",graph)
 
 
 
