@@ -96,7 +96,7 @@ export default function MainAdminDashboard() {
               {
                 authData?.user.image ? (<Image src={authData?.user.image} alt="Profile" width={36} height={36} className="rounded-full border  " />
                 ) : (
-                  <span className="text-lg border">{authData?.user.email?.charAt(0)?.toUpperCase() || "Sj"}</span>)
+                  <span className="text-lg p-9 border">{authData?.user.email?.charAt(0)?.toUpperCase() || "Sj"}</span>)
 
               }
             </div>
