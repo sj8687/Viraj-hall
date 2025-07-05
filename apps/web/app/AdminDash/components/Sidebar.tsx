@@ -24,13 +24,13 @@ export default function MainAdminDashboard() {
   const { data: authData, status } = useSession();
   const router = useRouter();
   
-    // useEffect(() => {
-    //   if (status === "loading") return;
+    useEffect(() => {
+      if (status === "loading") return;
   
-    //   if (!authData || !authData.user?.isAdmin) {
-    //     router.replace("/");
-    //   }
-    // }, [authData, status, router]);
+      if (!authData || !authData.user?.isAdmin) {
+        router.replace("/");
+      }
+    }, [authData, status, router]);
 
   const menuItems = [
     { label: "Dashboard", icon: <BiSolidDashboard className="sm:text-xl text-[16px]" />, key: "dashboard" },
