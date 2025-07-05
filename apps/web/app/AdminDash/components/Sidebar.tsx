@@ -24,13 +24,13 @@ export default function MainAdminDashboard() {
   const { data: authData, status } = useSession();
   const router = useRouter();
   
-    useEffect(() => {
-      if (status === "loading") return;
+    // useEffect(() => {
+    //   if (status === "loading") return;
   
-      if (!authData || !authData.user?.isAdmin) {
-        router.replace("/");
-      }
-    }, [authData, status, router]);
+    //   if (!authData || !authData.user?.isAdmin) {
+    //     router.replace("/");
+    //   }
+    // }, [authData, status, router]);
 
   const menuItems = [
     { label: "Dashboard", icon: <BiSolidDashboard className="sm:text-xl text-[16px]" />, key: "dashboard" },
@@ -70,7 +70,7 @@ export default function MainAdminDashboard() {
 
           ))}
 
-          <div className={`absolute bottom-4 right-1 transition-all duration-300 ${collapsed ? "right-2" : "right-4" }`}>
+          <div className={`absolute bottom-24 right-1 transition-all duration-300 ${collapsed ? "right-2" : "right-4" }`}>
             <span className={`flex items-center gap-2 p-2 rounded-md transition ${collapsed ? "justify-center" : ""}`} >
               <Theme  />
             </span>
@@ -91,12 +91,12 @@ export default function MainAdminDashboard() {
             <h1 className="text-2xl dark:text-white font-bold mb-4">Welcome Admin!</h1>
           </div>
 
-          <div className="flex items-center gap-3 dark:bg-slate-700 dark:sm:border-gray-10 border dark:border-gray-400 bg-white sm:px-4 p-1 sm:py-2 rounded  sm:shadow ">
+          <div className="flex items-center gap-3 dark:bg-slate-700 dark:sm:border-gray-10  dark:border-gray-400 bg-white sm:px-4 p-1 sm:py-2 rounded  sm:shadow ">
             <div className="w-9 h-9  rounded-full  text-white flex items-center justify-center font-bold">
               {
-                authData?.user.image ? (<Image src={authData?.user.image} alt="Profile" width={36} height={36} className="rounded-full border  " />
+                authData?.user.image ? (<Image src={authData?.user.image} alt="Profile" width={36} height={36} className="rounded-full   " />
                 ) : (
-                  <span className="text-lg p-9 border">{authData?.user.email?.charAt(0)?.toUpperCase() || "Sj"}</span>)
+                  <span className="text-lg p-9 ">{authData?.user.email?.charAt(0)?.toUpperCase() || "A"}</span>)
 
               }
             </div>
