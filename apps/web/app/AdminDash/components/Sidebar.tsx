@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaChevronLeft,
   FaBug,
@@ -12,15 +12,25 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import DashboardSummary from "./UsersSummary";
 import Theme from "./Theme";
+import { useRouter } from "next/navigation";
 
 
 
 
 
 export default function MainAdminDashboard() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [activeTab, setActiveTab] = useState<"dashboard" | "Bug reports" | "Bookings">("dashboard");
-  const { data: authData } = useSession();
+  const { data: authData, status } = useSession();
+  const router = useRouter();
+  
+    useEffect(() => {
+      if (status === "loading") return;
+  
+      if (!authData || !authData.user?.isAdmin) {
+        router.replace("/");
+      }
+    }, [authData, status, router]);
 
   const menuItems = [
     { label: "Dashboard", icon: <BiSolidDashboard className="sm:text-xl text-[16px]" />, key: "dashboard" },
@@ -84,9 +94,9 @@ export default function MainAdminDashboard() {
           <div className="flex items-center gap-3 dark:bg-slate-700 dark:sm:border-gray-10 border dark:border-gray-400 bg-white sm:px-4 p-1 sm:py-2 rounded  sm:shadow ">
             <div className="w-9 h-9  rounded-full  text-white flex items-center justify-center font-bold">
               {
-                authData?.user.image ? (<Image src={authData?.user.image} alt="Profile" width={36} height={36} className="rounded-full  md:border-none" />
+                authData?.user.image ? (<Image src={authData?.user.image} alt="Profile" width={36} height={36} className="rounded-full border  " />
                 ) : (
-                  <span className="text-lg">{authData?.user.email?.charAt(0)?.toUpperCase() || "Sj"}</span>)
+                  <span className="text-lg border">{authData?.user.email?.charAt(0)?.toUpperCase() || "Sj"}</span>)
 
               }
             </div>

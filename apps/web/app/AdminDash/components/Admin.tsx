@@ -73,7 +73,7 @@ export default function AdminDashboard() {
       })
       .then((res) => {
         setBookingsByMonth(res.data);
-        // Auto-expand all months initially
+        
         setExpandedMonths(new Set(Object.keys(res.data)));
       })
       .catch(() => toast.error("Failed to fetch bookings"))

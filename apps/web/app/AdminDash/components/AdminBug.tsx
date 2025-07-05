@@ -18,6 +18,7 @@ import {
   Maximize2
 } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface BugReport {
   id: string;
@@ -33,9 +34,8 @@ export default function AdminBugReports() {
   const { data: session, status } = useSession();
   const [bugs, setBugs] = useState<BugReport[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
  
-
-  
 
   useEffect(() => {
     if (status !== 'authenticated') return;
@@ -62,8 +62,10 @@ export default function AdminBugReports() {
       fetchBugs();
     } else {
       toast.error('Unauthorized. Admin only.');
+      router.push('/');  
     }
   }, [session, status]);
+
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

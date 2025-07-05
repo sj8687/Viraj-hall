@@ -43,7 +43,7 @@ const config: NextAuthConfig = {
           }
           return {
             id: "0",
-            name: "Admin",
+            name: "Shreyash Jadhav",
             email: ADMIN_EMAIL,
             isAdmin: true,
           };

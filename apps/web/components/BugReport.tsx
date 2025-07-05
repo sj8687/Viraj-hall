@@ -47,7 +47,7 @@ export default function BugReport() {
 
     if (title.length < 5) return toast.error('Title must be at least 5 characters');
     if (description.length < 10) return toast.error('Description must be at least 10 characters');
-    if (title.length > 100) return toast.error('Title must not exceed 100 characters');
+    if (title.length > 50) return toast.error('Title must not exceed 50 characters');
     if (description.length > 500) return toast.error('Description must not exceed 500 characters');
     if (!title.trim() || !description.trim() || !screenshot) {
       return toast.error('All fields and screenshot are required');
@@ -60,7 +60,7 @@ export default function BugReport() {
     formData.append('userEmail', authData?.user?.email || '');
     formData.append('userName', authData?.user?.name || '');
 
-    setIsSubmitting(true); // ✅ Start spinner
+    setIsSubmitting(true); 
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/bug/bug-report`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -74,7 +74,7 @@ export default function BugReport() {
     } catch (err) {
       toast.error('Failed to submit bug report');
     } finally {
-      setIsSubmitting(false); // ✅ Stop spinner
+      setIsSubmitting(false); 
     }
   };
 
@@ -83,7 +83,7 @@ export default function BugReport() {
       <div className="text-2xl font-semibold text-gray-800">🐞 Bug Report Form</div>
 
       <div>
-        <label className="block mb-1 font-medium">Bug Title (max 100 characters)</label>
+        <label className="block mb-1 font-medium">Bug Title (max 50 characters)</label>
         <input
           type="text"
           placeholder="e.g. Submit button not working"
@@ -91,7 +91,7 @@ export default function BugReport() {
           onChange={(e) => setTitle(e.target.value)}
           className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
-        <p className="text-sm text-gray-500 mt-1">{title.length} / 100 characters</p>
+        <p className="text-sm text-gray-500 mt-1">{title.length} /50 characters</p>
       </div>
 
       <div>
