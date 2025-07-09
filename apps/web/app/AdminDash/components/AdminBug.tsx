@@ -30,12 +30,11 @@ interface BugReport {
   createdAt: string;
 }
 
-export default function AdminBugReports() {
+export default function AdminBugReports({token}: {token?: string}) {
   const { data: session, status } = useSession();
   const [bugs, setBugs] = useState<BugReport[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
- 
 
   useEffect(() => {
     if (status !== 'authenticated') return;
@@ -43,7 +42,9 @@ export default function AdminBugReports() {
     const fetchBugs = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/bug/bug-report`, {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+        },
         });
 
         if (Array.isArray(res.data.bugs)) {
@@ -58,12 +59,9 @@ export default function AdminBugReports() {
       }
     };
 
-    if (session?.user.isAdmin) {
+    if (token) {
       fetchBugs();
-    } else {
-      toast.error('Unauthorized. Admin only.');
-      router.push('/');  
-    }
+    } 
   }, [session, status]);
 
 

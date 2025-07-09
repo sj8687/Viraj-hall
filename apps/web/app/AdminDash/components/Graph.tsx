@@ -11,18 +11,24 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function UserGrowthChart() {
-  const [range, setRange] = useState(7); // Default: 3 months
+export default function UserGrowthChart({ token }: { token?: string }) {
+  const [range, setRange] = useState(7); 
   const [data, setData] = useState<{ date: string; count: number }[]>([]);
-
+ 
   useEffect(() => {
+    if (!token) {
+      console.error("Authentication token is missing. Please log in again.");
+      return;
+    }
     axios
       .get(`${process.env.NEXT_PUBLIC_Backend_URL}/graph/admin/user-growth?range=${range}`, {
-        withCredentials: true,
+         headers: {
+            Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => setData(res.data))
       .catch(() => console.error("Error fetching user growth data"));
-  }, [range]);
+  }, [range,token]);
 
 
 

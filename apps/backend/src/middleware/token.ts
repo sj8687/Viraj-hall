@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { decode } from "@auth/core/jwt"; // Same as next-auth/jwt
+import { decode } from "@auth/core/jwt"; 
 
 export const middleware = async (
   req: Request,
@@ -37,7 +37,6 @@ const token = req.headers.authorization?.split(" ")[1];
       return;
     }
 
-    // Optional: attach session to request
     (req as any).session = decoded;
 
     next(); 

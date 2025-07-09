@@ -46,7 +46,7 @@ interface Booking {
   };
 }
 
-export default function AdminDashboard() {
+export default function AdminDashboard({token}:{token?:string}) {
   const [bookingsByMonth, setBookingsByMonth] = useState<Record<string, Booking[]>>({});
   const [loading, setLoading] = useState(true);
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
@@ -55,21 +55,28 @@ export default function AdminDashboard() {
   const [statusFilter, setStatusFilter] = useState<"ALL" | "CONFIRMED" | "PENDING">("ALL");
   const [expandedMonths, setExpandedMonths] = useState<Set<string>>(new Set());
   const router = useRouter();
-  const { data: authData, status } = useSession();
+ const { data: authData, status } = useSession();
+
+
 
   useEffect(() => {
     if (status === "loading") return;
-
     if (!authData || !authData.user?.isAdmin) {
       router.replace("/");
     }
   }, [authData, status, router]);
 
   const fetchBookings = () => {
+    if (!token) {
+      toast.error("Authentication token is missing. Please log in again.");
+      return;
+    }
     setLoading(true);
     axios
       .get(`${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/bookings`, {
-        withCredentials: true,
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => {
         setBookingsByMonth(res.data);
@@ -86,7 +93,9 @@ export default function AdminDashboard() {
     try {
       await axios.delete(
         `${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/delete/${id}`,
-        { withCredentials: true }
+        { headers: {
+            Authorization: `Bearer ${token}`,
+        }, }
       );
       toast.success("Booking deleted successfully");
       fetchBookings();
@@ -96,8 +105,12 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchBookings();
-  }, []);
+    if (token) {
+      fetchBookings();
+    }else{
+      router.push('/login');
+    }
+  }, [token]);
 
   const toggleRow = (id: string) => {
     setExpandedRows((prev) => {

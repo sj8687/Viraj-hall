@@ -2,12 +2,13 @@ import  { Request, Response, Router } from 'express';
 import { prisma } from '@repo/db';
 import { bugReportSchema } from '@repo/zod';
 import  { cloudinaryUploader } from "./../utils/cloud";
+import { userMiddleware } from '../middleware/clientmiddle';
 import { middleware } from '../middleware/token';
 
 export const bug = Router();
 
 
-bug.post('/bug-report', cloudinaryUploader.single('screenshot'), async (req: Request, res: Response) => {
+bug.post('/bug-report',userMiddleware, cloudinaryUploader.single('screenshot'), async (req: Request, res: Response) => {
   try {
     const { title, description, userEmail, userName } = req.body;
     const file = req.file;
@@ -55,7 +56,7 @@ bug.post('/bug-report', cloudinaryUploader.single('screenshot'), async (req: Req
 
 
 // Fetch all bug reports
-bug.get('/bug-report', async (req, res) => {
+bug.get('/bug-report',middleware, async (req, res) => {
   try {
     const bugs = await prisma.bugReport.findMany({
       orderBy: { createdAt: 'desc' },

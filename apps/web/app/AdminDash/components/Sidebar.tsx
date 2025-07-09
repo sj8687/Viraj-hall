@@ -13,6 +13,7 @@ import Image from "next/image";
 import DashboardSummary from "./UsersSummary";
 import Theme from "./Theme";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 
 
@@ -23,6 +24,22 @@ export default function MainAdminDashboard() {
   const [activeTab, setActiveTab] = useState<"dashboard" | "Bug reports" | "Bookings">("dashboard");
   const { data: authData, status } = useSession();
   const router = useRouter();
+  const [token, setToken] = useState<string>();
+ 
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("/api/token"); 
+        console.log("Token from API:", response.data.token);
+        setToken(response.data.token);
+      } catch (err) {
+        console.error("Error fetching token:", err);
+      }
+    };
+
+    fetchToken();
+  }, []);
   
     useEffect(() => {
       if (status === "loading") return;
@@ -70,7 +87,7 @@ export default function MainAdminDashboard() {
 
           ))}
 
-          <div className={`absolute bottom-24 right-1 transition-all duration-300 ${collapsed ? "right-2" : "right-4" }`}>
+          <div className={`absolute bottom-24 md:bottom-7 right-1 transition-all duration-300 ${collapsed ? "right-2" : "right-4" }`}>
             <span className={`flex items-center gap-2 p-2 rounded-md transition ${collapsed ? "justify-center" : ""}`} >
               <Theme  />
             </span>
@@ -91,7 +108,7 @@ export default function MainAdminDashboard() {
             <h1 className="text-2xl dark:text-white font-bold mb-4">Welcome Admin!</h1>
           </div>
 
-          <div className="flex items-center gap-3 dark:bg-slate-700 dark:sm:border-gray-10  dark:border-gray-400 bg-white sm:px-4 p-1 sm:py-2 rounded  sm:shadow ">
+          <div className="flex items-center gap-3 border dark:bg-slate-700 dark:sm:border-gray-10  dark:border-gray-400 bg-white sm:px-4 p-1 sm:py-2 rounded  sm:shadow ">
             <div className="w-9 h-9  rounded-full  text-white flex items-center justify-center font-bold">
               {
                 authData?.user.image ? (<Image src={authData?.user.image} alt="Profile" width={36} height={36} className="rounded-full   " />
@@ -114,9 +131,9 @@ export default function MainAdminDashboard() {
             <p className="dark:text-orange-300 text-orange-700 mb-6">Account Summary…</p>
           </>
         )}
-        {activeTab === "Bug reports" && <AdminBugReports />}
-        {activeTab === "Bookings" && <AdminDashboard />}
-        {activeTab === "dashboard" && <DashboardSummary />}
+        {activeTab === "Bug reports" && <AdminBugReports token={token} />}
+        {activeTab === "Bookings" && <AdminDashboard  token={token} />}
+        {activeTab === "dashboard" && <DashboardSummary token={token} />}
       </div>
     </div>
   );

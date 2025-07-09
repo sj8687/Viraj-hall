@@ -5,7 +5,7 @@ import StatCard from "./CardCompo";
 import UserGrowthChart from "./Graph";
 
 
-export default function DashboardSummary() {
+export default function DashboardSummary({token} :{token?:string}) {
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalBookings: 0,
@@ -13,15 +13,22 @@ export default function DashboardSummary() {
     newUsers: 0,
     totalBugs: 0,
   });
+ 
 
   useEffect(() => {
+    if (!token) {
+      console.error("Authentication token is missing. Please log in again.");
+      return;
+    }
     axios
       .get(`${process.env.NEXT_PUBLIC_Backend_URL}/allusers/allusers`, {
-        withCredentials: true,
+         headers: {
+            Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => setStats(res.data))
       .catch(() => console.error("Failed to fetch stats"));
-  }, []);
+  }, [token]);
 
 
   return (
@@ -72,7 +79,7 @@ export default function DashboardSummary() {
 
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-4">User Growth Over Time</h2>
-      <UserGrowthChart />
+      <UserGrowthChart token={token} />
     </div>
 
     

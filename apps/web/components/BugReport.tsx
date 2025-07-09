@@ -16,6 +16,23 @@ export default function BugReport() {
   const [preview, setPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+   const [token, setToken] = useState<string>();
+ 
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("/api/token"); 
+        console.log("Token from API:", response.data.token);
+        setToken(response.data.token);
+      } catch (err) {
+        console.error("Error fetching token:", err);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -63,7 +80,10 @@ export default function BugReport() {
     setIsSubmitting(true); 
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/bug/bug-report`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { 'Content-Type': 'multipart/form-data' ,
+            Authorization: `Bearer ${token}`,
+        },
+       
       });
 
       toast.success('Bug reported!');

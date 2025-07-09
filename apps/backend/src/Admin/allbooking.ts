@@ -7,7 +7,7 @@ import cache from "../utils/casche";
 export const adminbooking = Router();
 
 
-adminbooking.get("/admin/bookings", async (req, res) => {
+adminbooking.get("/admin/bookings",middleware, async (req, res) => {
   const cachedData = cache.get("adminBookings");
 
   if (cachedData) {
