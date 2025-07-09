@@ -26,16 +26,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 import cron from "node-cron";
 import { prisma } from "@repo/db"; // adjust this path if needed
 

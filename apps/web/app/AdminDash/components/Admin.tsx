@@ -108,7 +108,7 @@ export default function AdminDashboard({token}:{token?:string}) {
     if (token) {
       fetchBookings();
     }else{
-      router.push('/login');
+      router.push('/');
     }
   }, [token]);
 

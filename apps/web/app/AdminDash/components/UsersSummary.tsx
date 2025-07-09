@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import StatCard from "./CardCompo";
 import UserGrowthChart from "./Graph";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 
 export default function DashboardSummary({token} :{token?:string}) {
@@ -13,6 +15,16 @@ export default function DashboardSummary({token} :{token?:string}) {
     newUsers: 0,
     totalBugs: 0,
   });
+  const router = useRouter();
+    const { data: authData, status } = useSession();
+   
+     useEffect(() => {
+      if (status === "loading") return;
+      if (!authData || !authData.user?.isAdmin) {
+        router.replace("/");
+      }
+    }, [authData, status, router]);
+
  
 
   useEffect(() => {

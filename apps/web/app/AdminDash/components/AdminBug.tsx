@@ -31,10 +31,17 @@ interface BugReport {
 }
 
 export default function AdminBugReports({token}: {token?: string}) {
-  const { data: session, status } = useSession();
+  const { data: authData, status } = useSession();
   const [bugs, setBugs] = useState<BugReport[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+   useEffect(() => {
+      if (status === "loading") return;
+      if (!authData || !authData.user?.isAdmin) {
+        router.replace("/");
+      }
+    }, [authData, status, router]);
 
   useEffect(() => {
     if (status !== 'authenticated') return;
@@ -62,7 +69,7 @@ export default function AdminBugReports({token}: {token?: string}) {
     if (token) {
       fetchBugs();
     } 
-  }, [session, status]);
+  }, [authData, status]);
 
 
   const formatDate = (dateString: string) => {
