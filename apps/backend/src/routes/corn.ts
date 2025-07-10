@@ -4,7 +4,7 @@ import cron from "node-cron";
 import { prisma } from "@repo/db";
 
 
-cron.schedule('*/1 * * * *', async () => {
+cron.schedule('*/15 * * * *', async () => {
   try {
     await prisma.$queryRaw`SELECT 1`;
     console.log(' DB pinged successfully');
