@@ -14,6 +14,7 @@ import DashboardSummary from "./UsersSummary";
 import Theme from "./Theme";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 
 
 
@@ -57,11 +58,12 @@ export default function MainAdminDashboard() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className={`transition-all duration-300 dark:bg-zinc-900 bg-white dark:border-r-gray-400 border-r shadow h-full relative ${collapsed ? "sm:w-20 w-16 " : "w-64" }`} >
+      <div className={`transition-all  duration-300 dark:bg-zinc-900 bg-white dark:border-r-gray-400 border-r shadow h-full relative ${collapsed ? "sm:w-20 w-16 " : "w-64" }`} >
         <div className="flex items-center gap-1 p-4 border-b">
-          <div className="bg-orange-500 text-white rounded-full sm:w-10 sm:h-10 w-8 h-8 flex items-center justify-center font-bold">
+        <Link href={"/"}> <div className="bg-orange-500 text-white rounded-full sm:w-10 sm:h-10 w-8 h-8 flex items-center justify-center font-bold">
             V
           </div>
+          </Link> 
           {!collapsed && (
             <div className="">
               <h2 className="font-bold flex text-center text-md leading-tight">Viraj Multipurpose Hall</h2>

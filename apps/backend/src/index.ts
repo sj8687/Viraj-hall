@@ -10,11 +10,10 @@ import { show } from "./routes/show";
 import { adminbooking } from "./Admin/allbooking";
 import { contact } from "./routes/contact";
 import { login } from "./routes/login";
-// import { healthRoute } from "./routes/corn";
 import { bug } from "./routes/bug";
 import { graph } from "./Admin/graph";
 import { allusers } from "./Admin/allusers";
-// import "./routes/corn";
+import "./routes/corn";
 
 dotenv.config();
 
