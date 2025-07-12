@@ -20,14 +20,14 @@ export default function AboutSection() {
    <div className="">
                 <div className="absolute w-[80%] h-[60%] top-40 left-14 bg-orange-200 opacity-50 rounded-full blur-[100px] z-[-1]"></div>
         <p className="text-base sm:text-lg text-gray-600">
-          Since 2004, Viraj Hall has hosted over 500 beautiful weddings. Known for elegance, service, and love — we’re honored to make your day magical.
+          Since 2014, Viraj Hall has hosted over 500 beautiful weddings. Known for elegance, service, and love — we’re honored to make your day magical.
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-[50px] max-w-4xl mx-auto text-center mb-16">
         <div className="animate">
           <FaRing className="text-orange-500 text-4xl mx-auto mb-2" />
-          <p className="text-3xl font-bold text-orange-500">2004</p>
+          <p className="text-3xl font-bold text-orange-500">2014</p>
           <p className="text-gray-600 font-medium">Established</p>
         </div>
         <div className="animate">
@@ -49,22 +49,22 @@ export default function AboutSection() {
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 text-center">
           {[
             {
-              name: "Mr. Suresh Patil",
+              name: "Mr. Narayan (Nana) Patil",
               role: "Founder & Owner",
-              img: "/images/owner.jpg",
+              img: "/mainowner1.jpg",
             },
             {
-              name: "Mrs. Kavita Deshmukh",
+              name: "Mrs. Amruta (Rani) Patil",
               role: "Managing Head",
-              img: "/images/manager.jpg",
+              img: "/mainowner.jpg",
             },
             {
-              name: "Rohan Pawar",
+              name: "Kunal (Monya) jadhav",
               role: "Decoration Lead",
-              img: "/images/decor.jpg",
+              img: "/monya.jpg",
             },
           ].map((member, index) => (
-            <div className="animate" key={index}>
+            <div className="animate " key={index}>
               <Image
                 src={member.img}
                 alt={member.name}

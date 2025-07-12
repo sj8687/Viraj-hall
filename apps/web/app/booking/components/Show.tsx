@@ -32,8 +32,8 @@ export default function MyBookings() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { data: authData, status } = useSession();
-   const [token, setToken] = useState<string>();
- 
+  const [token, setToken] = useState<string>();
+
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -50,41 +50,48 @@ export default function MyBookings() {
   }, []);
 
 
-    useEffect(() => {
-      if (status === "loading") return; 
-      
-      if (!authData || !authData.user) {
-        router.replace("/");
-      }
-    }, [authData, status, router]);
+  useEffect(() => {
+    if (status === "loading") return;
 
-
-useEffect(() => {
-  if (!token) return;
-
-  const fetchBookings = async () => {
-    setLoading(true);
-    try {
-      console.log("Fetching with token:", token);
-
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setBookings(data);
-    } catch (err) {
-      toast.error("Failed to load bookings");
-    } finally {
-      setLoading(false);
+    if (!authData || !authData.user) {
+      router.replace("/");
     }
-  };
+  }, [authData, status, router]);
 
-  fetchBookings(); // ✅ only when token is ready
-}, [token]);
+
+  useEffect(() => {
+    if (!token) return;
+
+    const fetchBookings = async () => {
+      setLoading(true);
+      try {
+        console.log("Fetching with token:", token);
+
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setBookings(data);
+      } catch (err: any) {
+        if (err.response?.status === 429) {
+          toast.error('Too many requests. Please wait.');
+        } else {
+          toast.error("Failed to load bookings");
+        }
+
+
+        toast.error("Failed to load bookings");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookings(); // ✅ only when token is ready
+  }, [token]);
 
   return (
     <div className="min-h-screen max-w-[1250px] mx-auto px-4 py-8 mt-[80px] flex flex-col">
@@ -123,13 +130,13 @@ useEffect(() => {
                 {/* Venue column (5/12) */}
                 {/* Venue column (5/12) */}
                 <div className="col-span-5 flex flex-col md:flex-row md:items-center gap-4">
-                 <Image
-  src="/hall.jpg"
-  alt="Hall"
-  width={112}   // same as md:w-28
-  height={96}   // same as md:h-24
-  className="w-full h-40 md:w-28 md:h-24 object-cover rounded"
-/>
+                  <Image
+                    src="/hall.jpg"
+                    alt="Hall"
+                    width={112}   // same as md:w-28
+                    height={96}   // same as md:h-24
+                    className="w-full h-40 md:w-28 md:h-24 object-cover rounded"
+                  />
                   <div className="text-center md:text-left">
                     <h2 className="font-medium text-lg">
                       Viraj Multipurpose Hall ({booking.functionType || "Function"})

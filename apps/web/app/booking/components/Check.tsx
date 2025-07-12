@@ -62,12 +62,12 @@ export default function CheckAvailability() {
   const [checking, setChecking] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null);
-const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
+  const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
 
   const router = useRouter();
   const { data: authData, status } = useSession();
-   const [token, setToken] = useState<string>();
- 
+  const [token, setToken] = useState<string>();
+
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -84,13 +84,13 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
   }, []);
 
 
-    useEffect(() => {
-      if (status === "loading") return; 
-  
-      if (!authData || !authData.user) {
-        router.push("/login");
-      }
-    }, [authData, status, router]);
+  useEffect(() => {
+    if (status === "loading") return;
+
+    if (!authData || !authData.user) {
+      router.push("/login");
+    }
+  }, [authData, status, router]);
 
   const checkAvailability = useCallback(async () => {
     if (!date || !time) return toast.error('Please select all fields first');
@@ -109,11 +109,14 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
       toast[res.data.available ? 'success' : 'error'](
         res.data.available ? 'Slot is available ✅' : 'Slot already booked ❌'
       );
-       toast.info('before payment read a disclamier first...');
+      toast.info('before payment read a disclamier first...');
 
-    } catch {
-      toast.error('Failed to check availability');
-    } finally {
+    } catch(err: any) {
+ if (err.response?.status === 429) {
+    toast.error('Too many requests. Please wait.');
+  } else {
+    toast.error('Booking failed');
+  }      } finally {
       setChecking(false);
     }
   }, [date, time]);
@@ -125,7 +128,7 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
 
     const guestsCount = parseInt(form.guests);
     if (!guestsCount) return toast.error('Fill the guest field'), false;
-      if (guestsCount < 30) return toast.error('Minimum allowed guests is 30'), false; // <-- added condition
+    if (guestsCount < 30) return toast.error('Minimum allowed guests is 30'), false; // <-- added condition
     if (guestsCount > 1000) return toast.error('Max allowed guests is 1000'), false;
     if (!form.functionType) return toast.error('Fill the function field'), false;
     if (isPast(date)) return toast.error('You cannot select a past date'), false;
@@ -151,15 +154,15 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
           additionalInfo: form.additionalInfo
         },
         {
-       headers: {
+          headers: {
             Authorization: `Bearer ${token}`,
-             "X-Firebase-Token": firebaseToken,   
-        },
-      }
+            "X-Firebase-Token": firebaseToken,
+          },
+        }
       );
-
+ 
       toast.success('Redirecting to payment...');
-      
+
       setTimeout(() => {
         router.push(`/booking/payment?bookingId=${res.data.id}`);
       }, 500);
@@ -167,14 +170,19 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
       setForm({ customer: '', contact: '', guests: '', functionType: '', additionalInfo: '' });
       setAvailable(null);
     } catch (err: any) {
-      toast.error('Booking failed');
-    } finally {
+      // console.log(err);
+      
+ if (err.response?.status === 429) {
+    toast.error('Too many requests. Please wait.');
+  } else {
+    toast.error('Booking failed');
+  }    } finally {
       setSubmitting(false);
     }
-  }, [form, date, verifiedPhone, time, plan,token]);
+  }, [form, date, verifiedPhone, time, plan, token]);
 
   return (
-    
+
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
         <div className="max-w-[1250px] mx-auto p-6 mt-20">
@@ -212,10 +220,10 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
                 <div className="sm:col-span-2 flex justify-center">
                   <button
                     onClick={checkAvailability}
-                disabled={checking || !date || !time}
+                    // disabled={checking || !date || !time}
                     className={`flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded transition ${checking ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
-                    {checking ? <Spinner /> : 'Check Availability'}
+              'Check Availability'
                   </button>
                 </div>
               )}
@@ -243,13 +251,13 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
                     </div>
 
 
-{/* phn compo */}
+                    {/* phn compo */}
                     <div>
                       <label className="block mb-1 font-medium">Phone Number</label>
-<PhoneOtp onVerified={(phone, token) => {
-  setVerifiedPhone(phone);
-  setFirebaseToken(token); // ✅ save token
-}} />
+                      <PhoneOtp onVerified={(phone, token) => {
+                        setVerifiedPhone(phone);
+                        setFirebaseToken(token); // ✅ save token
+                      }} />
                     </div>
 
                     <div>
@@ -305,15 +313,15 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
                         {submitting ? <Spinner /> : 'Confirm Booking'}
                       </button>
                     </div>
-                    
+
                   </div>
-                  
-     
+
+
 
                 </>
               )}
             </div>
-            
+
           </div>
 
           <div className="mt-12 text-center text-gray-600">
@@ -321,9 +329,9 @@ const [firebaseToken, setFirebaseToken] = useState<string | null>(null);
               “We believe every celebration deserves a grand venue. Let us be a part of your special day.”
             </p>
           </div>
-            {available && (
-   <Disclaimer />
-            )}
+          {available && (
+            <Disclaimer />
+          )}
         </div>
       </main>
     </div>

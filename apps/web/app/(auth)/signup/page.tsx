@@ -67,7 +67,12 @@ export default function SignupPage() {
         err?.response?.data?.message ||
         err?.message ||
         "Signup failed ";
+
+         if (err.response?.status === 429) {
+              toast.error('Too many requests. Please wait.');
+            } else {
       toast.error(message);
+            }
     } finally {
       setLoading(false);
     }

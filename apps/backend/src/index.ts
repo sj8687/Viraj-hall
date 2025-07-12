@@ -14,6 +14,7 @@ import { bug } from "./routes/bug";
 import { graph } from "./Admin/graph";
 import { allusers } from "./Admin/allusers";
 import "./routes/corn";
+import { generalLimiter } from "./routes/ratelimit";
 
 dotenv.config();
 
@@ -28,15 +29,15 @@ app.use(cors({
     credentials: true,
 }))
 
-app.use("/auth",OTP)
-app.use("/booking",booking)
-app.use("/payment",payment)
-app.use("/show",show)
+
+app.use("/auth",generalLimiter,OTP)
+app.use("/booking",generalLimiter,booking)
+app.use("/payment",generalLimiter,payment)
+app.use("/show",generalLimiter,show)
 app.use("/adminbooking",adminbooking)
-app.use("/contact",contact)
-app.use("/login",login)
-// app.use("/health", healthRoute);
-app.use("/bug",bug);
+app.use("/contact",generalLimiter,contact)
+app.use("/login",generalLimiter,login)
+app.use("/bug",generalLimiter,bug);
 app.use("/allusers",allusers)
 app.use("/graph",graph)
 

@@ -47,17 +47,20 @@ export function Navbar() {
       y: -100,
       duration: 1,
       opacity: 0,
+      delay: 0.2,
     });
 
     gsap.from(".signbarsdiv", {
       y: -100,
       duration: 1,
       opacity: 0,
+      delay: 0.4,
     });
     gsap.from(".menus", {
       y: -100,
       duration: 1,
       opacity: 0,
+      delay: 0.3,
     });
 
     // Scroll listener
@@ -115,7 +118,7 @@ export function Navbar() {
           </Link>
         </div>
 
-        <div className="text-start px-2   hidden md:flex flex-1 justify-center gap-8 text-[17px] font-medium">
+        <div className="text-start px-2 p-4  hidden md:flex flex-1 justify-center gap-8 text-[17px] font-medium">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}

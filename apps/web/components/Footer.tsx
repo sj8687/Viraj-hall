@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-2xl font-semibold mb-4">Viraj Marriage Hall</h3>
+            <h3 className="text-2xl font-semibold mb-4">Viraj Multipurpose Hall</h3>
             <p className="text-sm mb-4">Creating unforgettable memories for your special events.</p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500">
@@ -76,7 +76,7 @@ const Footer = () => {
         </div>
 
         <div className="text-center mt-12 border-t border-gray-700 pt-6">
-          <p className="text-sm">© 2025 Viraj  Hall. All rights reserved.</p>
+          <p className="text-sm">© 2025 Viraj Multipurpose  Hall. All rights reserved.</p>
           <p className="text-sm">
             <a href="/privacy" className="hover:text-gray-400">Privacy Policy</a> |{' '}
             <a href="/terms" className="hover:text-gray-400">Terms of Service</a>

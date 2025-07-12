@@ -91,7 +91,9 @@ export default function PaymentPage() {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-    return () => document.body.removeChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   // 💳 Payment handler
@@ -141,7 +143,13 @@ export default function PaymentPage() {
             );
             toast.success("Payment successful!");
             router.push("/");
-          } catch {
+          } catch (err: any) {
+            if (err.response?.status === 429) {
+              toast.error('Too many requests. Please wait.');
+            } else {
+              toast.error("Payment verification failed.");
+              router.push("/");
+            }
             toast.error("Payment verification failed.");
             router.push("/");
           }

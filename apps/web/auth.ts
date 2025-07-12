@@ -4,6 +4,7 @@ import NextAuth, { AuthError, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 //  Admin credentials
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL!;
@@ -49,7 +50,7 @@ const config: NextAuthConfig = {
           };
         }
 
-       
+
         const validInput = loginSchema.safeParse({ email, password });
         if (!validInput.success) {
           throw new Error(validInput.error.errors[0]?.message ?? "Invalid input");
@@ -61,11 +62,16 @@ const config: NextAuthConfig = {
             `${process.env.NEXT_PUBLIC_Backend_URL}/login/validate`,
             { email, password },
           );
-          console.log("Backend response:", response.data); 
+          console.log("Backend response:", response.data);
           return response.data.user;
         } catch (err: any) {
-          console.error("Backend error:", err.response?.data || err.message);
-          throw new Error(err.response?.data?.message || "Login failed");
+          if (err.response?.status === 429) {
+            toast.error('Too many requests. Please wait.');
+          } else {
+            console.error("Backend error:", err.response?.data || err.message);
+            throw new Error(err.response?.data?.message || "Login failed");
+          }
+
         }
       },
     }),
@@ -92,7 +98,7 @@ const config: NextAuthConfig = {
           });
         } catch (err) {
           console.log(err);
-          
+
         }
       }
       return true;

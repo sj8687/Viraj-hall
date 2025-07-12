@@ -108,7 +108,10 @@ export default function PhoneOtp({ onVerified }: Props) {
         toast.error("Invalid phone number");
       } else if (err.code === "auth/too-many-requests") {
         toast.error("Too many requests. Please try later.");
-      } else {
+      } else if (err.response?.status === 429) {
+        toast.error("Too many requests. Please wait.");
+      }
+       else {
         toast.error("Failed to send OTP. Try again.");
       }
       toast.error("incorrect phn no.")

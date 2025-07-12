@@ -13,11 +13,11 @@ export function Hero() {
       gsap.from(".hero-heading", {
         duration: 0.7,
         x: -1200,
-        delay: 0.3,
+        delay: 0.7,
       });
 
       gsap.from(".descr", {
-        duration: 0.7,
+        duration: 1,
         x: 1200,
         delay: 0.2,
       });
@@ -40,12 +40,14 @@ export function Hero() {
     mm.add("(max-width:767px)", () => {
       gsap.from(".hero-heading", {
         duration: 1,
-        x: -300,
+        x: -400,
+        delay: 0.7,
       });
 
       gsap.from(".descr", {
         duration: 1,
-        x: 300,
+        x: 400,
+        delay: 0.2,
       });
 
       gsap.from(".btn", {
@@ -53,6 +55,7 @@ export function Hero() {
         duration: 1,
         yoyo: true,
         repeat: -1,
+        delay: 0.5,
       });
 
        gsap.from(".mobo", {

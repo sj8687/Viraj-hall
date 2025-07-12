@@ -11,8 +11,8 @@ import Image from 'next/image';
 
 const decorImages = [
     '/Decor4.jpg',
-    '/decor2.jpg',
-    '/decor3.jpg',
+    '/decor2.WEBP',
+    '/decor3.WEBP',
 
 ];
 

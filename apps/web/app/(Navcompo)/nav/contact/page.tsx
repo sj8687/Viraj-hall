@@ -38,8 +38,12 @@ const Contact = () => {
 
       setForm({ name: '', number: '', email: '', message: '' });
       toast.success("message sent successfully")
-    } catch (err) {
-      console.error('Message send failed:', err);
+    } catch (err: any) {
+      if (err.response?.status === 429) {
+        toast.error('Too many requests. Please wait.');
+      } else {
+        toast.error('Failed to send message');
+      }
     } finally {
       setLoading(false);
     }

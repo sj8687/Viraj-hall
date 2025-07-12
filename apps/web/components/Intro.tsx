@@ -18,6 +18,7 @@ export default function Intro() {
                 gsap.from(".headddd",{
                     x:-700,
                     duration:1,
+                    delay:0.2,
                     scrollTrigger:{
                         trigger:".headddd",
                         scroller:"body",
@@ -29,6 +30,8 @@ export default function Intro() {
                 gsap.from(".img",{
                     x:700,
                     duration:1,
+                     delay:0.2,
+                   
                     scrollTrigger:{
                         trigger:".img",
                         scroller:"body",
@@ -106,11 +109,10 @@ export default function Intro() {
           </h2>
           <p className="mt-7 md:text-start h1  text-center  text-[17px] font-medium text-gray-700">
             At Viraj, we are dedicated to creating unforgettable Marrage & Wedding experiences.
-            Established in 2020, our mission is to provide personalized service and exquisite
+            Established in 2014, our mission is to provide personalized service and exquisite
             decor, ensuring every detail is perfect for your special day.
           </p>
 
-          {/* Stats Section */}
           <div className="grid grid-cols-2  gap-6 mt-10">
             <div className='text-center h2'>
               <h3 className="text-orange-600 text-[22px] md:text-[30px]  font-bold">500 weddings hosted</h3>
@@ -119,9 +121,9 @@ export default function Intro() {
               </p>
             </div>
             <div className='text-center h3'>
-              <h3 className="text-orange-600 text-[22px]  md:text-[30px]  font-bold">10 years of experience</h3>
+              <h3 className="text-orange-600 text-[22px]  md:text-[30px]  font-bold">11 years of experience</h3>
               <p className="text-gray-600 font-medium text-[15px] mt-2">
-                Our team brings over 10 years of experience, ensuring that your marriage is executed flawlessly.
+                Our team brings over 11+ years of experience, ensuring that your marriage is executed flawlessly.
               </p>
             </div>
             <div className=' text-center h2'>
@@ -139,17 +141,15 @@ export default function Intro() {
           </div>
         </div>
 
-        {/* Right Image */}
         <div className="w-full img h-full rounded-xl overflow-hidden">
           <Image
-            src="/hall.jpg" // Ensure this image is in your public/ directory
+            src="/mainhall.jpg" // Ensure this image is in your public/ directory
             alt="Viraj Hall"
             width={800}
             height={500}
             className="object-cover rounded-xl"
           />
         </div>
-        {/* ✅ Bottom infinite scroll absolutely positioned */}
      
       </div>
        <div className="">

@@ -91,8 +91,14 @@ export default function BugReport() {
       setDescription('');
       setScreenshot(null);
       setPreview(null);
-    } catch (err) {
+    } catch (err:any) {
+      if (err.response?.status === 429) {
+        toast.error('Too many requests. Please wait.');
+        
+      }else{
       toast.error('Failed to submit bug report');
+
+      }
     } finally {
       setIsSubmitting(false); 
     }

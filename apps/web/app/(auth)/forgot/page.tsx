@@ -58,12 +58,16 @@ export default function Page() {
       } else {
         toast.warning(res.data.message);
       }
-    } catch (error: any) {
-      toast.dismiss(otpSendLoading);
-      toast.error(
-        error?.response?.data?.message ||
+    } catch (err: any) {
+       if (err.response?.status === 429) {
+              toast.error('Too many requests. Please wait.');
+            } else {
+              toast.error(
+        err?.response?.data?.message ||
           "Something went wrong while sending OTP"
       );
+            }
+     
     }
   }
   const handleSubmit = async (formData: FormData) => {
