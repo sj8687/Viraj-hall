@@ -111,12 +111,13 @@ export default function CheckAvailability() {
       );
       toast.info('before payment read a disclamier first...');
 
-    } catch(err: any) {
- if (err.response?.status === 429) {
-    toast.error('Too many requests. Please wait.');
-  } else {
-    toast.error('Booking failed');
-  }      } finally {
+    } catch (err: any) {
+      if (err.response?.status === 429) {
+        toast.error('Too many requests. Please wait.');
+      } else {
+        toast.error('Failed to check availability');
+      }
+    } finally {
       setChecking(false);
     }
   }, [date, time]);
@@ -160,7 +161,7 @@ export default function CheckAvailability() {
           },
         }
       );
- 
+
       toast.success('Redirecting to payment...');
 
       setTimeout(() => {
@@ -170,13 +171,12 @@ export default function CheckAvailability() {
       setForm({ customer: '', contact: '', guests: '', functionType: '', additionalInfo: '' });
       setAvailable(null);
     } catch (err: any) {
-      // console.log(err);
-      
- if (err.response?.status === 429) {
-    toast.error('Too many requests. Please wait.');
-  } else {
-    toast.error('Booking failed');
-  }    } finally {
+      if (err.response?.status === 429) {
+        toast.error('Too many requests. Please wait.');
+      } else {
+        toast.error('Booking failed');
+      }
+    } finally {
       setSubmitting(false);
     }
   }, [form, date, verifiedPhone, time, plan, token]);
@@ -220,10 +220,10 @@ export default function CheckAvailability() {
                 <div className="sm:col-span-2 flex justify-center">
                   <button
                     onClick={checkAvailability}
-                    // disabled={checking || !date || !time}
+                    disabled={checking || !date || !time}
                     className={`flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded transition ${checking ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
-              'Check Availability'
+                    {checking ? <Spinner /> : 'Check Availability'}
                   </button>
                 </div>
               )}
