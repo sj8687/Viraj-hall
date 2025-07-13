@@ -14,7 +14,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   const t1 = useRef<gsap.core.Timeline | null>(null);
-  const [scrolled, setScrolled] = useState(false); // for scroll effect
+  const [scrolled, setScrolled] = useState(false);
 
   function handleClick() {
     document.body.classList.add("overflow-hidden");
@@ -26,6 +26,8 @@ export function Navbar() {
     t1.current?.reverse();
   }
 
+
+  // animation
   useEffect(() => {
     if (!t1.current) {
       t1.current = gsap.timeline({ paused: true });
@@ -45,22 +47,28 @@ export function Navbar() {
 
     gsap.from(".logo", {
       y: -100,
-      duration: 1,
+      duration: 0.7,
       opacity: 0,
       delay: 0.2,
+      stagger: 0.1
+
     });
 
     gsap.from(".signbarsdiv", {
       y: -100,
-      duration: 1,
+      duration: 0.7,
       opacity: 0,
       delay: 0.4,
+      stagger: 0.1
+
+
     });
     gsap.from(".menus", {
       y: -100,
-      duration: 1,
+      duration: 0.7,
       opacity: 0,
       delay: 0.3,
+      stagger: 0.1
     });
 
     // Scroll listener
@@ -69,7 +77,25 @@ export function Navbar() {
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+
+
   }, []);
+
+
+
+  // cursor animation
+  useEffect(() => {
+    const cursor = document.querySelector(".cursor");
+
+    window.addEventListener("mousemove", function (client) {
+      gsap.to(cursor, {
+        x: client.x,
+        y: client.y,
+        duration: 0.7,
+        ease: "back.out",
+      })
+    })
+  }, [])
 
   const isActive = (route: string) => pathname === route;
 
@@ -81,7 +107,6 @@ export function Navbar() {
     { href: "/nav/about", label: "About Us" },
   ];
 
-  // Add this array
   const alwaysShadowRoutes = [
     "/nav/gallery",
     "/nav/contact",
@@ -94,17 +119,17 @@ export function Navbar() {
     "/nav/bug"
   ];
 
-  // Check if current route should always have shadow
   const alwaysShadow = alwaysShadowRoutes.includes(pathname);
 
   return (
-    <section className="">
+    <section className="main">
+
+      <div className="cursor pointer-events-none z-[9999] h-[22px] w-[22px]  shadow-[0_0_10px_rgba(900,00,00,1000)] bg-fuchsia-800  rounded-full fixed top-0 left-0"></div>
       <div
-        className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${
-          alwaysShadow || scrolled
+        className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${alwaysShadow || scrolled
             ? "bg- shadow-lg"
             : "bg-transparent shadow-lg sm:shadow-none  backdrop-blur-[10px]"
-        }`}
+          }`}
       >
         <div className="logo">
           <Link href={"/"}>
@@ -123,8 +148,8 @@ export function Navbar() {
             <Link
               key={href}
               className={`hover:shadow-lg px-4 py-1 hover:bg-gray-100 hover:rounded-lg menus ${isActive(href)
-                  ? "underline decoration-2 underline-offset-8"
-                  : ""
+                ? "underline decoration-2 underline-offset-8"
+                : ""
                 }`}
               href={href}
             >
@@ -187,7 +212,7 @@ export function Navbar() {
             key={href}
             id="mobile-menu-text"
             href={href}
-             onClick={() => hidediv()}
+            onClick={() => hidediv()}
             className={`tracking-widest rounded-lg transition-shadow duration-100 hover:text-white hover:bg-orange-400 px-12 p-2 barsmenus ${pathname === href ? 'underline decoration-2 underline-offset-8 hover:text-white' : ''
               }`}
           >

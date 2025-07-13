@@ -6,45 +6,59 @@ import gsap from "gsap";
 import Chat from "./chat";
 
 export function Hero() {
+  
   useEffect(() => {
     const mm = gsap.matchMedia();
+    const t1 = gsap.timeline();
 
     mm.add("(min-width:768px)", () => {
-      gsap.from(".hero-heading", {
-        duration: 0.7,
-        x: -1200,
-        delay: 0.7,
+
+       t1.from(".mobo", {
+        duration:1,
+        y:70,
+        stagger:1
       });
 
-      gsap.from(".descr", {
+       t1.from(".hero-heading", {
+        duration: 0.7,
+        x: -1200,
+        delay: 0.2,
+        stagger:1
+      });
+
+      t1.from(".descr", {
         duration: 1,
         x: 1200,
         delay: 0.2,
+        stagger:1
       });
 
-      gsap.from(".btn", {
+      t1.from(".btn", {
         scale: 1,
         duration: 1,
         yoyo: true,
         repeat: -1,
         opacity: 1,
         y: 10,
+        stagger:1
       });
 
-       gsap.from(".mobo", {
-        duration:1,
-        y:30,
-      });
+      
     });
 
     mm.add("(max-width:767px)", () => {
-      gsap.from(".hero-heading", {
-        duration: 1,
-        x: -400,
-        delay: 0.7,
+       t1.from(".mobo", {
+        duration:1,
+        y:80,
       });
 
-      gsap.from(".descr", {
+      t1.from(".hero-heading", {
+        duration: 1,
+        x: -400,
+        delay: 0.2,
+      });
+
+      t1.from(".descr", {
         duration: 1,
         x: 400,
         delay: 0.2,
@@ -58,10 +72,7 @@ export function Hero() {
         delay: 0.5,
       });
 
-       gsap.from(".mobo", {
-        duration:1,
-        y:30,
-      });
+     
     });
   }, []);
 

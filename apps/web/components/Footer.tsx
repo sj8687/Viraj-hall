@@ -11,6 +11,8 @@ import { FaBug } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="bg-[#0A0A23] text-white py-12">
+      {/* <div className="cursor pointer-events-none z-[9999] h-[20px] w-[20px]  shadow-[0_0_10px_rgba(900,00,00,1000)] bg-fuchsia-800  rounded-full fixed top-0 left-0"></div> */}
+
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>

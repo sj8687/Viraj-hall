@@ -10,19 +10,22 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Intro() {
 
-
     useEffect(()=>{
-            const mm = gsap.matchMedia();
-    
+           const mm = gsap.matchMedia();
+           const t1  = gsap.timeline()
+           
             mm.add("(min-width:768px)", () => {
                 gsap.from(".headddd",{
                     x:-700,
                     duration:1,
                     delay:0.2,
+                    stagger:1,
                     scrollTrigger:{
                         trigger:".headddd",
                         scroller:"body",
                         start:"top 70%",
+                        end:-10,
+                        // scrub:2,
                         // markers:true
                     }
                 })
@@ -31,16 +34,17 @@ export default function Intro() {
                     x:700,
                     duration:1,
                      delay:0.2,
-                   
+                    stagger:1,
                     scrollTrigger:{
                         trigger:".img",
                         scroller:"body",
                         start:"top 70%",
+                         end:-10,
+                        // scrub:2,
+                        // markers:true
                         // markers:true
                     }
-                })
-    
-               
+                }) 
             })
     
     
@@ -49,6 +53,7 @@ export default function Intro() {
                     y:80,
                     opacity:0,
                     duration:0.3,
+                     stagger:1,
                     scrollTrigger:{
                         trigger:".h1",
                         scroller:"body",
@@ -61,6 +66,7 @@ export default function Intro() {
                 gsap.from(".h2",{
                   x:-300,
                   opacity:0,
+                   stagger:1,
                   duration:1,
                   scrollTrigger:{
                       trigger:".h2",
@@ -75,6 +81,7 @@ export default function Intro() {
                 x:300,
                 opacity:0,
                 duration:1,
+                 stagger:1,
                 scrollTrigger:{
                     trigger:".h3",
                     scroller:"body",
@@ -87,6 +94,7 @@ export default function Intro() {
               y:80,
               opacity:0,
               duration:0.3,
+               stagger:1,
               scrollTrigger:{
                   trigger:".img",
                   scroller:"body",

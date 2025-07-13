@@ -2,7 +2,6 @@
 
 import { FaUtensils, FaPalette } from "react-icons/fa";
 
-import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useEffect } from "react";
@@ -17,37 +16,32 @@ export function Services() {
 
         mm.add("(min-width:768px)", () => {
             gsap.from(".headd", {
-                y: 100,
-                duration: 0.4,
+                y: 50,
+                opacity:0,
+                delay:0.1,
+                duration: 0.2,
+                stagger:0.4,
                 scrollTrigger: {
                     trigger: ".headd",
                     scroller: "body",
-                    start: "top 65%",
+                    start: "top 70%",
                     // markers:true
                 }
             })
 
-            gsap.to(".heading", {
-                scale: 1.6,
-                duration: 0.5,
+            gsap.from(".heading",{
+                y:20,
+                opacity:0,
+                delay:0.3,
+                duration:0.3,
+                stagger:0.2,
                 scrollTrigger: {
                     trigger: ".heading",
                     scroller: "body",
                     start: "top 70%",
-                    // markers:true,
+                    // markers:true
                 }
-            })
 
-            gsap.to(".headingg", {
-
-                scale: 1.3,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: ".headingg",
-                    scroller: "body",
-                    start: "top 70%",
-                    // markers:true,
-                }
             })
 
            
@@ -58,6 +52,9 @@ export function Services() {
             gsap.from(".headd", {
                 y: 80,
                 duration: 0.3,
+                delay:0.1,
+                stagger:0.4,
+                opacity:0,
                 scrollTrigger: {
                     trigger: ".headd",
                     scroller: "body",
@@ -66,26 +63,19 @@ export function Services() {
                 }
             })
 
-            gsap.from(".heading", {
-                scale: 0.9,
-                duration: 1,
+           gsap.from(".heading",{
+                y:20,
+                opacity:0,
+                delay:0.3,
+                duration:0.3,
+                stagger:0.2,
                 scrollTrigger: {
                     trigger: ".heading",
                     scroller: "body",
-                    start: "top 65%",
+                    start: "top 70%",
                     // markers:true
                 }
-            })
 
-            gsap.to(".headingg", {
-                scale: 1,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: ".headingg",
-                    scroller: "body",
-                    start: "top 70%",
-                    // markers:true,
-                }
             })
 
             
@@ -148,8 +138,7 @@ export function Services() {
 
 
             <section className="w-full  mx-auto px-2 sm:px-0 py-16">
-                {/* Heading + Description */}
-                <div className="text-center mb-10">
+                <div className="text-center mb-10 heading">
                     <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
                         Wedding ,Marrage <span className="text-orange-500">& </span> Other Moments
                     </h2>
@@ -158,7 +147,6 @@ export function Services() {
                     </p>
                 </div>
 
-                {/* Scrolling Image Cards */}
                 <InfiniteFloatingImages
                     images={imageData}
                     speed="normal"
