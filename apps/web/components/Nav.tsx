@@ -84,18 +84,41 @@ export function Navbar() {
 
 
   // cursor animation
+
   useEffect(() => {
     const cursor = document.querySelector(".cursor");
 
-    window.addEventListener("mousemove", function (client) {
+    if (!cursor) return;
+
+    const move = (x: number, y: number) => {
       gsap.to(cursor, {
-        x: client.x,
-        y: client.y,
+        x,
+        y,
         duration: 0.7,
         ease: "back.out",
-      })
-    })
-  }, [])
+      });
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      move(e.clientX, e.clientY);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) {
+        move(touch.clientX, touch.clientY);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
 
   const isActive = (route: string) => pathname === route;
 
@@ -123,12 +146,13 @@ export function Navbar() {
 
   return (
     <section className="main">
-
-      <div className="cursor pointer-events-none z-[9999] h-[22px] w-[22px]  shadow-[0_0_10px_rgba(900,00,00,1000)] bg-fuchsia-800  rounded-full fixed top-0 left-0"></div>
+      <div className="hidden md:block">
+        <div className="cursor pointer-events-none z-[9999] h-[22px] w-[22px]  shadow-[0_0_10px_rgba(900,00,00,1000)] bg-fuchsia-800  rounded-full fixed top-0 left-0"></div>
+      </div>
       <div
         className={`flex justify-between sm:mx-0 px-2 md:px-14 md:justify-around backdrop-blur-[10px] z-50 fixed top-0 left-0 right-0 mx-auto items-center md:p-0 transition-all duration-300 ${alwaysShadow || scrolled
-            ? "bg- shadow-lg"
-            : "bg-transparent shadow-lg sm:shadow-none  backdrop-blur-[10px]"
+          ? "bg- shadow-lg"
+          : "bg-transparent shadow-lg sm:shadow-none  backdrop-blur-[10px]"
           }`}
       >
         <div className="logo">
