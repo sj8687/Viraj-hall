@@ -10,7 +10,7 @@ export async function GET() {
     return NextResponse.json({ token: null }, { status: 401 });
   }
 
-  // console.log(token);
+  console.log(token);
   
 
   return NextResponse.json({ token });
