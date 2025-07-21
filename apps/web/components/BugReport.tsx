@@ -96,7 +96,7 @@ export default function BugReport() {
         toast.error('Too many requests. Please wait.');
         
       }else{
-      toast.error('Failed to submit bug report');
+      toast.error('Failed to submit a bug report');
 
       }
     } finally {
